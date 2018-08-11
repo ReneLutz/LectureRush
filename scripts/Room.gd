@@ -13,14 +13,21 @@ var isCatSpawned = false
 var timerCatExists = 0.0
 var catExistenceTime = 5.0
 
+var timerDisturbAction = 0.0
+var disturbActionCooldown = 5.0
+
+var nodeStudents
+
 func _ready():
 	_resetSeatList()
 	randomize()
+	nodeStudents = get_node("../Students")
 	self.set_process(true)
 
 func _process(delta):
 	spawnStudents(delta)
 	spawntimeCat(delta)
+	spawnStudentsDisturbActions(delta)
 
 # coord: Vector2
 func coordToCellIdx(coord):
@@ -59,8 +66,24 @@ func spawnStudent():
 	else:
 		sceneStudentInstance.set_pos(get_node("SpawnAreas/SpawnAreaRight").get_pos())
 		
-	add_child(sceneStudentInstance)
+	get_node("../Students").add_child(sceneStudentInstance)
 
+# Picks random student node for spawning a disturb action
+func spawnStudentsDisturbActions(delta):
+	timerDisturbAction += delta
+	if timerDisturbAction >= disturbActionCooldown:
+		timerDisturbAction = 0.0
+		print("Room.gd: Spawning disturb action..")
+		#choose random student who is sitting and has no current disturb action
+		var randStudent = randi() % nodeStudents.get_child_count()
+		var index = 0
+		for student in nodeStudents.get_children():
+			if index == randStudent && student.isSitting_test() && !student.isDisturbActionActive():
+				print(" --> Choosing student with index: ", index)
+				student.spawnDisturbAction()
+				break
+			index += 1
+		
 ########## SPAWNING CAT ##########
 
 func spawntimeCat(delta):

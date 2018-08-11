@@ -11,6 +11,8 @@ var animation = STANDING
 
 #Current mood level
 var mood = 100;
+var maxMood = 100;
+var panicUI = null
 
 func _ready():
 	set_fixed_process(true)
@@ -37,8 +39,13 @@ func _fixed_process(delta):
 	var motion = velocity * delta
 	move(motion)
 	
+func setPanicUI(p):
+	panicUI = p
+
 func setMood(level):
 	mood = level
+	if panicUI != null:
+		panicUI.panic = (maxMood-mood)/maxMood
 	print("Prof's mood set to %s." % str(level))
 	
 func changeMood(increase):

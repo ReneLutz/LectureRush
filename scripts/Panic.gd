@@ -24,11 +24,8 @@ func updateBar():
 	var add = (all-text)*panic
 	set_region_rect(Rect2(0,0,text+add,height))
 
-func _process(delta):
-	setPanic( panic+0.001 )
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	set_process(true)
 	pass

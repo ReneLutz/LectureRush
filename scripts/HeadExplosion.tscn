@@ -1,0 +1,126 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://scripts/HeadExplosion.gd" type="Script" id=1]
+[ext_resource path="res://scripts/HeadPart.gd" type="Script" id=2]
+[ext_resource path="res://textures/Professor_head_pt_1.png" type="Texture" id=3]
+[ext_resource path="res://textures/Professor_head_pt_2.png" type="Texture" id=4]
+[ext_resource path="res://textures/Professor_head_pt_3.png" type="Texture" id=5]
+[ext_resource path="res://textures/Professor_head_pt_4.png" type="Texture" id=6]
+[ext_resource path="res://textures/Professor_head_pt_5.png" type="Texture" id=7]
+[ext_resource path="res://textures/Professor_head_pt_6.png" type="Texture" id=8]
+
+[node name="HeadExplosion" type="Node2D"]
+
+transform/pos = Vector2( 300, 300 )
+script/script = ExtResource( 1 )
+power = 50.0
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+config/amount = 1024
+config/lifetime = 20.0
+config/process_mode = 1
+config/explosiveness = 0.03
+params/direction = 0.0
+params/spread = 200.0
+params/linear_velocity = 50.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 40.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color = Color( 1, 0, 0, 1 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 2 )
+degrees = 60.0
+mass = 1.0
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+
+texture = ExtResource( 3 )
+
+[node name="KinematicBody2D1" type="KinematicBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 2 )
+degrees = 120.0
+mass = 1.0
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D1"]
+
+texture = ExtResource( 4 )
+
+[node name="KinematicBody2D2" type="KinematicBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 2 )
+degrees = 180.0
+mass = 1.0
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D2"]
+
+texture = ExtResource( 5 )
+
+[node name="KinematicBody2D3" type="KinematicBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 2 )
+degrees = 240.0
+mass = 1.0
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D3"]
+
+texture = ExtResource( 6 )
+
+[node name="KinematicBody2D4" type="KinematicBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 2 )
+degrees = 300.0
+mass = 1.0
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D4"]
+
+texture = ExtResource( 7 )
+
+[node name="KinematicBody2D5" type="KinematicBody2D" parent="."]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 2 )
+degrees = 360.0
+mass = 1.0
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D5"]
+
+texture = ExtResource( 8 )
+
+

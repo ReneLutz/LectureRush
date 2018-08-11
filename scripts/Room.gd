@@ -1,4 +1,4 @@
-extends Sprite
+extends TileMap
 
 # class member variables go here, for example:
 # var a = 2
@@ -10,4 +10,5 @@ func _ready():
 	pass
 
 func _process(delta):
+	pass
 	

@@ -14,6 +14,14 @@ func _ready():
 func _process(delta):
 	spawnStudents(delta)
 	
+# coord: Vector2
+func coordToCellIdx(coord):
+	return coord / get_cell_size()
+	
+# idx: cell index
+func getTileName(idx):
+	get_tileset().tile_get_name(get_cell(idx))
+	
 func spawnStudents(delta):
 	timer += delta
 	if timer >= spawnTime:

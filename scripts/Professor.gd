@@ -9,6 +9,9 @@ onready var sprite = get_node("AnimatedSprite")
 var velocity = Vector2()
 var animation = STANDING
 
+#Current mood level
+var mood = 100;
+
 func _ready():
 	set_fixed_process(true)
 	
@@ -34,5 +37,5 @@ func _fixed_process(delta):
 	var motion = velocity * delta
 	move(motion)
 	
-#func :
-#	pass	
+func setMood(level):
+	mood = level;

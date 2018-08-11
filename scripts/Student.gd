@@ -3,9 +3,7 @@ extends AnimatedSprite
 export var walkSpeed = 1
 export var sex = "female"
 
-var walkHorizontal = true
-
-var room
+var _room
 
 var material
 
@@ -56,11 +54,16 @@ func _ready():
 	get_material().set_shader_param("trouwsersColor",panties)
 	get_material().set_shader_param("shoeColor",shoes)
 	hairnode.set_modulate(hairC)
-	room = get_tree().get_nodes_in_group("lectureRoom")
+	_room = get_tree().get_nodes_in_group("lectureRoom")[0]
 
 func _fixed_process(delta):
+	var currentTile = _room.getTileName(_room.coordToCellIdx(get_pos()))
+	
 	if(Input.is_action_pressed("turn_left")):
 		pass
-	if(Input.is_action_pressed("turn_right")):
+	elif(Input.is_action_pressed("turn_right")):
 		pass
-	
+
+# cell index of feet
+func _getCurrentTilePos():
+	return get_pos() / _room.get_cell_size()

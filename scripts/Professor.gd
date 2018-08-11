@@ -15,12 +15,23 @@ var mood = 100;
 var maxMood = 100;
 var panicUI = null
 var dead = false
+var deadTimer = 0
 
 func _ready():
 	set_fixed_process(true)
+	get_node("BodyOnly/Particles2D").set_process(false)
+	get_node("BodyOnly/Particles2D").set_fixed_process(false)
 	
 func _fixed_process(delta):
 	if dead:
+		get_node("BodyOnly/Particles2D").set_process(true)
+		get_node("BodyOnly/Particles2D").set_fixed_process(true)
+		deadTimer+=delta
+		if deadTimer > 1:
+			get_node("HeadOnly/Sprite").hide()
+			get_node("HeadOnly/HeadExplosion").show()
+			get_node("HeadOnly/HeadExplosion").set_global_pos(get_node("HeadOnly/Sprite").get_global_pos())
+			get_node("HeadOnly/HeadExplosion").start()
 		return
 	
 	var acceleration = Vector2((Input.is_key_pressed(KEY_D) - Input.is_key_pressed(KEY_A)), 
@@ -45,8 +56,8 @@ func setMood(level):
 		dead = true
 		get_node("AnimatedSprite").hide()
 		get_node("BodyOnly").show()
-		get_node("KinematicBody2D").show()
-		get_node("KinematicBody2D").set_fixed_process(true)
+		get_node("HeadOnly").show()
+		get_node("HeadOnly").set_fixed_process(true)
 	if panicUI != null:
 		panicUI.panic = (maxMood-mood)/maxMood
 	print("Prof's mood set to %s." % str(level))

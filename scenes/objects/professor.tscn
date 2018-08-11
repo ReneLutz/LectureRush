@@ -36,7 +36,32 @@ power = 150
 visibility/visible = false
 texture = ExtResource( 3 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="profBody"]
+[node name="Particles2D" type="Particles2D" parent="profBody/BodyOnly"]
+
+config/amount = 200
+config/lifetime = 7.0
+config/time_scale = 3.0
+config/process_mode = 1
+config/explosiveness = 0.3
+params/direction = 180.0
+params/spread = 30.0
+params/linear_velocity = 30.0
+params/spin_velocity = 20.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 3.0
+params/final_size = 3.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color = Color( 0.757812, 0.00592041, 0.00592041, 1 )
+
+[node name="HeadOnly" type="KinematicBody2D" parent="profBody"]
 
 visibility/visible = false
 input/pickable = false
@@ -47,12 +72,14 @@ script/script = ExtResource( 4 )
 degrees = 180.0
 mass = 1.0
 
-[node name="Sprite" type="Sprite" parent="profBody/KinematicBody2D"]
+[node name="Sprite" type="Sprite" parent="profBody/HeadOnly"]
 
 transform/pos = Vector2( 0.214638, -7.72699 )
 texture = ExtResource( 5 )
 
-[node name="HeadExplosion" parent="profBody/KinematicBody2D" instance=ExtResource( 6 )]
+[node name="HeadExplosion" parent="profBody/HeadOnly" instance=ExtResource( 6 )]
+
+visibility/visible = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="profBody"]
 

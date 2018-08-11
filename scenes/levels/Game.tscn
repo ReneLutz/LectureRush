@@ -37,7 +37,7 @@ script/script = ExtResource( 5 )
 
 [node name="SpawnAreaLeft" type="Area2D" parent="LectureRoom/SpawnAreas"]
 
-transform/pos = Vector2( 32, 256 )
+transform/pos = Vector2( 32.7351, 256 )
 transform/scale = Vector2( 0.5, 0.5 )
 input/pickable = true
 gravity_vec = Vector2( 0, 1 )

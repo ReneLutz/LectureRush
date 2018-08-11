@@ -1,4 +1,4 @@
-extends AnimatedSprite
+extends Area2D
 
 var speed = 300
 var vel = Vector2()

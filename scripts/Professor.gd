@@ -1,14 +1,46 @@
-extends Area2D
+extends KinematicBody2D
 
-var speed = 300
-var vel = Vector2()
+const WALK_SPEED = 80
+const STANDING = "Standing"
+const WALKING = "Walking"
+
+onready var sprite = get_node("AnimatedSprite")
+
+var velocity = Vector2()
+var animation = STANDING
+
+#Current mood level
+var mood = 100;
 
 func _ready():
 	set_fixed_process(true)
 	
 func _fixed_process(delta):
-	var input = Vector2(0, 0)
-	input.x = Input.is_key_pressed(KEY_D) - Input.is_key_pressed(KEY_A)
-	vel = input.normalized() * speed
-	var pos = get_pos() + vel * delta
-	set_pos(pos)
+	
+	# Set walking direction
+	if (Input.is_key_pressed(KEY_A)):
+		velocity.x = -WALK_SPEED
+		animation = WALKING
+	elif (Input.is_key_pressed(KEY_D)):
+		velocity.x =  WALK_SPEED
+		animation = WALKING
+	else:
+		velocity.x = 0
+		animation = STANDING
+	
+	# Play walking / standing animation
+	if(animation == STANDING):
+		sprite.play(STANDING)
+	else:
+		sprite.play(WALKING)
+	
+	var motion = velocity * delta
+	move(motion)
+	
+func setMood(level):
+	mood = level
+	print("Prof's mood set to %s." % str(level))
+	
+func changeMood(increase):
+	mood += increase
+	print("Prof's mood %s by %s." % ["increased" if increase >= 0 else "decreased", str(abs(increase))])

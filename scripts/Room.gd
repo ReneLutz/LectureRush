@@ -2,9 +2,16 @@ extends TileMap
 
 const CHAIR_TILE_NAME = "Chair"
 
-var timer = 0.0
-var spawnTime = 2.0
-var spawnLeft = true
+var timerStudent = 0.0
+var spawnTimeStudent = 2.0
+var spawnStudentLeft = true
+
+var sceneCatInstance
+var timerCat = 0.0
+var spawnTimeCat = 10.0
+var isCatSpawned = false
+var timerCatExists = 0.0
+var catExistenceTime = 5.0
 
 func _ready():
 	_resetSeatList()
@@ -13,7 +20,8 @@ func _ready():
 
 func _process(delta):
 	spawnStudents(delta)
-	
+	spawntimeCat(delta)
+
 # coord: Vector2
 func coordToCellIdx(coord):
 	return (coord / get_cell_size()).floor()
@@ -21,18 +29,20 @@ func coordToCellIdx(coord):
 # idx: cell index
 func getTileName(idx):
 	return get_tileset().tile_get_name(self.get_cell(idx.x, idx.y))
-	
+
+########## SPAWNING STUDENTS ##########
+
 func spawnStudents(delta):
-	timer += delta
-	if timer >= spawnTime:
+	timerStudent += delta
+	if timerStudent >= spawnTimeStudent:
 		print("Spawning student..")
 		# spawn left or right
 		if randi()%2 == 1:
-			spawnLeft = !spawnLeft
+			spawnStudentLeft = !spawnStudentLeft
 		# spawn student scene
 		spawnStudent()
 		# reset spawn timer
-		timer = 0.0
+		timerStudent = 0.0
 		
 func spawnStudent():
 	var sceneStudent = load("res://scenes/objects/student.tscn")
@@ -44,13 +54,42 @@ func spawnStudent():
 		sceneStudentInstance.sex = "female"
 	sceneStudentInstance.set_name("student")
 	# set position
-	if spawnLeft == true:
+	if spawnStudentLeft == true:
 		sceneStudentInstance.set_pos(get_node("SpawnAreas/SpawnAreaLeft").get_pos())
 	else:
 		sceneStudentInstance.set_pos(get_node("SpawnAreas/SpawnAreaRight").get_pos())
 		
 	add_child(sceneStudentInstance)
 
+########## SPAWNING CAT ##########
+
+func spawntimeCat(delta):
+	if !isCatSpawned:
+		timerCat += delta
+		if timerCat >= spawnTimeCat:
+			print("Spawning cat")
+			spawnCat()
+			isCatSpawned = true
+			timerCat = 0.0
+	else:
+		timerCatExists += delta
+		if timerCatExists >= catExistenceTime:
+			print("Hiding cat")
+			hideCat()
+			timerCatExists = 0.0
+			isCatSpawned = false
+	
+func spawnCat():
+	var sceneCat = load("res://scenes/objects/cat.tscn")
+	sceneCatInstance = sceneCat.instance()
+	sceneCatInstance.set_name("cat")
+	# set position
+	sceneCatInstance.set_pos(get_node("Decoration/Plant").get_pos())
+	add_child(sceneCatInstance)
+	
+func hideCat():
+	remove_child(sceneCatInstance)
+	
 # Vector2 -> bool
 # only contains indices of chairs
 var _seatList = Dictionary()

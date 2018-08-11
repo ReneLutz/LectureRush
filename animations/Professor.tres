@@ -1,15 +1,20 @@
 [gd_resource type="SpriteFrames" load_steps=4 format=1]
 
-[ext_resource path="res://textures/Professor_RGB_walking1.png" type="Texture" id=1]
-[ext_resource path="res://textures/Professor_RGB_walking2.png" type="Texture" id=2]
-[ext_resource path="res://textures/Professor_RGB_neutral.png" type="Texture" id=3]
+[ext_resource path="res://textures/Professor_RGB_neutral.png" type="Texture" id=1]
+[ext_resource path="res://textures/Professor_RGB_walking1.png" type="Texture" id=2]
+[ext_resource path="res://textures/Professor_RGB_walking2.png" type="Texture" id=3]
 
 [resource]
 
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "default",
+"name": "Walking",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Standing",
 "speed": 5.0
 } ]
 

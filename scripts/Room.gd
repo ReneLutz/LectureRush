@@ -29,6 +29,11 @@ func spawnStudents(delta):
 func spawnStudent():
 	var sceneStudent = load("res://scenes/objects/student.tscn")
 	var sceneStudentInstance = sceneStudent.instance()
+	var sex = randi()%2
+	if sex == 1:
+		sceneStudentInstance.sex = "male"
+	else:
+		sceneStudentInstance.sex = "female"
 	sceneStudentInstance.set_name("student")
 	# set position
 	if spawnLeft == true:

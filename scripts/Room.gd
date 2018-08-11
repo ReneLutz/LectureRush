@@ -21,15 +21,9 @@ func _ready():
 func _process(delta):
 	spawnStudents(delta)
 	spawntimeCat(delta)
-	
-# coord: Vector2
-func coordToCellIdx(coord):
-	return coord / get_cell_size()
-	
-# idx: cell index
-func getTileName(idx):
-	get_tileset().tile_get_name(get_cell(idx))
-	
+
+########## SPAWNING STUDENTS ##########
+
 func spawnStudents(delta):
 	timerStudent += delta
 	if timerStudent >= spawnTimeStudent:
@@ -59,26 +53,8 @@ func spawnStudent():
 		
 	add_child(sceneStudentInstance)
 
-# Vector2 -> bool
-# only contains indices of chairs
-var _seatList = Dictionary()
+########## SPAWNING CAT ##########
 
-func _resetSeatList():
-	_seatList.clear()
-	var ts = get_tileset()
-	for cellIdx in get_used_cells():
-		if(ts.tile_get_name(get_cell(cellIdx.x, cellIdx.y)) == CHAIR_TILE_NAME):
-			_seatList[cellIdx] = true
-
-# seatIdx: Vector2
-func isSeatFree(seatIdx):
-	return _seatList.has(seatIdx) && _seatList[seatIdx]
-	
-#seatIdx: Vector2
-#free: bool
-func setSeatFree(seatIdx, free):
-	_seatList[seatIdx] = free
-	
 func spawntimeCat(delta):
 	if !isCatSpawned:
 		timerCat += delta
@@ -105,3 +81,31 @@ func spawnCat():
 	
 func hideCat():
 	remove_child(sceneCatInstance)
+	
+# coord: Vector2
+func coordToCellIdx(coord):
+	return coord / get_cell_size()
+	
+# idx: cell index
+func getTileName(idx):
+	get_tileset().tile_get_name(get_cell(idx))
+	
+# Vector2 -> bool
+# only contains indices of chairs
+var _seatList = Dictionary()
+
+func _resetSeatList():
+	_seatList.clear()
+	var ts = get_tileset()
+	for cellIdx in get_used_cells():
+		if(ts.tile_get_name(get_cell(cellIdx.x, cellIdx.y)) == CHAIR_TILE_NAME):
+			_seatList[cellIdx] = true
+
+# seatIdx: Vector2
+func isSeatFree(seatIdx):
+	return _seatList.has(seatIdx) && _seatList[seatIdx]
+	
+#seatIdx: Vector2
+#free: bool
+func setSeatFree(seatIdx, free):
+	_seatList[seatIdx] = free

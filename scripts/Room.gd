@@ -2,10 +2,11 @@ extends TileMap
 
 const CHAIR_TILE_NAME = "Chair"
 
-var catTimer = 0.0
-var timer = 0.0
-var spawnTime = 2.0
-var spawnLeft = true
+var timerStudent = 0.0
+var spawnTimeStudent = 2.0
+var spawnStudentLeft = true
+
+var timerCat = 0.0
 var spawnTimeCat = 1.0
 
 func _ready():
@@ -15,7 +16,7 @@ func _ready():
 
 func _process(delta):
 	spawnStudents(delta)
-#	spawntimeCat(delta)
+	spawntimeCat(delta)
 	
 # coord: Vector2
 func coordToCellIdx(coord):
@@ -26,16 +27,16 @@ func getTileName(idx):
 	get_tileset().tile_get_name(get_cell(idx))
 	
 func spawnStudents(delta):
-	timer += delta
-	if timer >= spawnTime:
+	timerStudent += delta
+	if timerStudent >= spawnTimeStudent:
 		print("Spawning student..")
 		# spawn left or right
 		if randi()%2 == 1:
-			spawnLeft = !spawnLeft
+			spawnStudentLeft = !spawnStudentLeft
 		# spawn student scene
 		spawnStudent()
 		# reset spawn timer
-		timer = 0.0
+		timerStudent = 0.0
 		
 func spawnStudent():
 	var sceneStudent = load("res://scenes/objects/student.tscn")
@@ -47,7 +48,7 @@ func spawnStudent():
 		sceneStudentInstance.sex = "female"
 	sceneStudentInstance.set_name("student")
 	# set position
-	if spawnLeft == true:
+	if spawnStudentLeft == true:
 		sceneStudentInstance.set_pos(get_node("SpawnAreas/SpawnAreaLeft").get_pos())
 	else:
 		sceneStudentInstance.set_pos(get_node("SpawnAreas/SpawnAreaRight").get_pos())
@@ -75,18 +76,16 @@ func setSeatFree(seatIdx, free):
 	_seatList[seatIdx] = free
 	
 func spawntimeCat(delta):
-	catTimer += delta
-	if catTimer >= spawnTimeCat:
+	timerCat += delta
+	if timerCat >= spawnTimeCat:
 		print("Spawning cat")
 		spawnCat()
-		catTimer = 0.0
+		timerCat = 0.0
 	
 func spawnCat():
 	var sceneCat = load("res://scenes/objects/cat.tscn")
 	var sceneCatInstance = sceneCat.instance()
 	sceneCatInstance.set_name("cat")
-	print("before setpos")
 	# set position
 	sceneCatInstance.set_pos(get_node("SpawnAreas/SpawnAreaLeft").get_pos())
-	print("cat is here!")
 	add_child(sceneCatInstance)

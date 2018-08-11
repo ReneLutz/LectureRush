@@ -67,3 +67,19 @@ func _fixed_process(delta):
 # cell index of feet
 func _getCurrentTilePos():
 	return get_pos() / _room.get_cell_size()
+	
+	
+####### PUBLIC #######
+
+func spawnDisturbAction():
+	print("SPAWNING DISTURB ACTION!!!!!!!")
+	#TODO spawn random disturb action
+	
+	pass
+
+func isDisturbActionActive():
+	# TODO check if student is currently disturbing
+	return false
+	
+func isSitting_test(): # Remove when isSitting() is implemented
+	return true

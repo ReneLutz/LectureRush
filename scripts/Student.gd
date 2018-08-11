@@ -155,3 +155,16 @@ func _unhandled_input(event):
 			set_pos(_room.map_to_world(currentCellIdx))
 			state = State.SITTING
 			_onStateChange()
+
+func spawnDisturbAction():
+	print("SPAWNING DISTURB ACTION!!!!!!!")
+	#TODO spawn random disturb action
+	
+	pass
+
+func isDisturbActionActive():
+	# TODO check if student is currently disturbing
+	return false
+	
+func isSitting_test(): # Remove when isSitting() is implemented
+	return true

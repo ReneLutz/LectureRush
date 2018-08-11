@@ -4,14 +4,24 @@ var timer = 0.0
 var spawnTime = 2.0
 var spawnLeft = true
 
+func _ready():
+	# Initialization here
+	randomize()
+	self.set_process(true)
+
+func _process(delta):
+	spawnStudents(delta)
+	
 func spawnStudents(delta):
 	timer += delta
 	if timer >= spawnTime:
 		print("Spawning student..")
+		# spawn left or right
+		if randi()%2 == 1:
+			spawnLeft = !spawnLeft
 		# spawn student scene
 		spawnStudent()
-		
-		spawnLeft = !spawnLeft
+		# reset spawn timer
 		timer = 0.0
 		
 func spawnStudent():
@@ -25,11 +35,3 @@ func spawnStudent():
 		sceneStudentInstance.set_pos(get_node("SpawnAreas/SpawnAreaRight").get_pos())
 		
 	add_child(sceneStudentInstance)
-	
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	self.set_process(true)
-
-func _process(delta):
-	spawnStudents(delta)

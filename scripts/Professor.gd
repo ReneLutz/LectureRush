@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
-enum { STANDING, WALKING }
 const WALK_SPEED = 80
+const STANDING = "Standing"
+const WALKING = "Walking"
 
 onready var sprite = get_node("AnimatedSprite")
 
@@ -13,6 +14,7 @@ func _ready():
 	
 func _fixed_process(delta):
 	
+	# Set walking direction
 	if (Input.is_key_pressed(KEY_A)):
 		velocity.x = -WALK_SPEED
 		animation = WALKING
@@ -23,12 +25,13 @@ func _fixed_process(delta):
 		velocity.x = 0
 		animation = STANDING
 	
-	var motion = velocity * delta
-	
+	# Play walking / standing animation
 	if(animation == STANDING):
-		sprite.play("Idle")
+		sprite.play(STANDING)
 	else:
-		sprite.play("Walking")
+		sprite.play(WALKING)
+	
+	var motion = velocity * delta
 	move(motion)
 	
 #func :

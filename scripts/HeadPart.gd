@@ -13,7 +13,6 @@ var velocity = Vector2()
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	set_fixed_process(true)
 	dir.x = sin(deg2rad(degrees))
 	dir.y = cos(deg2rad(degrees))
 	velocity.x = get_parent().power*dir.x/mass

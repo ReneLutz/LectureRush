@@ -6,6 +6,8 @@ const WALKING = "Walking"
 
 onready var sprite = get_node("AnimatedSprite")
 
+export var power = 150
+
 var velocity = Vector2()
 var animation = STANDING
 
@@ -13,12 +15,15 @@ var animation = STANDING
 var mood = 100;
 var maxMood = 100;
 var panicUI = null
+var dead = false
 
 func _ready():
 	set_fixed_process(true)
 	
 func _fixed_process(delta):
-	
+	if dead:
+		
+		return
 	# Set walking direction
 	if (Input.is_key_pressed(KEY_A)):
 		velocity.x = -WALK_SPEED
@@ -44,6 +49,12 @@ func setPanicUI(p):
 
 func setMood(level):
 	mood = level
+	if mood == 0:
+		dead = true
+		get_node("AnimatedSprite").hide()
+		get_node("BodyOnly").show()
+		get_node("KinematicBody2D").show()
+		get_node("KinematicBody2D").set_fixed_process(true)
 	if panicUI != null:
 		panicUI.panic = (maxMood-mood)/maxMood
 	print("Prof's mood set to %s." % str(level))

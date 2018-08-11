@@ -4,11 +4,7 @@ extends Node2D
 # var a = 2
 # var b = "textvar"
 
-export var power = 200.0
-
-func start():
-	for child in get_children():
-		child.set_fixed_process(true)
+export var power = 20
 
 func _ready():
 	# Called every time the node is added to the scene.

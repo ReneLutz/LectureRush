@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://textures/bgTileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/Room.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://sounds/raw/track.ogg" type="AudioStream" id=4]
 [ext_resource path="res://scenes/objects/professor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=6]
+[ext_resource path="res://scripts/PaperPlaneDebug.gd" type="Script" id=7]
 
 [node name="Game" type="Node"]
 
@@ -112,5 +113,18 @@ align = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="PaperPlaneDebug" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = true
+
+[node name="PaperPlaneDebug" type="Node" parent="PaperPlaneDebug"]
+
+script/script = ExtResource( 7 )
+
+[connection signal="timeout" from="PaperPlaneDebug" to="PaperPlaneDebug/PaperPlaneDebug" method="_on_PaperPlaneDebug_timeout"]
 
 

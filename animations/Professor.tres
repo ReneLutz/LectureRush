@@ -7,9 +7,14 @@
 [resource]
 
 animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "walk",
+"name": "Walking",
 "speed": 5.0
 } ]
 

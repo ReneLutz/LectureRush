@@ -8,7 +8,7 @@ func _ready():
 	
 func _fixed_process(delta):
 	var input = Vector2(0, 0)
-	input.x = Input.is_action_pressed("ui_right") - Input.is_action_pressed("ui_left")
+	input.x = Input.is_key_pressed(KEY_D) - Input.is_key_pressed(KEY_A)
 	vel = input.normalized() * speed
 	var pos = get_pos() + vel * delta
 	set_pos(pos)

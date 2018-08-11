@@ -127,8 +127,34 @@ func _fixed_process(delta):
 func _getCurrentTilePos():
 	return get_pos() / _room.get_cell_size()
 	
-	
-####### PUBLIC #######
+func _unhandled_input(event):
+	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
+		var currentCellIdx = _room.coordToCellIdx(get_pos())
+		var currentTile = _room.getTileName(currentCellIdx)
+		
+		if currentTile == "Floor":
+			var topIdx = currentCellIdx + Vector2(0,1)
+			if _room.getTileName(topIdx) == "Stair":
+				set_pos(_room.map_to_world(topIdx))
+				state = WALK_U
+				_onStateChange()
+		elif currentTile == "Stair":
+			var nXOffset = 1
+			if event.button_index == 1:
+				nXOffset = -1
+				
+			var nIdx = currentCellIdx + Vector2(nXOffset, 0)
+			if _room.getTileName(nIdx) == "Chair":
+				set_pos(_room.map_to_world(nIdx))
+				if nXOffset == 1:
+					state = State.WALK_R
+				else:
+					state = State.WALK_L
+				_onStateChange()
+		elif currentTile == "Chair":
+			set_pos(_room.map_to_world(currentCellIdx))
+			state = State.SITTING
+			_onStateChange()
 
 func spawnDisturbAction():
 	print("SPAWNING DISTURB ACTION!!!!!!!")

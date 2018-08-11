@@ -16,11 +16,11 @@ func _process(delta):
 	
 # coord: Vector2
 func coordToCellIdx(coord):
-	return coord / get_cell_size()
+	return (coord / get_cell_size()).floor()
 	
 # idx: cell index
 func getTileName(idx):
-	get_tileset().tile_get_name(get_cell(idx))
+	return get_tileset().tile_get_name(self.get_cell(idx.x, idx.y))
 	
 func spawnStudents(delta):
 	timer += delta

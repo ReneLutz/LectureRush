@@ -29,6 +29,14 @@ func _process(delta):
 	spawntimeCat(delta)
 	spawnStudentsDisturbActions(delta)
 
+# coord: Vector2
+func coordToCellIdx(coord):
+	return (coord / get_cell_size()).floor()
+	
+# idx: cell index
+func getTileName(idx):
+	return get_tileset().tile_get_name(self.get_cell(idx.x, idx.y))
+
 ########## SPAWNING STUDENTS ##########
 
 func spawnStudents(delta):
@@ -104,14 +112,6 @@ func spawnCat():
 	
 func hideCat():
 	remove_child(sceneCatInstance)
-	
-# coord: Vector2
-func coordToCellIdx(coord):
-	return coord / get_cell_size()
-	
-# idx: cell index
-func getTileName(idx):
-	get_tileset().tile_get_name(get_cell(idx))
 	
 # Vector2 -> bool
 # only contains indices of chairs

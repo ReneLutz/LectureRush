@@ -64,7 +64,7 @@ material/material = SubResource( 2 )
 frames = SubResource( 3 )
 animation = "New Anim"
 script/script = ExtResource( 2 )
-walkSpeed = 1
+walkSpeed = 300
 sex = "male"
 
 [node name="Hair" type="AnimatedSprite" parent="."]

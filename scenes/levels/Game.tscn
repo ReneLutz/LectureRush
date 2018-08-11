@@ -5,10 +5,10 @@
 [ext_resource path="res://textures/plant.png" type="Texture" id=3]
 [ext_resource path="res://sounds/raw/track.ogg" type="AudioStream" id=4]
 [ext_resource path="res://scenes/objects/professor.tscn" type="PackedScene" id=5]
-[ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=6]
-[ext_resource path="res://scripts/PaperPlaneDebug.gd" type="Script" id=7]
-[ext_resource path="res://textures/panic.png" type="Texture" id=8]
-[ext_resource path="res://scripts/Panic.gd" type="Script" id=9]
+[ext_resource path="res://textures/panic.png" type="Texture" id=6]
+[ext_resource path="res://scripts/Panic.gd" type="Script" id=7]
+[ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=8]
+[ext_resource path="res://scripts/PaperPlaneDebug.gd" type="Script" id=9]
 
 [node name="Game" type="Node"]
 
@@ -83,6 +83,16 @@ transform/pos = Vector2( 131.208, 399.077 )
 
 [node name="UI" type="Node" parent="."]
 
+[node name="Panic" type="Sprite" parent="UI"]
+
+transform/pos = Vector2( 202.77, 4.43213 )
+transform/scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 6 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 145, 80 )
+script/script = ExtResource( 7 )
+
 [node name="Score" type="Label" parent="UI"]
 
 focus/ignore_mouse = true
@@ -91,9 +101,9 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 10.0
 margin/top = 10.0
-margin/right = 118.0
+margin/right = 154.0
 margin/bottom = 36.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 8 )
 text = "Score: 0"
 percent_visible = 1.0
 lines_skipped = 0
@@ -109,7 +119,7 @@ margin/left = 669.0
 margin/top = 10.0
 margin/right = 760.0
 margin/bottom = 48.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 8 )
 text = "2:00"
 align = 2
 percent_visible = 1.0
@@ -125,16 +135,6 @@ autostart = true
 
 [node name="PaperPlaneDebug" type="Node" parent="PaperPlaneDebug"]
 
-script/script = ExtResource( 7 )
-
-[node name="Panic" type="Sprite" parent="."]
-
-transform/pos = Vector2( 202.77, 4.43213 )
-transform/scale = Vector2( 0.6, 0.6 )
-texture = ExtResource( 8 )
-centered = false
-region = true
-region_rect = Rect2( 0, 0, 145, 80 )
 script/script = ExtResource( 9 )
 
 [connection signal="timeout" from="PaperPlaneDebug" to="PaperPlaneDebug/PaperPlaneDebug" method="_on_PaperPlaneDebug_timeout"]

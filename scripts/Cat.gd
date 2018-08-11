@@ -14,7 +14,6 @@ func _input_event(viewport, event, shape_idx):
 
 func on_click():
 	if not is_used:
-		print(get_node("../../../Professor").get_name())
-		get_tree().get_root().get_node("Professor/profBody").changeMood(mood_bonus)
+		get_tree().get_current_scene().get_node("Professor/profBody").changeMood(mood_bonus)
 		is_used = true
 	print("Gadse!")

@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const SPEED = 250
+const SPEED = 150
 
 func _ready():
 	set_fixed_process(true)

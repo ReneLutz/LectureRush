@@ -6,8 +6,12 @@ var timerStudent = 0.0
 var spawnTimeStudent = 2.0
 var spawnStudentLeft = true
 
+var sceneCatInstance
 var timerCat = 0.0
-var spawnTimeCat = 1.0
+var spawnTimeCat = 10.0
+var isCatSpawned = false
+var timerCatExists = 0.0
+var catExistenceTime = 5.0
 
 func _ready():
 	_resetSeatList()
@@ -76,16 +80,28 @@ func setSeatFree(seatIdx, free):
 	_seatList[seatIdx] = free
 	
 func spawntimeCat(delta):
-	timerCat += delta
-	if timerCat >= spawnTimeCat:
-		print("Spawning cat")
-		spawnCat()
-		timerCat = 0.0
+	if !isCatSpawned:
+		timerCat += delta
+		if timerCat >= spawnTimeCat:
+			print("Spawning cat")
+			spawnCat()
+			isCatSpawned = true
+			timerCat = 0.0
+	else:
+		timerCatExists += delta
+		if timerCatExists >= catExistenceTime:
+			print("Hiding cat")
+			hideCat()
+			timerCatExists = 0.0
+			isCatSpawned = false
 	
 func spawnCat():
 	var sceneCat = load("res://scenes/objects/cat.tscn")
-	var sceneCatInstance = sceneCat.instance()
+	sceneCatInstance = sceneCat.instance()
 	sceneCatInstance.set_name("cat")
 	# set position
-	sceneCatInstance.set_pos(get_node("SpawnAreas/SpawnAreaLeft").get_pos())
+	sceneCatInstance.set_pos(get_node("Decoration/Plant").get_pos())
 	add_child(sceneCatInstance)
+	
+func hideCat():
+	remove_child(sceneCatInstance)

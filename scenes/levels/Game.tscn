@@ -67,7 +67,7 @@ stream/buffering_ms = 500
 
 [node name="Professor" type="Area2D" parent="."]
 
-transform/pos = Vector2( 19.6438, 314.3 )
+transform/pos = Vector2( 32, 256 )
 input/pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -77,7 +77,11 @@ script/script = ExtResource( 4 )
 
 [node name="Sprite" parent="Professor" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( -2.45547, -58.9312 )
 frames = ExtResource( 6 )
+
+[node name="Collision" type="CollisionShape2D" parent="Professor"]
+
+trigger = false
+_update_shape_index = -1
 
 

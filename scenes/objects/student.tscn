@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://textures/Studentmale_complete.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Student.gd" type="Script" id=2]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -15,5 +16,7 @@ animations = [ {
 
 frames = SubResource( 1 )
 animation = "default"
+script/script = ExtResource( 2 )
+walkSpeed = 1
 
 

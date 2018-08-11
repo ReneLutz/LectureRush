@@ -127,7 +127,6 @@ func _fixed_process(delta):
 func _getCurrentTilePos():
 	return get_pos() / _room.get_cell_size()
 	
-<<<<<<< HEAD
 	
 ####### PUBLIC #######
 

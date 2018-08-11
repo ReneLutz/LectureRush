@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://textures/bgTileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/Room.gd" type="Script" id=2]
 [ext_resource path="res://textures/plant.png" type="Texture" id=3]
 [ext_resource path="res://sounds/raw/track.ogg" type="AudioStream" id=4]
 [ext_resource path="res://scenes/objects/professor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=6]
 
 [node name="Game" type="Node"]
 
@@ -76,5 +77,40 @@ stream/buffering_ms = 500
 [node name="Professor" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 131.208, 399.077 )
+
+[node name="UI" type="Node" parent="."]
+
+[node name="Score" type="Label" parent="UI"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 118.0
+margin/bottom = 36.0
+custom_fonts/font = ExtResource( 6 )
+text = "Score: 0"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Time" type="Label" parent="UI"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 669.0
+margin/top = 10.0
+margin/right = 760.0
+margin/bottom = 48.0
+custom_fonts/font = ExtResource( 6 )
+text = "2:00"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 

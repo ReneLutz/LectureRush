@@ -38,4 +38,9 @@ func _fixed_process(delta):
 	move(motion)
 	
 func setMood(level):
-	mood = level;
+	mood = level
+	print("Prof's mood set to %s." % str(level))
+	
+func changeMood(increase):
+	mood += increase
+	print("Prof's mood %s by %s." % ["increased" if increase >= 0 else "decreased", str(abs(increase))])

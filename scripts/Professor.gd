@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const WALK_SPEED = 80
+const WALK_SPEED = Vector2(80, 40)
 const STANDING = "Standing"
 const WALKING = "Walking"
 
@@ -9,7 +9,6 @@ onready var sprite = get_node("AnimatedSprite")
 export var power = 150
 
 var velocity = Vector2()
-var animation = STANDING
 
 #Current mood level
 var mood = 100;
@@ -22,26 +21,19 @@ func _ready():
 	
 func _fixed_process(delta):
 	if dead:
-		
 		return
-	# Set walking direction
-	if (Input.is_key_pressed(KEY_A)):
-		velocity.x = -WALK_SPEED
-		animation = WALKING
-	elif (Input.is_key_pressed(KEY_D)):
-		velocity.x =  WALK_SPEED
-		animation = WALKING
-	else:
-		velocity.x = 0
-		animation = STANDING
 	
-	# Play walking / standing animation
-	if(animation == STANDING):
-		sprite.play(STANDING)
-	else:
+	var acceleration = Vector2((Input.is_key_pressed(KEY_D) - Input.is_key_pressed(KEY_A)), 
+								(Input.is_key_pressed(KEY_S) - Input.is_key_pressed(KEY_W)))
+	
+	# Play walking animation
+	if((acceleration.x != 0) || (acceleration.y != 0)):
 		sprite.play(WALKING)
+	else:
+		sprite.play(STANDING)
 	
-	var motion = velocity * delta
+	# Move professor
+	var motion = Vector2(WALK_SPEED.x * acceleration.x, WALK_SPEED.y * acceleration.y) * delta
 	move(motion)
 	
 func setPanicUI(p):
@@ -61,4 +53,4 @@ func setMood(level):
 	
 func changeMood(increase):
 	mood += increase
-	print("Prof's mood %s by %s." % ["increased" if increase >= 0 else "decreased", str(abs(increase))])
+	print("Prof's mood %s by %s (%s)." % ["increased" if increase >= 0 else "decreased", str(abs(increase)), str(mood)])

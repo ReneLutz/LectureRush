@@ -43,4 +43,4 @@ func setMood(level):
 	
 func changeMood(increase):
 	mood += increase
-	print("Prof's mood %s by %s." % ["increased" if increase >= 0 else "decreased", str(abs(increase))])
+	print("Prof's mood %s by %s (%s)." % ["increased" if increase >= 0 else "decreased", str(abs(increase)), str(mood)])

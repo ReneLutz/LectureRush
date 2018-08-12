@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=1]
+[gd_scene load_steps=28 format=1]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://textures/bgTilesets.tres" type="TileSet" id=2]
@@ -14,11 +14,11 @@
 [ext_resource path="res://scenes/objects/professor.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scripts/DisturbActions.gd" type="Script" id=13]
 [ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=14]
-[ext_resource path="res://scripts/PaperPlaneDebug.gd" type="Script" id=15]
-[ext_resource path="res://textures/ragemeter.png" type="Texture" id=16]
-[ext_resource path="res://scripts/Panic.gd" type="Script" id=17]
-[ext_resource path="res://scripts/SeatArea.gd" type="Script" id=18]
-[ext_resource path="res://scripts/SpeechbubbleDebug.gd" type="Script" id=19]
+[ext_resource path="res://textures/ragemeter.png" type="Texture" id=15]
+[ext_resource path="res://scripts/Panic.gd" type="Script" id=16]
+[ext_resource path="res://scripts/SeatArea.gd" type="Script" id=17]
+[ext_resource path="res://scripts/Sponge.gd" type="Script" id=18]
+[ext_resource path="res://textures/sponge/sponge1.png" type="Texture" id=19]
 [ext_resource path="res://textures/bottomseets.png" type="Texture" id=20]
 [ext_resource path="res://textures/inbetween.png" type="Texture" id=21]
 
@@ -46,6 +46,11 @@ extents = Vector2( 384, 1 )
 
 custom_solver_bias = 0.0
 extents = Vector2( 31.8893, 32.2111 )
+
+[sub_resource type="RectangleShape2D" id=6]
+
+custom_solver_bias = 0.0
+extents = Vector2( 7.03526, 4.99719 )
 
 [node name="Game" type="Node"]
 
@@ -102,6 +107,7 @@ angular_damp = 1.0
 
 [node name="Decoration" type="Node" parent="LectureRoom"]
 
+editor/display_folded = true
 script/script = ExtResource( 4 )
 
 [node name="Plant" type="Sprite" parent="LectureRoom/Decoration"]
@@ -173,6 +179,8 @@ script/script = ExtResource( 13 )
 
 [node name="UI" type="Node" parent="."]
 
+editor/display_folded = true
+
 [node name="Score" type="Label" parent="UI"]
 
 focus/ignore_mouse = true
@@ -206,38 +214,30 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="PaperPlaneDebug" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 2.0
-one_shot = false
-autostart = true
-
-[node name="PaperPlaneDebug" type="Node" parent="PaperPlaneDebug"]
-
-script/script = ExtResource( 15 )
-
 [node name="Panic" type="Sprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 178.621, 7.21532 )
 transform/scale = Vector2( 1.24347, 1.24347 )
-texture = ExtResource( 16 )
+texture = ExtResource( 15 )
 centered = false
 region = true
 region_rect = Rect2( 0, 0, 64, 35 )
-script/script = ExtResource( 17 )
+script/script = ExtResource( 16 )
 
 [node name="PanicPointer" type="Sprite" parent="Panic"]
 
 transform/pos = Vector2( 32, 32 )
 transform/rot = 90.0
-texture = ExtResource( 16 )
+texture = ExtResource( 15 )
 offset = Vector2( 0, -14 )
 modulate = Color( 1, 0.726563, 0, 1 )
 region = true
 region_rect = Rect2( 2, 36, 12, 28 )
 
 [node name="FrontStageBorder" type="Node" parent="."]
+
+editor/display_folded = true
 
 [node name="EastBorder" type="KinematicBody2D" parent="FrontStageBorder"]
 
@@ -321,7 +321,7 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 18 )
+script/script = ExtResource( 17 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeatArea"]
 
@@ -329,16 +329,27 @@ shape = SubResource( 5 )
 trigger = false
 _update_shape_index = 0
 
-[node name="SpeechbubbleDebug" type="Timer" parent="."]
+[node name="Sponge" type="Area2D" parent="."]
 
-process_mode = 1
-wait_time = 2.0
-one_shot = false
-autostart = true
+input/pickable = true
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 18 )
 
-[node name="SpeechbubbleDebug" type="Node" parent="SpeechbubbleDebug"]
+[node name="Sprite" type="Sprite" parent="Sponge"]
 
-script/script = ExtResource( 19 )
+texture = ExtResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sponge"]
+
+shape = SubResource( 6 )
+trigger = false
+_update_shape_index = 0
 
 [node name="BetweenChairsBot" type="Sprite" parent="."]
 
@@ -402,9 +413,5 @@ transform/pos = Vector2( 388.637, 94.2736 )
 z/z = 5
 z/relative = false
 texture = ExtResource( 21 )
-
-[connection signal="timeout" from="PaperPlaneDebug" to="PaperPlaneDebug/PaperPlaneDebug" method="_on_PaperPlaneDebug_timeout"]
-
-[connection signal="timeout" from="SpeechbubbleDebug" to="SpeechbubbleDebug/SpeechbubbleDebug" method="_on_SpeechbubbleDebug_timeout"]
 
 

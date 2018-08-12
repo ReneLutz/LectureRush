@@ -13,6 +13,7 @@ lossy_quality = 0.7
 
 [node name="Polygon2D" type="Polygon2D"]
 
+z/z = 100
 polygon = Vector2Array( -96, -16, -96, 16, 96, 16, 96, -16 )
 uv = Vector2Array(  )
 color = Color( 0, 0, 0, 1 )

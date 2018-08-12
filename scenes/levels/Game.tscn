@@ -153,7 +153,7 @@ stream/buffering_ms = 500
 
 [node name="Professor" parent="." instance=ExtResource( 12 )]
 
-transform/pos = Vector2( 131.208, 399.077 )
+transform/pos = Vector2( 384, 400 )
 
 [node name="Students" type="Node" parent="."]
 

@@ -94,7 +94,7 @@ func _spawnActionDrinkWater(student):
 	var sceneWaterbottle = load("res://scenes/objects/waterbottle.tscn")
 	var sceneWaterbottleInstance = sceneWaterbottle.instance()
 	sceneWaterbottleInstance.set_name("waterbottle")
-	sceneWaterbottleInstance.set_pos(Vector2(10, -8))
+	sceneWaterbottleInstance.set_pos(Vector2(10, -2))
 		
 	student.get_node("DisturbSprites").add_child(sceneWaterbottleInstance)
 	
@@ -103,7 +103,7 @@ func _spawnActionDrinkCoffee(student):
 	var scene = load("res://scenes/objects/coffee.tscn")
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("coffee")
-	sceneInstance.set_pos(Vector2(12, -2))
+	sceneInstance.set_pos(Vector2(16, -1))
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
 	

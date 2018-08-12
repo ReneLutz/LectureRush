@@ -32,6 +32,7 @@ func picRandomColor():
 func _input_event(viewport, event, shape):
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		_onClick(event.button_index)
+		get_tree().set_input_as_handled()
 
 func _ready():
 	set_fixed_process(true)
@@ -112,16 +113,10 @@ func _ready():
 	var currentTile = _room.getTileName(currentCellIdx)
 	var screenSize = get_viewport().get_rect().size
 	
-	if currentTile == "Floor":
-		if get_pos().x <= screenSize.x/2:
-			setState(State.WALK_R)
-		else:
-			setState(State.WALK_L)
-	elif currentTile == "Stair":
-		if get_pos().y <= screenSize.y/2:
-			setState(State.WALK_U)
-		else:
-			setState(State.WALK_D)
+	if get_pos().y <= screenSize.y/2:
+		setState(State.WALK_U)
+	else:
+		setState(State.WALK_D)
 
 func isSeated():
 	return state == State.SITTING
@@ -233,17 +228,13 @@ func _getCurrentTilePos():
 func _onClick(btn):
 	var currentCellIdx = _room.coordToCellIdx(get_pos())
 	var currentTile = _room.getTileName(currentCellIdx)
+	var ss = _room.get_used_rect().size * _room.get_cell_size()
 	
-	var offset = -1
-	if btn == 2:
-		offset = 1
-	
-	var nIdx = Vector2()
-	if state == State.WALK_L || state == State.WALK_R:
-		setState( State.WALK_R + offset )
-		
+	# move to row 
+	if get_pos().x < ss.x / 2.0:
+		setState(State.WALK_R)
 	else:
-		setState(State.WALK_U + offset)
+		setState(State.WALK_L)
 		
 	moveToCell(currentCellIdx)
 	

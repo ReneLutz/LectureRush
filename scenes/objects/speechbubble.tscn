@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://textures/ui/ui_font_14.fnt" type="BitmapFont" id=1]
+[ext_resource path="res://textures/ui/ui_font_10.fnt" type="BitmapFont" id=1]
 [ext_resource path="res://scripts/Speechbubble.gd" type="Script" id=2]
 
 [sub_resource type="ImageTexture" id=1]
@@ -13,7 +13,7 @@ lossy_quality = 0.7
 
 [node name="Polygon2D" type="Polygon2D"]
 
-polygon = Vector2Array( -64, -16, -64, 16, 64, 16, 64, -16 )
+polygon = Vector2Array( -96, -16, -96, 16, 96, 16, 96, -16 )
 uv = Vector2Array(  )
 color = Color( 0, 0, 0, 1 )
 vertex_colors = ColorArray(  )
@@ -27,7 +27,7 @@ invert/border = 16.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 
-polygon = Vector2Array( -63, 15, -63, -15, 63, -15, 63, 15 )
+polygon = Vector2Array( -95, -15, -95, 15, 95, 15, 95, -15 )
 uv = Vector2Array(  )
 color = Color( 1, 1, 1, 1 )
 vertex_colors = ColorArray(  )
@@ -45,9 +45,9 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = -62.0
+margin/left = -94.0
 margin/top = -14.0
-margin/right = 62.0
+margin/right = 94.0
 margin/bottom = 14.0
 custom_fonts/normal_font = ExtResource( 1 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
@@ -66,7 +66,7 @@ autostart = false
 
 [node name="Sprite" type="Sprite" parent="Polygon2D"]
 
-transform/pos = Vector2( -64, 15 )
+transform/pos = Vector2( -96, 15 )
 texture = SubResource( 1 )
 centered = false
 

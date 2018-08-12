@@ -15,9 +15,9 @@
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 1 ), ExtResource( 1 ) ],
 "loop": true,
-"name": "default",
+"name": "anim1",
 "speed": 5.0
 } ]
 
@@ -38,7 +38,8 @@ z/relative = false
 [node name="Cigarette" type="AnimatedSprite" parent="."]
 
 frames = SubResource( 1 )
-animation = "default"
+animation = "anim1"
+frame = 11
 playing = true
 
 [node name="Smoke" type="AnimatedSprite" parent="."]

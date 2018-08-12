@@ -4,6 +4,17 @@ const WALK_SPEED = Vector2(80, 40)
 const STANDING = "Standing"
 const WALKING = "Walking"
 
+# Current sentences the professor can say
+const SENTENCE_TRIVIAL = "You can do the rest at home. It's completely trivial!"
+const SENTENCE_EXAM = "Listen!!!\nThis will be relevant for your exam!"
+const SENTENCE_GET_OUT = "You are not paying attention! GET OUT!"
+
+var speechBubbleInstance
+
+# Professor ability cooldowns available
+var examActivated = false
+var trivialActivated = false
+
 onready var sprite = get_node("AnimatedSprite")
 
 export var power = 150
@@ -21,6 +32,13 @@ func _ready():
 	set_fixed_process(true)
 	get_node("BodyOnly/Particles2D").set_process(false)
 	get_node("BodyOnly/Particles2D").set_fixed_process(false)
+	
+	var speechBubbleScene = load("res://scenes/objects/speechbubble.tscn")
+	speechBubbleInstance = speechBubbleScene.instance()
+	add_child(speechBubbleInstance)
+	
+	_disposeSpeechBubble()
+
 	
 func _fixed_process(delta):
 	if dead:
@@ -45,6 +63,15 @@ func _fixed_process(delta):
 	var acceleration = Vector2((Input.is_key_pressed(KEY_D) - Input.is_key_pressed(KEY_A)), 
 								(Input.is_key_pressed(KEY_S) - Input.is_key_pressed(KEY_W)))
 	
+	# Check ability activation
+	if(Input.is_key_pressed(KEY_1)):
+		if(!trivialActivated):
+			 _activateTrivial()
+	
+	if(Input.is_key_pressed(KEY_2)):
+		if(!examActivated):
+			_activateExam()
+	
 	# Play walking animation
 	if((acceleration.x != 0) || (acceleration.y != 0)):
 		sprite.play(WALKING)
@@ -55,6 +82,26 @@ func _fixed_process(delta):
 	var motion = Vector2(WALK_SPEED.x * acceleration.x, WALK_SPEED.y * acceleration.y) * delta
 	move(motion)
 	
+func _yell(sentence):
+	var position = get_pos()
+	speechBubbleInstance.set_pos(Vector2(position.x + 50, position.y - 50))
+
+	var textLabelNode = speechBubbleInstance.get_node("Polygon2D/RichTextLabel")
+	textLabelNode.setText(sentence)
+	
+func _disposeSpeechBubble():
+	speechBubbleInstance.set_pos(Vector2(-2500, -2500))
+
+func _activateTrivial():
+	trivialActivated = true
+	_yell(SENTENCE_TRIVIAL)
+	
+	# Start cooldown timer
+	
+func _activateExam():
+	examActivated = true
+	_yell(SENTENCE_EXAM)
+
 func setPanicUI(p):
 	panicUI = p
 

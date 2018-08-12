@@ -1,6 +1,6 @@
 extends Node
 
-enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE }
+enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE }
 
 const ACTION_SPAWN_COOLDOWN = 2.0
 
@@ -10,6 +10,7 @@ const MOOD_VALUE_ACTION_DRINK_COFFEE = 5
 const MOOD_VALUE_ACTION_HEADPHONES = 5
 const MOOD_VALUE_ACTION_TOILET = 5
 const MOOD_VALUE_ACTION_SMOKE = 5
+const MOOD_VALUE_ACTION_PAPERPLANE = 5
 
 # If DURATION initialized with <= 0: Disturb action of student will remain until he leaves the room
 const DURATION_ACTION_DRINK_WATER = 50
@@ -17,6 +18,7 @@ const DURATION_ACTION_DRINK_COFFEE = 50
 const DURATION_ACTION_HEADPHONES = 50
 const DURATION_ACTION_TOILET = 50
 const DURATION_ACTION_SMOKE = 50
+const DURATION_ACTION_PAPERPLANE = 10
 
 var timerDisturbAction = 0.0
 
@@ -52,7 +54,7 @@ func spawnDisturbActions(delta):
 # spawns a random disturb action on a student
 func _spawnRandomDisturbAction(student):
 	# spawn random disturb action
-	var randAction = randi() % 5
+	var randAction = randi() % actionTypes.size()
 	_generateDisturbAction(randAction, student)
 		
 	
@@ -82,6 +84,11 @@ func _generateDisturbAction(actionType, student):
 		print(" --> Student SMOKE")
 		_spawnActionSmoke(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_SMOKE, DURATION_ACTION_SMOKE)
+		
+	elif actionType == actionTypes.PAPERPLANE:
+		print(" --> Student PAPERPLANE")
+		_spawnActionPaperplane(student)
+		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_PAPERPLANE, DURATION_ACTION_PAPERPLANE)
 	
 	# give action to student
 	student.setActiveDisturbAction(action)
@@ -124,3 +131,12 @@ func _spawnActionSmoke(student):
 	sceneInstance.set_pos(Vector2(-8, 5))
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
+	
+func _spawnActionPaperplane(student):
+	# spawn paperplane at students pos
+	var scenePlane = load("res://scenes/objects/paper_plane.tscn")
+	var scenePlaneInstance = scenePlane.instance()
+	scenePlaneInstance.set_name("paper_plane")
+	# set position
+	scenePlaneInstance.set_pos(Vector2(student.get_pos().x + 20, student.get_pos().y))
+	student.get_node("DisturbSprites").add_child(scenePlaneInstance)

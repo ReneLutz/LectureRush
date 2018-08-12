@@ -3,7 +3,7 @@ extends TileMap
 const CHAIR_TILE_NAME = "Chair"
 
 var timerStudent = 20.0
-var spawnTimeStudent = 20.0
+var spawnTimeStudent = 5.0
 var spawnStudentLeft = true
 
 var sceneCatInstance

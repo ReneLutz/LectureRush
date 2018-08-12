@@ -14,7 +14,14 @@ animations = [ {
 
 [node name="Node2D" type="Node2D"]
 
+<<<<<<< HEAD
 [node name="Sprite" type="AnimatedSprite" parent="."]
+=======
+z/z = 1
+z/relative = false
+
+[node name="Sprite" type="Sprite" parent="."]
+>>>>>>> 7c1f7dcc7c764604e077748e0e53ba3ba372bb11
 
 frames = SubResource( 1 )
 animation = "default"

@@ -27,10 +27,10 @@ texture = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 0.814499, -10.5887 )
+transform/pos = Vector2( -0.0440674, -6.08126 )
 frames = SubResource( 1 )
 animation = "default"
-frame = 1
+frame = 3
 playing = true
 
 

@@ -14,13 +14,13 @@ func setPanic(var p):
 		panic = 0.0
 	if panic > 1.0:
 		panic = 1.0
-	updatePointer()
 
 func getPanic():
 	return panic
 
-func updatePointer():
-	panicPointer.set_rotd(90 - panic * 180)
+func _process(delta):
+	panicPointer.set_rotd(90 - panic * 180 + (exp(panic)-1) * 2 * sin(2 * OS.get_ticks_msec()))
 
 func _ready():
+	set_process(true)
 	panicPointer = get_node("PanicPointer")

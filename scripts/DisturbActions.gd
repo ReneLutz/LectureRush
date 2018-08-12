@@ -2,7 +2,7 @@ extends Node
 
 enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE }
 
-const ACTION_SPAWN_COOLDOWN = 5
+const ACTION_SPAWN_COOLDOWN = 3
 
 const MOOD_VALUE_ACTION_DRINK_WATER = 5
 const MOOD_VALUE_ACTION_DRINK_COFFEE = 5
@@ -10,11 +10,11 @@ const MOOD_VALUE_ACTION_HEADPHONES = 5
 const MOOD_VALUE_ACTION_TOILET = 5
 const MOOD_VALUE_ACTION_SMOKE = 5
 
-const DURATION_ACTION_DRINK_WATER = 10
-const DURATION_ACTION_DRINK_COFFEE = 10
-const DURATION_ACTION_HEADPHONES = 10
-const DURATION_ACTION_TOILET = 10
-const DURATION_ACTION_SMOKE = 10
+const DURATION_ACTION_DRINK_WATER = 5
+const DURATION_ACTION_DRINK_COFFEE = 5
+const DURATION_ACTION_HEADPHONES = 5
+const DURATION_ACTION_TOILET = 5
+const DURATION_ACTION_SMOKE = 5
 
 var timerDisturbAction = 0.0
 
@@ -52,7 +52,7 @@ func spawnDisturbActions(delta):
 # spawns a random disturb action on a student
 func _spawnRandomDisturbAction(student):
 	# spawn random disturb action
-	var randAction = randi() % 3
+	var randAction = randi() % 5
 	_generateDisturbAction(randAction, student)
 		
 	
@@ -80,7 +80,7 @@ func _generateDisturbAction(actionType, student):
 		
 	elif actionType == actionTypes.SMOKE:
 		print(" --> Student SMOKE")
-		
+		_spawnActionSmoke(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_SMOKE, DURATION_ACTION_SMOKE)
 		
 	student.setActiveDisturbAction(action)
@@ -99,7 +99,7 @@ func _spawnActionDrinkCoffee(student):
 	var scene = load("res://scenes/objects/coffee.tscn")
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("coffee")
-	sceneInstance.set_pos(Vector2(10, -8))
+	sceneInstance.set_pos(Vector2(12, -2))
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
 	
@@ -108,6 +108,15 @@ func _spawnActionHeadphones(student):
 	var scene = load("res://scenes/objects/headphones.tscn")
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("headphones")
-	sceneInstance.set_pos(Vector2(0, -10))
+	sceneInstance.set_pos(Vector2(1, -11))
+		
+	student.get_node("DisturbSprites").add_child(sceneInstance)
+	
+func _spawnActionSmoke(student):
+	# Add Image / Animations to Student
+	var scene = load("res://scenes/objects/Cigarette.tscn")
+	var sceneInstance = scene.instance()
+	sceneInstance.set_name("cigarette")
+	sceneInstance.set_pos(Vector2(-8, 5))
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)

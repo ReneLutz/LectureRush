@@ -1,6 +1,8 @@
 extends AnimatedSprite
 
-export var walkSpeed = 600
+export var walkSpeed = 50
+export var walkSpeedLeaving = 200
+
 export var sex = "female"
 
 enum State { SITTING = 0, WALK_L, WALK_U, WALK_R, WALK_D }
@@ -13,6 +15,11 @@ var state = State.SITTING setget setState, getState
 
 var _room
 var material
+
+var leaveRoom
+var leavingState = 0
+var leaveDelay = 0.0
+var leaveDelayMax = 0.7
 
 var disturbing
 var activeDisturbAction
@@ -156,7 +163,49 @@ func getState():
 
 func moveToCell(cellIdx):
 	set_pos(_room.map_to_world(cellIdx) + _room.get_cell_size()/2 -Vector2(0,10))
+
+func leaveRoom():
+	print("leave room")
+	leavingState = 1
+	walkSpeed = walkSpeedLeaving
+	# show speechbubble of prof
+	var professor = get_node("../../Professor/profBody")
+	#TODO
 	
+	leaveRoom = true
+	
+func _leavingRoom(delta, currentTile):
+	var ss = _room.get_used_rect().size * _room.get_cell_size()
+	
+	if leavingState == 1:
+		set_pos(Vector2(get_pos().x, get_pos().y - 5))
+		leavingState = 2
+		
+	elif leavingState == 2:
+		leaveDelay += delta
+		if leaveDelay >= leaveDelayMax:
+			leavingState = 3
+		
+	elif leavingState == 3:
+		if get_pos().x < ss.x / 2.0:
+			setState(State.WALK_L)
+		else:
+			setState(State.WALK_R)
+		if currentTile == "Stair":
+			if get_pos().x < 32 || get_pos().x > ss.x - 182:
+				setState(State.WALK_U)
+				leavingState = 4
+			
+	elif leavingState == 4:
+		if currentTile == "Floor":
+			_deleteSelf()
+			leavingState = 5
+			leaveRoom = false
+	
+func _deleteSelf():
+	_resetDisturbAction(true)
+	self.queue_free()
+
 func _fixed_process(delta):
 	
 	set_z(int(min(46,(_getCurrentTilePos().y-2)*5 +1)))
@@ -226,6 +275,9 @@ func _fixed_process(delta):
 				setState(State.WALK_L)
 				
 	_updateActiveDisturbAction(delta)
+	
+	if leaveRoom == true:
+		_leavingRoom(delta, currentTile)
 
 # cell index of feet
 func _getCurrentTilePos():
@@ -236,18 +288,22 @@ func _onClick(btn):
 	var currentTile = _room.getTileName(currentCellIdx)
 	var ss = _room.get_used_rect().size * _room.get_cell_size()
 	
-	# move to row 
-	if get_pos().x < ss.x / 2.0:
-		setState(State.WALK_R)
-	else:
-		setState(State.WALK_L)
-		
-	moveToCell(currentCellIdx)
 	
 	if currentTile == "Chair":
+		if btn == BUTTON_RIGHT:
+			if isSeated() && isDisturbActionActive():
+				leaveRoom()
+		else:
+			if isSeated() == false:
+				moveToCell(currentCellIdx)
+				setState(State.SITTING)
+	else:
 		moveToCell(currentCellIdx)
-		setState(State.SITTING)
-		
+		# move to row 
+		if get_pos().x < ss.x / 2.0:
+			setState(State.WALK_R)
+		else:
+			setState(State.WALK_L)
 
 func setActiveDisturbAction(action):
 	activeDisturbAction = action
@@ -263,15 +319,16 @@ func _updateActiveDisturbAction(delta):
 				_resetDisturbAction(true)
 
 func _resetDisturbAction(resetMood):
-	# delete sprites belonging to disturb action
-	for c in disturbChildNodes.get_children():
-		c.queue_free()
-	# reset mood of professor
-	if resetMood == true:
-		var professor = get_node("../../Professor/profBody")
-		professor.changeMood(activeDisturbAction.disturbValue)
-	# delete disturb action instance
-	activeDisturbAction = null
+	if activeDisturbAction != null:
+		# delete sprites belonging to disturb action
+		for c in disturbChildNodes.get_children():
+			c.queue_free()
+		# reset mood of professor
+		if resetMood == true:
+			var professor = get_node("../../Professor/profBody")
+			professor.changeMood(activeDisturbAction.disturbValue)
+		# delete disturb action instance
+		activeDisturbAction = null
 
 # checks if student is currently disturbing
 func isDisturbActionActive():

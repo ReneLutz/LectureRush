@@ -1,5 +1,7 @@
 extends Node
 
+var studentClicked = false;
+
 enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP }
 
 const ACTION_SPAWN_COOLDOWN = 2.0

@@ -4,6 +4,7 @@
 
 [node name="Node2D" type="Node2D"]
 
+transform/scale = Vector2( 1.5, 1.5 )
 z/z = 1
 
 [node name="Sprite" type="Sprite" parent="."]

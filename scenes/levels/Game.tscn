@@ -99,18 +99,21 @@ texture = ExtResource( 5 )
 
 [node name="Chemistry Rack" type="Sprite" parent="LectureRoom/Decoration"]
 
+visibility/visible = false
 transform/pos = Vector2( 495.455, 25.2618 )
 transform/scale = Vector2( 1.34969, 1.19766 )
 texture = ExtResource( 6 )
 
 [node name="Periodic Table" type="Sprite" parent="LectureRoom/Decoration"]
 
+visibility/visible = false
 transform/pos = Vector2( 594.363, 25.7784 )
 transform/scale = Vector2( 1.21642, 1.21642 )
 texture = ExtResource( 7 )
 
 [node name="Starry Night" type="Sprite" parent="LectureRoom/Decoration"]
 
+visibility/visible = false
 transform/pos = Vector2( 591.869, 28.3842 )
 transform/scale = Vector2( 1.38138, 1.38138 )
 texture = ExtResource( 8 )

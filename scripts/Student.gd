@@ -3,7 +3,11 @@ extends AnimatedSprite
 export var walkSpeed = 600
 export var sex = "female"
 
-enum State { SITTING = 0, WALK_L, WALK_R, WALK_U, WALK_D }
+enum State { SITTING = 0, WALK_L, WALK_U, WALK_R, WALK_D }
+
+enum Walkable { NONE = 0, HRZ, VRT, BOTH }
+
+const WALKABLE_TILES = { "Floor": Walkable.BOTH, "Chair": Walkable.HRZ, "Stair": Walkable.BOTH }
 
 var state
 
@@ -17,9 +21,15 @@ func picRandomColor():
 	var b = randf()
 	return Color(r,g,b,1.0)
 
+func _input_event(viewport, event, shape):
+	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
+		_onClick(event.button_index)
+
 func _ready():
 	set_fixed_process(true)
 	set_process_unhandled_input(true)
+	
+	get_node("Area2D").connect("input_event", self, "_input_event")
 	
 	var hairnode = get_node("Hair")
 	if sex == "female":
@@ -76,16 +86,10 @@ func _ready():
 			state = State.WALK_U
 		else:
 			state = State.WALK_D
-			
-	_onStateChange()
-	
-func _onStateChange():
-	# TODO
-	pass
 
 func isSeated():
 	return state == State.SITTING
-	
+
 func _fixed_process(delta):
 	var currentCellIdx = _room.coordToCellIdx(get_pos())
 	var currentTile = _room.getTileName(currentCellIdx)
@@ -109,55 +113,63 @@ func _fixed_process(delta):
 	if p.x <= 0:
 		state = State.WALK_R
 		set_pos(Vector2(cs.x/2, p.y))
-		_onStateChange()
+		
 	elif p.x >= ss.x:
 		state = State.WALK_L
 		set_pos(Vector2(ss.x - cs.x/2, p.y))
-		_onStateChange()
+		
 	elif p.y <= 0:
 		state = State.WALK_U
 		set_pos(Vector2(p.x, cs.y/2))
-		_onStateChange()
+		
 	elif p.y >= ss.y:
 		state = State.WALK_D
 		set_pos(Vector2(p.x, ss.y - cs.y/2))
-		_onStateChange()
+		
+	else:
+		var newCellIdx = _room.coordToCellIdx(get_pos())
+		var newTile = _room.getTileName(newCellIdx)
+		if (state == State.WALK_D || state == State.WALK_U) &&  !(WALKABLE_TILES[newTile] & Walkable.VRT):
+			set_pos(_room.map_to_world(currentCellIdx))
+			if state == State.WALK_D:
+				state = State.WALK_U
+			else:
+				state = State.WALK_D
+		elif (state == State.WALK_L || state == State.WALK_R) && !(WALKABLE_TILES[newTile] & Walkable.HRZ):
+			setPos(_room.map_to_world(currentCellIdx))
+			if state == State.WALK_L:
+				state = State.WALK_R
+			else:
+				state = State.WALK_L
 
 # cell index of feet
 func _getCurrentTilePos():
 	return get_pos() / _room.get_cell_size()
 	
-func _unhandled_input(event):
-	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
-		var currentCellIdx = _room.coordToCellIdx(get_pos())
-		var currentTile = _room.getTileName(currentCellIdx)
+func _onClick(btn):
+	var currentCellIdx = _room.coordToCellIdx(get_pos())
+	var currentTile = _room.getTileName(currentCellIdx)
+	
+	var offset = -1
+	if btn == 2:
+		offset = 1
+	
+	var nIdx = Vector2()
+	if state == State.WALK_L || state == State.WALK_R:
+		state = State.WALK_R + offset
 		
-		if currentTile == "Floor":
-			var topIdx = currentCellIdx + Vector2(0,1)
-			if _room.getTileName(topIdx) == "Stair":
-				set_pos(_room.map_to_world(topIdx))
-				state = WALK_U
-				_onStateChange()
-		elif currentTile == "Stair":
-			var nXOffset = 1
-			if event.button_index == 1:
-				nXOffset = -1
-				
-			var nIdx = currentCellIdx + Vector2(nXOffset, 0)
-			if _room.getTileName(nIdx) == "Chair":
-				set_pos(_room.map_to_world(nIdx))
-				if nXOffset == 1:
-					state = State.WALK_R
-				else:
-					state = State.WALK_L
-				_onStateChange()
-		elif currentTile == "Chair":
-			set_pos(_room.map_to_world(currentCellIdx))
-			state = State.SITTING
-			_onStateChange()
+	else:
+		state = State.WALK_U + offset
+		
+	set_pos(_room.map_to_world(currentCellIdx))
+	
+	if currentTile == "Chair":
+		set_pos(_room.map_to_world(currentCellIdx))
+		state = State.SITTING
+		
 
 func spawnDisturbAction():
-	print("SPAWNING DISTURB ACTION!!!!!!!")
+	#print("SPAWNING DISTURB ACTION!!!!!!!")
 	#TODO spawn random disturb action
 	
 	pass
@@ -165,6 +177,3 @@ func spawnDisturbAction():
 func isDisturbActionActive():
 	# TODO check if student is currently disturbing
 	return false
-	
-func isSitting_test(): # Remove when isSitting() is implemented
-	return true

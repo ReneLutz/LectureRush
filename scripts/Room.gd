@@ -2,8 +2,8 @@ extends TileMap
 
 const CHAIR_TILE_NAME = "Chair"
 
-var timerStudent = 0.0
-var spawnTimeStudent = 2.0
+var timerStudent = 20.0
+var spawnTimeStudent = 20.0
 var spawnStudentLeft = true
 
 var sceneCatInstance
@@ -70,15 +70,19 @@ func spawnStudent():
 
 # Picks random student node for spawning a disturb action
 func spawnStudentsDisturbActions(delta):
+	var studentCount = nodeStudents.get_child_count()
+	if studentCount == 0:
+		return
+		
 	timerDisturbAction += delta
 	if timerDisturbAction >= disturbActionCooldown:
 		timerDisturbAction = 0.0
 		print("Room.gd: Spawning disturb action..")
 		#choose random student who is sitting and has no current disturb action
-		var randStudent = randi() % nodeStudents.get_child_count()
+		var randStudent = randi() % studentCount
 		var index = 0
 		for student in nodeStudents.get_children():
-			if index == randStudent && student.isSitting_test() && !student.isDisturbActionActive():
+			if index == randStudent && student.isSeated() && !student.isDisturbActionActive():
 				print(" --> Choosing student with index: ", index)
 				student.spawnDisturbAction()
 				break

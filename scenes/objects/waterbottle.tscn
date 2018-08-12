@@ -4,9 +4,11 @@
 
 [node name="Node2D" type="Node2D"]
 
+z/z = 1
+z/relative = false
+
 [node name="Sprite" type="Sprite" parent="."]
 
-transform/scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 
 

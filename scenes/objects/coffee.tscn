@@ -18,6 +18,9 @@ animations = [ {
 
 [node name="Node2D" type="Node2D"]
 
+z/z = 1
+z/relative = false
+
 [node name="Sprite" type="Sprite" parent="."]
 
 texture = ExtResource( 1 )

@@ -116,6 +116,12 @@ func setState(s):
 		else:
 			set_animation("WalkingFemaleBack")
 		set_frame(0)
+	elif state != State.SITTING:
+		if sex == "male":
+			set_animation("WalkingMaleFront")
+		else:
+			set_animation("WalkingFemaleFront")
+		set_frame(0)
 	else:
 		set_animation("front")
 		if sex == "male":
@@ -131,7 +137,7 @@ func moveToCell(cellIdx):
 	set_pos(_room.map_to_world(cellIdx) + _room.get_cell_size()/2)
 	
 func _fixed_process(delta):
-	if state == State.WALK_D:
+	if state != State.SITTING:
 		walkTimer += delta
 		if walkTimer > walkAnimSpeed:
 			walkTimer -= walkAnimSpeed

@@ -5,9 +5,8 @@ extends Sprite
 # var b = "textvar"
 
 var panic = 0.0 setget setPanic, getPanic
-var height = 80
-var text = 145
-var all = 700
+
+var panicPointer
 
 func setPanic(var p):
 	panic = p
@@ -15,17 +14,13 @@ func setPanic(var p):
 		panic = 0.0
 	if panic > 1.0:
 		panic = 1.0
-	updateBar()
+	updatePointer()
 
 func getPanic():
 	return panic
 
-func updateBar():
-	var add = (all-text)*panic
-	set_region_rect(Rect2(0,0,text+add,height))
-
+func updatePointer():
+	panicPointer.set_rotd(90 - panic * 180)
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+	panicPointer = get_node("PanicPointer")

@@ -13,7 +13,15 @@ func _input_event(viewport, event, shape_idx):
 	if event.type == InputEvent.MOUSE_BUTTON and \
 			event.button_index == BUTTON_RIGHT and \
 			event.pressed:
-		on_click()
+		on_click(event.pos)
 		
-func on_click():
-	print("Chalk!")
+func on_click(targetPos):
+	var sceneChalk = load("res://scenes/objects/chalk.tscn")
+	var sceneChalkInstance = sceneChalk.instance()
+	sceneChalkInstance.set_name("chalk")
+	# set position
+	var profPos = get_node("../Professor/profBody").get_pos()
+	profPos += get_node("../Professor").get_pos()
+	print("profPos %s" % profPos)
+	sceneChalkInstance.init(profPos, targetPos)
+	get_parent().add_child(sceneChalkInstance)

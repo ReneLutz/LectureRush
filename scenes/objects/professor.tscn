@@ -18,6 +18,7 @@ height = 16.7721
 
 [node name="Professor" type="Node2D"]
 
+z/z = 51
 script/script = ExtResource( 1 )
 power = 20
 
@@ -88,6 +89,8 @@ visibility/visible = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="profBody"]
 
+z/z = 51
+z/relative = false
 frames = ExtResource( 7 )
 animation = "Walking"
 

@@ -82,7 +82,7 @@ func spawnStudentsDisturbActions(delta):
 		var randStudent = randi() % studentCount
 		var index = 0
 		for student in nodeStudents.get_children():
-			if index == randStudent && student.isSeated() && !student.isDisturbActionActive():
+			if index == randStudent  && !student.isDisturbActionActive(): # && student.isSeated()
 				print(" --> Choosing student with index: ", index)
 				student.spawnDisturbAction()
 				break

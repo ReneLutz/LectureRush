@@ -26,8 +26,8 @@ input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 0.938542, 0, 0, -1.14928, 0.60099, 5.86287 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
+collision/layers = 2
+collision/mask = 2
 collision/margin = 0.08
 script/script = ExtResource( 1 )
 speed = 150
@@ -36,7 +36,7 @@ speed = 150
 
 frames = SubResource( 2 )
 animation = "fly"
-frame = 3
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://textures/ui/ui_font_14.fnt" type="BitmapFont" id=1]
+[ext_resource path="res://scripts/Speechbubble.gd" type="Script" id=2]
 
 [sub_resource type="ImageTexture" id=1]
 
@@ -50,15 +51,25 @@ margin/right = 62.0
 margin/bottom = 14.0
 custom_fonts/normal_font = ExtResource( 1 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
-bbcode/enabled = false
+bbcode/enabled = true
 bbcode/bbcode = ""
 visible_characters = -1
 percent_visible = 1.0
+script/script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="Polygon2D/RichTextLabel"]
+
+process_mode = 1
+wait_time = 0.05
+one_shot = false
+autostart = false
 
 [node name="Sprite" type="Sprite" parent="Polygon2D"]
 
 transform/pos = Vector2( -64, 15 )
 texture = SubResource( 1 )
 centered = false
+
+[connection signal="timeout" from="Polygon2D/RichTextLabel/Timer" to="Polygon2D/RichTextLabel" method="_on_Timer_timeout"]
 
 

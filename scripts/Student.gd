@@ -16,6 +16,7 @@ var material
 
 var disturbing
 var activeDisturbAction
+var pathToStudentsNode
 var disturbTimer = 0.0
 var disturbChildNodes
 
@@ -105,6 +106,9 @@ func _ready():
 func isSeated():
 	return state == State.SITTING
 
+func moveToCell(cellIdx):
+	set_pos(_room.map_to_world(cellIdx) + _room.get_cell_size()/2)
+	
 func _fixed_process(delta):
 	var currentCellIdx = _room.coordToCellIdx(get_pos())
 	var currentTile = _room.getTileName(currentCellIdx)
@@ -122,36 +126,36 @@ func _fixed_process(delta):
 	set_pos(get_pos() + walkDir * walkSpeed * delta)
 	
 	var p = get_pos()
-	var cs = _room.get_cell_size()
-	var ss = _room.get_used_rect().size * cs
+	var ss = _room.get_used_rect().size * _room.get_cell_size()
+	var usedCellsRect = _room.get_used_rect()
 	
 	if p.x <= 0:
 		state = State.WALK_R
-		set_pos(Vector2(cs.x/2, p.y))
+		moveToCell(Vector2(1, currentCellIdx.y))
 		
 	elif p.x >= ss.x:
 		state = State.WALK_L
-		set_pos(Vector2(ss.x - cs.x/2, p.y))
+		moveToCell(Vector2(usedCellsRect.end.x-1, currentCellIdx.y))
 		
 	elif p.y <= 0:
 		state = State.WALK_U
-		set_pos(Vector2(p.x, cs.y/2))
+		moveToCell(Vector2(currentCellIdx.x, 1))
 		
 	elif p.y >= ss.y:
 		state = State.WALK_D
-		set_pos(Vector2(p.x, ss.y - cs.y/2))
+		moveToCell(Vector2(currentCellIdx.x, usedCellsRect.end.y-1))
 		
 	else:
 		var newCellIdx = _room.coordToCellIdx(get_pos())
 		var newTile = _room.getTileName(newCellIdx)
 		if (state == State.WALK_D || state == State.WALK_U) &&  !(WALKABLE_TILES[newTile] & Walkable.VRT):
-			set_pos(_room.map_to_world(currentCellIdx))
+			moveToCell(currentCellIdx)
 			if state == State.WALK_D:
 				state = State.WALK_U
 			else:
 				state = State.WALK_D
 		elif (state == State.WALK_L || state == State.WALK_R) && !(WALKABLE_TILES[newTile] & Walkable.HRZ):
-			setPos(_room.map_to_world(currentCellIdx))
+			moveToCell(currentCellIdx)
 			if state == State.WALK_L:
 				state = State.WALK_R
 			else:
@@ -178,10 +182,10 @@ func _onClick(btn):
 	else:
 		state = State.WALK_U + offset
 		
-	set_pos(_room.map_to_world(currentCellIdx))
+	moveToCell(currentCellIdx)
 	
 	if currentTile == "Chair":
-		set_pos(_room.map_to_world(currentCellIdx))
+		moveToCell(currentCellIdx)
 		state = State.SITTING
 		
 

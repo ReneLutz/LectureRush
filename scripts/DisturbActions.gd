@@ -13,12 +13,12 @@ const MOOD_VALUE_ACTION_SMOKE = 5
 const MOOD_VALUE_ACTION_PAPERPLANE = 5
 
 # If DURATION initialized with <= 0: Disturb action of student will remain until he leaves the room
-const DURATION_ACTION_DRINK_WATER = 50
-const DURATION_ACTION_DRINK_COFFEE = 50
-const DURATION_ACTION_HEADPHONES = 50
-const DURATION_ACTION_TOILET = 50
-const DURATION_ACTION_SMOKE = 50
-const DURATION_ACTION_PAPERPLANE = 10
+const DURATION_ACTION_DRINK_WATER = 15
+const DURATION_ACTION_DRINK_COFFEE = 15
+const DURATION_ACTION_HEADPHONES = 15
+const DURATION_ACTION_TOILET = 15
+const DURATION_ACTION_SMOKE = 15
+const DURATION_ACTION_PAPERPLANE = 7
 
 var timerDisturbAction = 0.0
 
@@ -43,13 +43,17 @@ func spawnDisturbActions(delta):
 	if timerDisturbAction >= ACTION_SPAWN_COOLDOWN:
 		timerDisturbAction = 0.0
 		#choose random student who is sitting and has no current disturb action
-		var randStudent = randi() % get_child_count()
-		var index = 0
-		for student in get_children():
-			if index == randStudent  && !student.isDisturbActionActive() && student.isSeated():
+		var freeStudentChosen = false
+		var count = 0
+		var maxTries = 10
+		while !freeStudentChosen && count < maxTries:
+			var randStudent = randi() % get_child_count()
+			var student = get_children()[randStudent]
+			if student.isSeated() && !student.isDisturbActionActive():
+				freeStudentChosen = true
 				_spawnRandomDisturbAction(student)
 				break
-			index += 1
+			count += 1
 
 # spawns a random disturb action on a student
 func _spawnRandomDisturbAction(student):
@@ -82,7 +86,10 @@ func _generateDisturbAction(actionType, student):
 	elif actionType == actionTypes.PAPERPLANE:
 		_spawnActionPaperplane(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_PAPERPLANE, DURATION_ACTION_PAPERPLANE)
-	
+	else:
+		_spawnActionPaperplane(student)
+		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_PAPERPLANE, DURATION_ACTION_PAPERPLANE)
+		
 	# give action to student
 	student.setActiveDisturbAction(action)
 	# change mood of professor
@@ -132,4 +139,4 @@ func _spawnActionPaperplane(student):
 	scenePlaneInstance.set_name("paper_plane")
 	# set position
 	scenePlaneInstance.set_pos(Vector2(student.get_pos().x + 20, student.get_pos().y))
-	student.get_node("DisturbSprites").add_child(scenePlaneInstance)
+	add_child(scenePlaneInstance)

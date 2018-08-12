@@ -231,17 +231,25 @@ func setActiveDisturbAction(action):
 	
 func _updateActiveDisturbAction(delta):
 	if activeDisturbAction != null:
-		disturbTimer += delta
-		if disturbTimer >= activeDisturbAction.disturbTime:
-			disturbTimer = 0.0
-			# delete sprites belonging to disturb action
-			for c in disturbChildNodes.get_children():
-    			c.queue_free()
-			# delete disturb action instance
-			activeDisturbAction = null
+		if activeDisturbAction.disturbTime > 0:
+		# when disturbTime is initialized with 0, then the disturb is permanent
+		# and should end when student leaves the room!
+			disturbTimer += delta
+			if disturbTimer >= activeDisturbAction.disturbTime:
+				disturbTimer = 0.0
+				_resetDisturbAction(true)
 
+func _resetDisturbAction(resetMood):
+	# delete sprites belonging to disturb action
+	for c in disturbChildNodes.get_children():
+		c.queue_free()
+	# reset mood of professor
+	if resetMood == true:
+		var professor = get_node("../../Professor/profBody")
+		professor.changeMood(activeDisturbAction.disturbValue)
+	# delete disturb action instance
+	activeDisturbAction = null
 
 # checks if student is currently disturbing
 func isDisturbActionActive():
-	print(activeDisturbAction != null)
 	return activeDisturbAction != null

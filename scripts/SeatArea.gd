@@ -12,8 +12,8 @@ func _ready():
 func _input_event(viewport, event, shape_idx):
 	if event.type == InputEvent.MOUSE_BUTTON and \
 			event.button_index == BUTTON_RIGHT and \
-			event.pressed:
-		on_click(event.pos)
+			event.pressed: #??
+		on_click(event.pos) # Event Position wird übermittelt
 		
 func on_click(targetPos):
 	var sceneChalk = load("res://scenes/objects/chalk.tscn")
@@ -24,3 +24,6 @@ func on_click(targetPos):
 	profPos += get_node("../Professor").get_pos()
 	sceneChalkInstance.init(profPos, targetPos)
 	get_parent().add_child(sceneChalkInstance)
+	
+	
+	

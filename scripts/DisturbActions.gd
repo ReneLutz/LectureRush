@@ -2,7 +2,7 @@ extends Node
 
 enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE }
 
-const ACTION_SPAWN_COOLDOWN = 3
+const ACTION_SPAWN_COOLDOWN = 2.0
 
 # Values which decrease the mood of the professor
 const MOOD_VALUE_ACTION_DRINK_WATER = 5
@@ -12,11 +12,11 @@ const MOOD_VALUE_ACTION_TOILET = 5
 const MOOD_VALUE_ACTION_SMOKE = 5
 
 # If DURATION initialized with <= 0: Disturb action of student will remain until he leaves the room
-const DURATION_ACTION_DRINK_WATER = 30
-const DURATION_ACTION_DRINK_COFFEE = 30
-const DURATION_ACTION_HEADPHONES = 30
-const DURATION_ACTION_TOILET = 30
-const DURATION_ACTION_SMOKE = 30
+const DURATION_ACTION_DRINK_WATER = 50
+const DURATION_ACTION_DRINK_COFFEE = 50
+const DURATION_ACTION_HEADPHONES = 50
+const DURATION_ACTION_TOILET = 50
+const DURATION_ACTION_SMOKE = 50
 
 var timerDisturbAction = 0.0
 

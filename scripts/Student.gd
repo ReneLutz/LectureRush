@@ -204,17 +204,13 @@ func _getCurrentTilePos():
 func _onClick(btn):
 	var currentCellIdx = _room.coordToCellIdx(get_pos())
 	var currentTile = _room.getTileName(currentCellIdx)
+	var ss = _room.get_used_rect().size * _room.get_cell_size()
 	
-	var offset = -1
-	if btn == 2:
-		offset = 1
-	
-	var nIdx = Vector2()
-	if state == State.WALK_L || state == State.WALK_R:
-		setState( State.WALK_R + offset )
-		
+	# move to row 
+	if get_pos().x < ss.x / 2.0:
+		setState(State.WALK_R)
 	else:
-		setState(State.WALK_U + offset)
+		setState(State.WALK_L)
 		
 	moveToCell(currentCellIdx)
 	

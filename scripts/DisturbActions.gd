@@ -103,7 +103,7 @@ func _spawnActionDrinkCoffee(student):
 	var scene = load("res://scenes/objects/coffee.tscn")
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("coffee")
-	sceneInstance.set_pos(Vector2(16, -1))
+	sceneInstance.set_pos(Vector2(14, -1))
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
 	

@@ -15,5 +15,5 @@ func _fixed_process(delta):
 	uiTimeLabel.set_text(str(minutes) + ":" + str(seconds))
 	
 func _on_LectureTimer_timeout():
-	# End game, because lecture is over
+	get_tree().set_pause(true)
 	pass # replace with function body

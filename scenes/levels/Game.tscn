@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=1]
+[gd_scene load_steps=24 format=1]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://textures/bgTileset.tres" type="TileSet" id=2]
@@ -38,6 +38,11 @@ extents = Vector2( 48, 48 )
 
 custom_solver_bias = 0.0
 extents = Vector2( 384, 1 )
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 31.8893, 32.2111 )
 
 [node name="Game" type="Node"]
 
@@ -293,11 +298,20 @@ _update_shape_index = 0
 transform/pos = Vector2( 385.151, 205.892 )
 transform/scale = Vector2( 9.03984, 4.5008 )
 input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeatArea"]
+
+shape = SubResource( 5 )
+trigger = false
+_update_shape_index = 0
 
 [connection signal="timeout" from="PaperPlaneDebug" to="PaperPlaneDebug/PaperPlaneDebug" method="_on_PaperPlaneDebug_timeout"]
 

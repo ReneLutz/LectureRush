@@ -1,12 +1,28 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://scripts/Cat.gd" type="Script" id=1]
-[ext_resource path="res://textures/Sindbad.png" type="Texture" id=2]
+[ext_resource path="res://textures/cat/Cat_animationt1.png" type="Texture" id=2]
+[ext_resource path="res://textures/cat/Cat_animationt2.png" type="Texture" id=3]
+[ext_resource path="res://textures/cat/Cat_animationt3.png" type="Texture" id=4]
+[ext_resource path="res://textures/cat/Cat_animationt4.png" type="Texture" id=5]
+[ext_resource path="res://textures/cat/Cat_animationt5.png" type="Texture" id=6]
+[ext_resource path="res://textures/cat/Cat_animationt6.png" type="Texture" id=7]
+[ext_resource path="res://textures/cat/Cat_animationt7.png" type="Texture" id=8]
+[ext_resource path="res://textures/cat/Cat_animationt8.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 12.1241, 14.3902 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
+} ]
 
 [node name="Cat" type="Node2D"]
 
@@ -23,10 +39,6 @@ angular_damp = 1.0
 script/script = ExtResource( 1 )
 mood_bonus = 15
 
-[node name="Sprite" type="Sprite" parent="Clickable"]
-
-texture = ExtResource( 2 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Clickable"]
 
 transform/pos = Vector2( -2.41388, -1.73079 )
@@ -34,5 +46,12 @@ transform/scale = Vector2( 1.16953, 0.897749 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Clickable"]
+
+frames = SubResource( 2 )
+animation = "idle"
+frame = 3
+playing = true
 
 

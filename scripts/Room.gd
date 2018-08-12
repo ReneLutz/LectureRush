@@ -39,7 +39,6 @@ func getTileName(idx):
 func spawnStudents(delta):
 	timerStudent += delta
 	if timerStudent >= spawnTimeStudent:
-		print("Spawning student..")
 		# spawn left or right
 		if randi()%2 == 1:
 			spawnStudentLeft = !spawnStudentLeft
@@ -72,14 +71,12 @@ func spawntimeCat(delta):
 	if !isCatSpawned:
 		timerCat += delta
 		if timerCat >= spawnTimeCat:
-			print("Spawning cat")
 			spawnCat()
 			isCatSpawned = true
 			timerCat = 0.0
 	else:
 		timerCatExists += delta
 		if timerCatExists >= catExistenceTime:
-			print("Hiding cat")
 			hideCat()
 			timerCatExists = 0.0
 			isCatSpawned = false

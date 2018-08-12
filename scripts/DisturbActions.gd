@@ -61,32 +61,25 @@ func _spawnRandomDisturbAction(student):
 func _generateDisturbAction(actionType, student):
 	var action
 	if actionType == actionTypes.DRINK_WATER:
-		print(" --> Student DRINK_WATER")
 		_spawnActionDrinkWater(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_DRINK_WATER, DURATION_ACTION_DRINK_WATER)
 		
 	elif actionType == actionTypes.DRINK_COFFEE:
-		print(" --> Student DRINK_COFFEE")
 		_spawnActionDrinkCoffee(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_DRINK_COFFEE, DURATION_ACTION_DRINK_COFFEE)
 		
 	elif actionType == actionTypes.HEADPHONES:
-		print(" --> Student HEADPHONES")
 		_spawnActionHeadphones(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_HEADPHONES, DURATION_ACTION_HEADPHONES)
 		pass
 	elif actionType == actionTypes.TOILET:
-		print(" --> Student TOILET")
-		
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_TOILET, DURATION_ACTION_TOILET)
 		
 	elif actionType == actionTypes.SMOKE:
-		print(" --> Student SMOKE")
 		_spawnActionSmoke(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_SMOKE, DURATION_ACTION_SMOKE)
 		
 	elif actionType == actionTypes.PAPERPLANE:
-		print(" --> Student PAPERPLANE")
 		_spawnActionPaperplane(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_PAPERPLANE, DURATION_ACTION_PAPERPLANE)
 	

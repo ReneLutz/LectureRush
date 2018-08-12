@@ -16,4 +16,3 @@ func on_click():
 	if not is_used:
 		get_tree().get_current_scene().get_node("Professor/profBody").changeMood(mood_bonus)
 		is_used = true
-	print("Gadse!")

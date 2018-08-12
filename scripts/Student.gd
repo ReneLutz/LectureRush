@@ -163,9 +163,6 @@ func _fixed_process(delta):
 	if state == State.WALK_D:
 		set_z(get_z()+2)
 		
-	print(get_z())
-	print(_getCurrentTilePos().y)
-	
 	
 	if state != State.SITTING:
 		walkTimer += delta

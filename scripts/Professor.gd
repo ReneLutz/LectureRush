@@ -10,6 +10,8 @@ const SENTENCE_EXAM = "Listen!!!\nThis will be relevant for your exam!"
 const SENTENCE_GET_OUT = "You are not paying attention! GET OUT!"
 
 var speechBubbleInstance
+onready var trivialTimer = get_node("TrivialTimer")
+onready var disposeTimer = get_node("SpeechbubbleDispose")
 
 # Professor ability cooldowns available
 var examActivated = false
@@ -36,6 +38,8 @@ func _ready():
 	var speechBubbleScene = load("res://scenes/objects/speechbubble.tscn")
 	speechBubbleInstance = speechBubbleScene.instance()
 	add_child(speechBubbleInstance)
+	
+	speechBubbleInstance.set_pos(Vector2(96, -55))
 	
 	_disposeSpeechBubble()
 
@@ -83,24 +87,32 @@ func _fixed_process(delta):
 	move(motion)
 	
 func _yell(sentence):
-	var position = get_pos()
-	speechBubbleInstance.set_pos(Vector2(position.x + 50, position.y - 50))
-
 	var textLabelNode = speechBubbleInstance.get_node("Polygon2D/RichTextLabel")
 	textLabelNode.setText(sentence)
 	
+	if(!(disposeTimer.get_time_left() != 0)):
+		speechBubbleInstance.set_pos(speechBubbleInstance.get_pos() + Vector2(2500, 2500))
+		disposeTimer.start()
+	
 func _disposeSpeechBubble():
-	speechBubbleInstance.set_pos(Vector2(-2500, -2500))
+	if(disposeTimer.is_active()):
+		speechBubbleInstance.set_pos(speechBubbleInstance.get_pos() - Vector2(2500, 2500))
+		disposeTimer.stop()
 
 func _activateTrivial():
 	trivialActivated = true
 	_yell(SENTENCE_TRIVIAL)
 	
 	# Start cooldown timer
-	
+	trivialTimer.start()
+
 func _activateExam():
 	examActivated = true
 	_yell(SENTENCE_EXAM)
+
+func _onTrivialCooldownReady():
+	trivialTimer.stop()
+	trivialActivated = false
 
 func setPanicUI(p):
 	panicUI = p

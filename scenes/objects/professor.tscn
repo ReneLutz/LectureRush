@@ -127,4 +127,15 @@ wait_time = 45.0
 one_shot = false
 autostart = false
 
+[node name="SpeechbubbleDispose" type="Timer" parent="profBody"]
+
+process_mode = 1
+wait_time = 4.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="profBody/TrivialTimer" to="profBody" method="_onTrivialCooldownReady"]
+
+[connection signal="timeout" from="profBody/SpeechbubbleDispose" to="profBody" method="_disposeSpeechBubble"]
+
 

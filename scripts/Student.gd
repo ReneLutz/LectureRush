@@ -94,16 +94,10 @@ func _ready():
 	var currentTile = _room.getTileName(currentCellIdx)
 	var screenSize = get_viewport().get_rect().size
 	
-	if currentTile == "Floor":
-		if get_pos().x <= screenSize.x/2:
-			setState(State.WALK_R)
-		else:
-			setState(State.WALK_L)
-	elif currentTile == "Stair":
-		if get_pos().y <= screenSize.y/2:
-			setState(State.WALK_U)
-		else:
-			setState(State.WALK_D)
+	if get_pos().y <= screenSize.y/2:
+		setState(State.WALK_U)
+	else:
+		setState(State.WALK_D)
 
 func isSeated():
 	return state == State.SITTING

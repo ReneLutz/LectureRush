@@ -44,7 +44,7 @@ func spawnDisturbActions(delta):
 		var randStudent = randi() % get_child_count()
 		var index = 0
 		for student in get_children():
-			if index == randStudent  && !student.isDisturbActionActive(): # && student.isSeated()
+			if index == randStudent  && !student.isDisturbActionActive() && student.isSeated():
 				_spawnRandomDisturbAction(student)
 				break
 			index += 1

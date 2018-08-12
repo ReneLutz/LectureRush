@@ -4,24 +4,26 @@ enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE }
 
 const ACTION_SPAWN_COOLDOWN = 3
 
+# Values which decrease the mood of the professor
 const MOOD_VALUE_ACTION_DRINK_WATER = 5
 const MOOD_VALUE_ACTION_DRINK_COFFEE = 5
 const MOOD_VALUE_ACTION_HEADPHONES = 5
 const MOOD_VALUE_ACTION_TOILET = 5
 const MOOD_VALUE_ACTION_SMOKE = 5
 
-const DURATION_ACTION_DRINK_WATER = 5
-const DURATION_ACTION_DRINK_COFFEE = 5
-const DURATION_ACTION_HEADPHONES = 5
-const DURATION_ACTION_TOILET = 5
-const DURATION_ACTION_SMOKE = 5
+# If DURATION initialized with <= 0: Disturb action of student will remain until he leaves the room
+const DURATION_ACTION_DRINK_WATER = 10
+const DURATION_ACTION_DRINK_COFFEE = 10
+const DURATION_ACTION_HEADPHONES = 10
+const DURATION_ACTION_TOILET = 10
+const DURATION_ACTION_SMOKE = 10
 
 var timerDisturbAction = 0.0
 
 class DisturbAction:
 	var actionType
-	var disturbValue = 1
-	var disturbTime = 20
+	var disturbValue = 0
+	var disturbTime = 0
 	
 	func _init(actionType, moodValue, duration):
 		self.actionType = actionType
@@ -38,13 +40,11 @@ func spawnDisturbActions(delta):
 	timerDisturbAction += delta
 	if timerDisturbAction >= ACTION_SPAWN_COOLDOWN:
 		timerDisturbAction = 0.0
-		print("Room.gd: Spawning disturb action..")
 		#choose random student who is sitting and has no current disturb action
 		var randStudent = randi() % get_child_count()
 		var index = 0
 		for student in get_children():
 			if index == randStudent  && !student.isDisturbActionActive(): # && student.isSeated()
-				print(" --> Choosing student with index: ", index)
 				_spawnRandomDisturbAction(student)
 				break
 			index += 1
@@ -82,8 +82,12 @@ func _generateDisturbAction(actionType, student):
 		print(" --> Student SMOKE")
 		_spawnActionSmoke(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_SMOKE, DURATION_ACTION_SMOKE)
-		
+	
+	# give action to student
 	student.setActiveDisturbAction(action)
+	# change mood of professor
+	var professor = get_node("../Professor/profBody")
+	professor.changeMood(-action.disturbValue)
 	
 func _spawnActionDrinkWater(student):
 	# Add Image / Animations to Student

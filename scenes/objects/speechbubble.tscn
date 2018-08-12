@@ -61,7 +61,7 @@ script/script = ExtResource( 2 )
 [node name="Timer" type="Timer" parent="Polygon2D/RichTextLabel"]
 
 process_mode = 1
-wait_time = 0.05
+wait_time = 0.03
 one_shot = false
 autostart = false
 

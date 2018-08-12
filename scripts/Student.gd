@@ -198,8 +198,7 @@ func leaveRoom():
 	walkSpeed = walkSpeedLeaving
 	# show speechbubble of prof
 	var professor = get_node("../../Professor/profBody")
-	#TODO
-	
+	professor.yankOutStudent()
 	leaveRoom = true
 	
 func _leavingRoom(delta, currentTile):
@@ -220,7 +219,7 @@ func _leavingRoom(delta, currentTile):
 		else:
 			setState(State.WALK_R)
 		if currentTile == "Stair":
-			if get_pos().x < 32 || get_pos().x > ss.x - 182:
+			if get_pos().x < 40 || get_pos().x > ss.x - 40:
 				setState(State.WALK_U)
 				leavingState = 4
 			

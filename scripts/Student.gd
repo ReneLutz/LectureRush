@@ -104,15 +104,15 @@ func isSeated():
 	return state == State.SITTING
 
 func setState(s):
+	if s!=state and s == State.SITTING:
+		set_pos(get_pos()+Vector2(0,5))
 	state = s
-	set_z(1)
 	if state == State.WALK_D:
 		if sex == "male":
 			set_animation("WalkingMaleBack")
 		else:
 			set_animation("WalkingFemaleBack")
 		set_frame(0)
-		set_z(3)
 	elif state != State.SITTING:
 		if sex == "male":
 			set_animation("WalkingMaleFront")
@@ -131,9 +131,18 @@ func getState():
 	return state
 
 func moveToCell(cellIdx):
-	set_pos(_room.map_to_world(cellIdx) + _room.get_cell_size()/2)
+	set_pos(_room.map_to_world(cellIdx) + _room.get_cell_size()/2 -Vector2(0,10))
 	
 func _fixed_process(delta):
+	
+	set_z(int(min(46,(_getCurrentTilePos().y-2)*5 +1)))
+	if state == State.WALK_D:
+		set_z(get_z()+2)
+		
+	print(get_z())
+	print(_getCurrentTilePos().y)
+	
+	
 	if state != State.SITTING:
 		walkTimer += delta
 		if walkTimer > walkAnimSpeed:

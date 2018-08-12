@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=1]
+[gd_scene load_steps=27 format=1]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://textures/bgTilesets.tres" type="TileSet" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://scripts/Panic.gd" type="Script" id=17]
 [ext_resource path="res://scripts/SeatArea.gd" type="Script" id=18]
 [ext_resource path="res://scripts/SpeechbubbleDebug.gd" type="Script" id=19]
+[ext_resource path="res://textures/bottomseets.png" type="Texture" id=20]
+[ext_resource path="res://textures/inbetween.png" type="Texture" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -53,7 +55,6 @@ script/script = ExtResource( 1 )
 "lectureRoom",
 ]]
 
-editor/display_folded = true
 mode = 0
 tile_set = ExtResource( 2 )
 cell/size = Vector2( 37, 32 )
@@ -106,6 +107,7 @@ script/script = ExtResource( 4 )
 [node name="Plant" type="Sprite" parent="LectureRoom/Decoration"]
 
 transform/pos = Vector2( 112, 373.001 )
+z/z = 50
 texture = ExtResource( 5 )
 
 [node name="Chemistry Rack" type="Sprite" parent="LectureRoom/Decoration"]
@@ -162,6 +164,8 @@ stream/buffering_ms = 500
 [node name="Professor" parent="." instance=ExtResource( 12 )]
 
 transform/pos = Vector2( 384, 400 )
+z/z = 50
+z/relative = false
 
 [node name="Students" type="Node" parent="."]
 
@@ -306,6 +310,7 @@ _update_shape_index = 0
 
 [node name="SeatArea" type="Area2D" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( 385.151, 205.892 )
 transform/scale = Vector2( 9.03984, 4.5008 )
 input/pickable = true
@@ -334,6 +339,69 @@ autostart = true
 [node name="SpeechbubbleDebug" type="Node" parent="SpeechbubbleDebug"]
 
 script/script = ExtResource( 19 )
+
+[node name="BetweenChairsBot" type="Sprite" parent="."]
+
+transform/pos = Vector2( 388.149, 368.045 )
+z/z = 45
+z/relative = false
+texture = ExtResource( 20 )
+
+[node name="BetweenChairs0" type="Sprite" parent="."]
+
+transform/pos = Vector2( 388.149, 319.34 )
+z/z = 40
+z/relative = false
+texture = ExtResource( 21 )
+
+[node name="BetweenChairs1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 388.149, 287.154 )
+z/z = 35
+z/relative = false
+texture = ExtResource( 21 )
+
+[node name="BetweenChairs2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 388.149, 254.967 )
+z/z = 30
+z/relative = false
+texture = ExtResource( 21 )
+
+[node name="BetweenChairs3" type="Sprite" parent="."]
+
+transform/pos = Vector2( 388.149, 222.78 )
+z/z = 25
+z/relative = false
+texture = ExtResource( 21 )
+
+[node name="BetweenChairs4" type="Sprite" parent="."]
+
+transform/pos = Vector2( 388.149, 191.646 )
+z/z = 20
+z/relative = false
+texture = ExtResource( 21 )
+
+[node name="BetweenChairs5" type="Sprite" parent="."]
+
+transform/pos = Vector2( 388.149, 157.74 )
+z/z = 15
+z/relative = false
+texture = ExtResource( 21 )
+
+[node name="BetweenChairs6" type="Sprite" parent="."]
+
+transform/pos = Vector2( 388.149, 126.982 )
+z/z = 10
+z/relative = false
+texture = ExtResource( 21 )
+
+[node name="BetweenChairs7" type="Sprite" parent="."]
+
+transform/pos = Vector2( 388.637, 94.2736 )
+z/z = 5
+z/relative = false
+texture = ExtResource( 21 )
 
 [connection signal="timeout" from="PaperPlaneDebug" to="PaperPlaneDebug/PaperPlaneDebug" method="_on_PaperPlaneDebug_timeout"]
 

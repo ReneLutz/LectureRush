@@ -4,14 +4,14 @@
 [ext_resource path="res://textures/Studentfemale_RGB.png" type="Texture" id=2]
 [ext_resource path="res://textures/Student_male_back.png" type="Texture" id=3]
 [ext_resource path="res://textures/Student_female_back.png" type="Texture" id=4]
-[ext_resource path="res://textures/Student_female_back_walking1.png" type="Texture" id=5]
-[ext_resource path="res://textures/Student_female_back_walking2.png" type="Texture" id=6]
-[ext_resource path="res://textures/Student_male_back_walking1.png" type="Texture" id=7]
-[ext_resource path="res://textures/Student_male_back_walking2.png" type="Texture" id=8]
-[ext_resource path="res://textures/Studentmale_walking_front1.png" type="Texture" id=9]
-[ext_resource path="res://textures/Studentmale_walking_front2.png" type="Texture" id=10]
-[ext_resource path="res://textures/Studentfemale_walking_front1.png" type="Texture" id=11]
-[ext_resource path="res://textures/Studentfemale_walking_front2.png" type="Texture" id=12]
+[ext_resource path="res://textures/Student_male_back_walking1.png" type="Texture" id=5]
+[ext_resource path="res://textures/Student_male_back_walking2.png" type="Texture" id=6]
+[ext_resource path="res://textures/Studentmale_walking_front1.png" type="Texture" id=7]
+[ext_resource path="res://textures/Studentmale_walking_front2.png" type="Texture" id=8]
+[ext_resource path="res://textures/Studentfemale_walking_front1.png" type="Texture" id=9]
+[ext_resource path="res://textures/Studentfemale_walking_front2.png" type="Texture" id=10]
+[ext_resource path="res://textures/Student_female_back_walking1.png" type="Texture" id=11]
+[ext_resource path="res://textures/Student_female_back_walking2.png" type="Texture" id=12]
 [ext_resource path="res://scripts/Student.gd" type="Script" id=13]
 
 [sub_resource type="CanvasItemShader" id=1]
@@ -64,22 +64,22 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
-"name": "WalkingFemaleBack",
+"name": "WalkingMaleBack",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
-"name": "WalkingMaleBack",
+"name": "WalkingMaleFront",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "WalkingMaleFront",
+"name": "WalkingFemaleFront",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ) ],
 "loop": true,
-"name": "WalkingFemaleFront",
+"name": "WalkingFemaleBack",
 "speed": 5.0
 } ]
 
@@ -91,6 +91,8 @@ extents = Vector2( 11.8586, 20.2773 )
 [node name="AnimatedSprite" type="AnimatedSprite"]
 
 material/material = SubResource( 2 )
+z/z = 3
+z/relative = false
 frames = SubResource( 3 )
 animation = "front"
 script/script = ExtResource( 13 )

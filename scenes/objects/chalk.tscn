@@ -5,7 +5,7 @@
 [ext_resource path="res://textures/chalk/chalk3.png" type="Texture" id=3]
 [ext_resource path="res://textures/chalk/chalk4.png" type="Texture" id=4]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
@@ -23,9 +23,9 @@ collision/margin = 0.08
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "fly"
-frame = 3
+frame = 2
 playing = true
 
 

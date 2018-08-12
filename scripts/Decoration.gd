@@ -3,7 +3,7 @@ extends Node
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
-var decoration_themes = [["Starry Night"], ["Periodic Table", "Chemistry Rack"]]
+var decoration_themes = [["Starry Night", "Easle 1", "Easle 2"], ["Periodic Table", "Chemistry Rack"]]
 
 func _ready():
 	# Called every time the node is added to the scene.

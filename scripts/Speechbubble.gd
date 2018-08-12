@@ -2,8 +2,8 @@ extends RichTextLabel
 
 
 func _ready():
-	pass
-
+	set_scroll_active(false)
+	
 func setText(text):
 	set_bbcode(text)
 	set_visible_characters(0)

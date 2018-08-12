@@ -36,6 +36,14 @@ func picRandomColor():
 	var b = randf()
 	return Color(r,g,b,1.0)
 	
+func isOccupied(idx):
+	if not get_parent().occupiedSeats.has(idx):
+		return false
+	return get_parent().occupiedSeats[idx]
+	
+func occupieSeat(idx, val):
+	get_parent().occupiedSeats[idx] = val
+	
 func pickHairColor():
 	var colors = [Color("#090806"),
 			Color("#2C222B"),
@@ -163,8 +171,12 @@ func set_frame(i):
 	get_material().set_shader_param("shadeTex", frame)
 
 func setState(s):
-	if s!=state and s == State.SITTING:
-		set_pos(get_pos()+Vector2(0,5))
+	if s!=state:
+		if s == State.SITTING:
+			set_pos(get_pos()+Vector2(0,5))
+			occupieSeat(_room.coordToCellIdx(get_pos()),true)
+		else:
+			occupieSeat(_room.coordToCellIdx(get_pos()),false)
 	state = s
 	if state == State.WALK_D:
 		if sex == "male":
@@ -316,8 +328,7 @@ func _onClick(btn):
 		var currentCellIdx = _room.coordToCellIdx(get_pos())
 		var currentTile = _room.getTileName(currentCellIdx)
 		var ss = _room.get_used_rect().size * _room.get_cell_size()
-	
-	
+
 		if !get_parent().studentClicked:
 			get_parent().studentClicked = true
 			var currentCellIdx = _room.coordToCellIdx(get_pos())
@@ -329,7 +340,7 @@ func _onClick(btn):
 					if isSeated() && isDisturbActionActive():
 						leaveRoom()
 				else:
-					if isSeated() == false:
+					if isSeated() == false and not isOccupied(currentCellIdx):
 						moveToCell(currentCellIdx)
 						setState(State.SITTING)
 			else:

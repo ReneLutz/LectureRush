@@ -2,6 +2,8 @@ extends Node
 
 var studentClicked = false;
 
+var occupiedSeats = {}
+
 enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP }
 
 const ACTION_SPAWN_COOLDOWN = 2.0
@@ -21,7 +23,7 @@ const DURATION_ACTION_DRINK_COFFEE = 15
 const DURATION_ACTION_HEADPHONES = 15
 const DURATION_ACTION_TOILET = 15
 const DURATION_ACTION_SMOKE = 15
-const DURATION_ACTION_PAPERPLANE = 7
+const DURATION_ACTION_PAPERPLANE = 4
 const DURATION_ACTION_SLEEP = 20
 
 var timerDisturbAction = 0.0

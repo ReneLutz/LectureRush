@@ -1,10 +1,22 @@
 extends Node
 
 enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE }
-var actions = []
+
+const ACTION_SPAWN_COOLDOWN = 5
+
+const MOOD_VALUE_ACTION_DRINK_WATER = 5
+const MOOD_VALUE_ACTION_DRINK_COFFEE = 5
+const MOOD_VALUE_ACTION_HEADPHONES = 5
+const MOOD_VALUE_ACTION_TOILET = 5
+const MOOD_VALUE_ACTION_SMOKE = 5
+
+const DURATION_ACTION_DRINK_WATER = 10
+const DURATION_ACTION_DRINK_COFFEE = 10
+const DURATION_ACTION_HEADPHONES = 10
+const DURATION_ACTION_TOILET = 10
+const DURATION_ACTION_SMOKE = 10
 
 var timerDisturbAction = 0.0
-var disturbActionCooldown = 5.0
 
 class DisturbAction:
 	var actionType
@@ -24,7 +36,7 @@ func _ready():
 # Picks random student node for spawning a disturb action
 func spawnDisturbActions(delta):
 	timerDisturbAction += delta
-	if timerDisturbAction >= disturbActionCooldown:
+	if timerDisturbAction >= ACTION_SPAWN_COOLDOWN:
 		timerDisturbAction = 0.0
 		print("Room.gd: Spawning disturb action..")
 		#choose random student who is sitting and has no current disturb action
@@ -40,11 +52,8 @@ func spawnDisturbActions(delta):
 # spawns a random disturb action on a student
 func _spawnRandomDisturbAction(student):
 	# spawn random disturb action
-	var randAction = randi() % 2
-	if randAction == 0:
-		_generateDisturbAction(actionTypes.DRINK_WATER, student)
-	else:
-		_generateDisturbAction(actionTypes.HEADPHONES, student)
+	var randAction = randi() % 3
+	_generateDisturbAction(randAction, student)
 		
 	
 func _generateDisturbAction(actionType, student):
@@ -52,28 +61,27 @@ func _generateDisturbAction(actionType, student):
 	if actionType == actionTypes.DRINK_WATER:
 		print(" --> Student DRINK_WATER")
 		_spawnActionDrinkWater(student)
-		action = DisturbAction.new(actionType, 5, 10)
+		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_DRINK_WATER, DURATION_ACTION_DRINK_WATER)
 		
 	elif actionType == actionTypes.DRINK_COFFEE:
 		print(" --> Student DRINK_COFFEE")
+		_spawnActionDrinkCoffee(student)
+		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_DRINK_COFFEE, DURATION_ACTION_DRINK_COFFEE)
 		
-		action = DisturbAction.new(actionType, 5, 10)
-		pass
 	elif actionType == actionTypes.HEADPHONES:
 		print(" --> Student HEADPHONES")
 		_spawnActionHeadphones(student)
-		action = DisturbAction.new(actionType, 5, 10)
+		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_HEADPHONES, DURATION_ACTION_HEADPHONES)
 		pass
 	elif actionType == actionTypes.TOILET:
 		print(" --> Student TOILET")
 		
-		action = DisturbAction.new(actionType, 5, 10)
-		pass
+		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_TOILET, DURATION_ACTION_TOILET)
+		
 	elif actionType == actionTypes.SMOKE:
 		print(" --> Student SMOKE")
 		
-		action = DisturbAction.new(actionType, 5, 10)
-		pass
+		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_SMOKE, DURATION_ACTION_SMOKE)
 		
 	student.setActiveDisturbAction(action)
 	
@@ -85,6 +93,15 @@ func _spawnActionDrinkWater(student):
 	sceneWaterbottleInstance.set_pos(Vector2(10, -8))
 		
 	student.get_node("DisturbSprites").add_child(sceneWaterbottleInstance)
+	
+func _spawnActionDrinkCoffee(student):
+	# Add Image / Animations to Student
+	var scene = load("res://scenes/objects/coffee.tscn")
+	var sceneInstance = scene.instance()
+	sceneInstance.set_name("coffee")
+	sceneInstance.set_pos(Vector2(10, -8))
+		
+	student.get_node("DisturbSprites").add_child(sceneInstance)
 	
 func _spawnActionHeadphones(student):
 	# Add Image / Animations to Student

@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://textures/chalk/chalk1.png" type="Texture" id=1]
+[ext_resource path="res://textures/chalk/chalk2.png" type="Texture" id=2]
+[ext_resource path="res://textures/chalk/chalk3.png" type="Texture" id=3]
+[ext_resource path="res://textures/chalk/chalk4.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "fly",
+"speed": 14.0
+} ]
+
+[node name="Chalk" type="KinematicBody2D"]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+
+frames = SubResource( 2 )
+animation = "fly"
+frame = 3
+playing = true
+
+

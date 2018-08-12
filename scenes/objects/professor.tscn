@@ -61,6 +61,7 @@ params/final_size = 3.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
+randomness/spread = 0.9
 color/color = Color( 0.757812, 0.00592041, 0.00592041, 1 )
 
 [node name="HeadOnly" type="KinematicBody2D" parent="profBody"]

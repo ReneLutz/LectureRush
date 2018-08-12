@@ -19,12 +19,12 @@ power = 50.0
 [node name="Particles2D" type="Particles2D" parent="."]
 
 config/amount = 1024
-config/lifetime = 20.0
+config/lifetime = 6.0
 config/process_mode = 1
 config/explosiveness = 0.03
 params/direction = 0.0
 params/spread = 200.0
-params/linear_velocity = 50.0
+params/linear_velocity = 25.0
 params/spin_velocity = 0.0
 params/orbit_velocity = 0.0
 params/gravity_direction = 0.0
@@ -38,6 +38,9 @@ params/final_size = 2.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
+randomness/direction = 0.2
+randomness/spread = 0.1
+randomness/linear_velocity = 0.9
 color/color = Color( 1, 0, 0, 1 )
 script/script = ExtResource( 2 )
 

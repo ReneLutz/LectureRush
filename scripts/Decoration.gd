@@ -16,16 +16,4 @@ func theme_choice():
 	var theme = decoration_themes[theme_index]
 	for item in theme:
 		get_node(item).show()
-
-
-
-
-
-
-
-#for i in arts_decoration 
-#	get node visible 
-#for y in chemistry_dec
-#	get node unvisible
-
-#print(arts_decoration)
+		print("HILFEEEEEEEEEE")

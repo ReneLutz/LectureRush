@@ -28,6 +28,34 @@ func picRandomColor():
 	var g = randf()
 	var b = randf()
 	return Color(r,g,b,1.0)
+	
+func pickHairColor():
+	var colors = [Color("#090806"),
+			Color("#2C222B"),
+			Color("#71635A"),
+			Color("#B7A69E"),
+			Color("#D6C4C2"),
+			Color("#CABFB1"),
+			Color("#DCD0BA"),
+			Color("#FFF5E1"),
+			Color("#E6CEA8"),
+			Color("#E5C8A8"),
+			Color("#DEBC99"),
+			Color("#B89778"),
+			Color("#A56B46"),
+			Color("#B55239"),
+			Color("#91553D"),
+			Color("#8D4A43"),
+			Color("#533D32"),
+			Color("#3B3024"),
+			Color("#4E433F"),
+			Color("#554838"),
+			Color("#504444"),
+			Color("#6A4E42"),
+			Color("#A7856A"),
+			Color("#977961")]
+	randomize()
+	return colors[randi() % colors.size()]
 
 func _input_event(viewport, event, shape):
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
@@ -50,7 +78,7 @@ func _ready():
 		set_frame(1)
 	else:
 		set_frame(0)
-	var hairC = picRandomColor();
+	var hairC = pickHairColor();
 	var shirt = picRandomColor();
 	var shoes = picRandomColor();
 	var panties = picRandomColor();
@@ -158,7 +186,8 @@ func moveToCell(cellIdx):
 	set_pos(_room.map_to_world(cellIdx) + _room.get_cell_size()/2 -Vector2(0,10))
 	
 func _fixed_process(delta):
-	
+	if get_parent().studentClicked:
+		get_parent().studentClicked = false
 	set_z(int(min(46,(_getCurrentTilePos().y-2)*5 +1)))
 	if state == State.WALK_D:
 		set_z(get_z()+2)
@@ -232,21 +261,23 @@ func _getCurrentTilePos():
 	return get_pos() / _room.get_cell_size()
 	
 func _onClick(btn):
-	var currentCellIdx = _room.coordToCellIdx(get_pos())
-	var currentTile = _room.getTileName(currentCellIdx)
-	var ss = _room.get_used_rect().size * _room.get_cell_size()
-	
-	# move to row 
-	if get_pos().x < ss.x / 2.0:
-		setState(State.WALK_R)
-	else:
-		setState(State.WALK_L)
+	if !get_parent().studentClicked:
+		get_parent().studentClicked = true
+		var currentCellIdx = _room.coordToCellIdx(get_pos())
+		var currentTile = _room.getTileName(currentCellIdx)
+		var ss = _room.get_used_rect().size * _room.get_cell_size()
 		
-	moveToCell(currentCellIdx)
-	
-	if currentTile == "Chair":
+		# move to row 
+		if get_pos().x < ss.x / 2.0:
+			setState(State.WALK_R)
+		else:
+			setState(State.WALK_L)
+			
 		moveToCell(currentCellIdx)
-		setState(State.SITTING)
+		
+		if currentTile == "Chair":
+			moveToCell(currentCellIdx)
+			setState(State.SITTING)
 		
 
 func setActiveDisturbAction(action):

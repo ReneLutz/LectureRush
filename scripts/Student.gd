@@ -29,6 +29,14 @@ func picRandomColor():
 	var b = randf()
 	return Color(r,g,b,1.0)
 	
+func isOccupied(idx):
+	if not get_parent().occupiedSeats.has(idx):
+		return false
+	return get_parent().occupiedSeats[idx]
+	
+func occupieSeat(idx, val):
+	get_parent().occupiedSeats[idx] = val
+	
 func pickHairColor():
 	var colors = [Color("#090806"),
 			Color("#2C222B"),
@@ -276,8 +284,10 @@ func _onClick(btn):
 		moveToCell(currentCellIdx)
 		
 		if currentTile == "Chair":
-			moveToCell(currentCellIdx)
-			setState(State.SITTING)
+			if not isOccupied(currentCellIdx):
+				occupieSeat(currentCellIdx,true)
+				moveToCell(currentCellIdx)
+				setState(State.SITTING)
 		
 
 func setActiveDisturbAction(action):

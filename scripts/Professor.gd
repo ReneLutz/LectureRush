@@ -10,6 +10,8 @@ const SENTENCE_EXAM = "Listen!!!\nThis will be relevant for your exam!"
 const SENTENCE_GET_OUT = "You are not paying attention! GET OUT!"
 
 var speechBubbleInstance
+onready var trivialTimer = get_node("TrivialTimer")
+onready var disposeTimer = get_node("SpeechbubbleDispose")
 
 # Professor ability cooldowns available
 var examActivated = false
@@ -37,8 +39,9 @@ func _ready():
 	speechBubbleInstance = speechBubbleScene.instance()
 	add_child(speechBubbleInstance)
 	
+	speechBubbleInstance.set_pos(Vector2(96, -55))
+	
 	_disposeSpeechBubble()
-
 	
 func _fixed_process(delta):
 	if dead:
@@ -83,28 +86,39 @@ func _fixed_process(delta):
 	move(motion)
 	
 func _yell(sentence):
-	var position = get_pos()
-	speechBubbleInstance.set_pos(Vector2(position.x + 50, position.y - 50))
-
 	var textLabelNode = speechBubbleInstance.get_node("Polygon2D/RichTextLabel")
 	textLabelNode.setText(sentence)
 	
+	if(!(disposeTimer.get_time_left() != 0)):
+		speechBubbleInstance.set_pos(speechBubbleInstance.get_pos() + Vector2(2500, 2500))
+		disposeTimer.start()
+	
 func _disposeSpeechBubble():
-	speechBubbleInstance.set_pos(Vector2(-2500, -2500))
+	if(disposeTimer.is_active()):
+		speechBubbleInstance.set_pos(speechBubbleInstance.get_pos() - Vector2(2500, 2500))
+		disposeTimer.stop()
 
 func _activateTrivial():
 	trivialActivated = true
 	_yell(SENTENCE_TRIVIAL)
 	
 	# Start cooldown timer
-	
+	trivialTimer.start()
+
 func _activateExam():
 	examActivated = true
 	_yell(SENTENCE_EXAM)
 
+func _onTrivialCooldownReady():
+	trivialTimer.stop()
+	trivialActivated = false
+
 func setPanicUI(p):
 	panicUI = p
-
+	
+func yankOutStudent():
+	_yell(SENTENCE_GET_OUT)
+	
 func setMood(level):
 	mood = level
 	if mood == 0:
@@ -114,11 +128,8 @@ func setMood(level):
 		get_node("HeadOnly").show()
 		get_node("HeadOnly").set_fixed_process(true)
 	if panicUI != null:
-		print((maxMood-mood)/maxMood)
 		panicUI.panic = (maxMood-mood)/maxMood
-	print("Prof's mood set to %s." % str(level))
 	
 func changeMood(increase):
 	var newMood = mood + increase
 	setMood(newMood)
-	print("Prof's mood %s by %s (%s)." % ["increased" if increase >= 0 else "decreased", str(abs(increase)), str(mood)])

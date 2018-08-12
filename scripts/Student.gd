@@ -56,28 +56,45 @@ func _ready():
 	var panties = picRandomColor();
 	
 	var fragmentShader = """
+	uniform texture shadeTex;
 	uniform color shirtColor;
 	uniform color trouwsersColor;
 	uniform color shoeColor;
 	uniform color hairColor;
+	
+	float SHADE_FACTOR = 2;
+	
 	color col = tex(TEXTURE,UV);
-	COLOR=col;
 	if(col.r==1.0&&col.g==1.0&&col.b==0.0)
 	{
-		COLOR=hairColor;
+		col=hairColor;
 	}
-	if(col.r==1.0&&col.g==0.0&&col.b==0.0)
-	{
-		COLOR=shirtColor;
+	else {
+		if(col.r==1.0&&col.g==0.0&&col.b==0.0)
+		{
+			col=shirtColor;
+		}
+		else 
+		{
+			if(col.r==0.0&&col.g==0.0&&col.b==1.0)
+			{
+				col=trouwsersColor;
+			}
+			else {
+				if(col.r==0.0&&col.g==1.0&&col.b==0.0)
+				{
+					COLOR=shoeColor;
+				}
+			}
+		}
 	}
-	if(col.r==0.0&&col.g==0.0&&col.b==1.0)
-	{
-		COLOR=trouwsersColor;
+	
+	vec3 shade = tex(shadeTex,UV).xyz;
+	if(shade.x != shade.y || shade.x != shade.z || shade.y != shade.z || shade.x == 0 || shade.x == 1) {
+		shade = vec3(0.5);
 	}
-	if(col.r==0.0&&col.g==1.0&&col.b==0.0)
-	{
-		COLOR=shoeColor;
-	}
+	col += vec4(SHADE_FACTOR * (shade - vec3(0.5)), 0);
+	COLOR = col;
 	"""
 	var material = CanvasItemMaterial.new()
 	var shader = CanvasItemShader.new()
@@ -89,6 +106,7 @@ func _ready():
 	get_material().set_shader_param("trouwsersColor",panties)
 	get_material().set_shader_param("shoeColor",shoes)
 	get_material().set_shader_param("hairColor",hairC)
+	
 	_room = get_tree().get_nodes_in_group("lectureRoom")[0]
 	
 	var currentCellIdx = _room.coordToCellIdx(get_pos())
@@ -103,16 +121,22 @@ func _ready():
 func isSeated():
 	return state == State.SITTING
 
+func set_frame(i):
+	.set_frame(i)
+	var animName = get_animation() + "Shade"
+	var frame = get_sprite_frames().get_frame(animName, i)
+	get_material().set_shader_param("shadeTex", frame)
+
 func setState(s):
+	if s!=state and s == State.SITTING:
+		set_pos(get_pos()+Vector2(0,5))
 	state = s
-	set_z(1)
 	if state == State.WALK_D:
 		if sex == "male":
 			set_animation("WalkingMaleBack")
 		else:
 			set_animation("WalkingFemaleBack")
 		set_frame(0)
-		set_z(3)
 	elif state != State.SITTING:
 		if sex == "male":
 			set_animation("WalkingMaleFront")
@@ -131,9 +155,15 @@ func getState():
 	return state
 
 func moveToCell(cellIdx):
-	set_pos(_room.map_to_world(cellIdx) + _room.get_cell_size()/2)
+	set_pos(_room.map_to_world(cellIdx) + _room.get_cell_size()/2 -Vector2(0,10))
 	
 func _fixed_process(delta):
+	
+	set_z(int(min(46,(_getCurrentTilePos().y-2)*5 +1)))
+	if state == State.WALK_D:
+		set_z(get_z()+2)
+		
+	
 	if state != State.SITTING:
 		walkTimer += delta
 		if walkTimer > walkAnimSpeed:

@@ -22,6 +22,8 @@ animations = [ {
 
 [node name="PaperPlane" type="KinematicBody2D"]
 
+z/z = 1000
+z/relative = false
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 0.938542, 0, 0, -1.14928, 0.60099, 5.86287 )

@@ -22,7 +22,6 @@ func on_click(targetPos):
 	# set position
 	var profPos = get_node("../Professor/profBody").get_pos()
 	profPos += get_node("../Professor").get_pos()
-	print("profPos %s" % profPos)
 	sceneChalkInstance.init(profPos, targetPos)
 	get_parent().add_child(sceneChalkInstance)
 	

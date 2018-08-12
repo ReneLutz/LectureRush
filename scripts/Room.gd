@@ -1,9 +1,10 @@
 extends TileMap
 
 const CHAIR_TILE_NAME = "Chair"
+const INITIAL_STUDENTS_COUNT = 20
 
 var timerStudent = 20.0
-var spawnTimeStudent = 5.0
+var spawnTimeStudent = 3.0
 var spawnStudentLeft = true
 
 var sceneCatInstance
@@ -14,14 +15,19 @@ var timerCatExists = 0.0
 var catExistenceTime = 5.0
 
 var nodeStudents
+var initialSpawn = false
 
 func _ready():
 	_resetSeatList()
 	randomize()
 	nodeStudents = get_node("../Students")
-	self.set_process(true)
+	self.set_process(true)	
 
 func _process(delta):
+	if !initialSpawn:
+		spawnStudentsOnSeats(INITIAL_STUDENTS_COUNT)
+		initialSpawn = true
+		
 	spawnStudents(delta)
 	spawntimeCat(delta)
 	nodeStudents.spawnDisturbActions(delta)
@@ -39,16 +45,12 @@ func getTileName(idx):
 func spawnStudents(delta):
 	timerStudent += delta
 	if timerStudent >= spawnTimeStudent:
-		print("Spawning student..")
-		# spawn left or right
-		if randi()%2 == 1:
-			spawnStudentLeft = !spawnStudentLeft
 		# spawn student scene
-		spawnStudent()
+		spawnStudent(true)
 		# reset spawn timer
 		timerStudent = 0.0
 		
-func spawnStudent():
+func spawnStudent(atRandomSpawnPoint):
 	var sceneStudent = load("res://scenes/objects/student.tscn")
 	var sceneStudentInstance = sceneStudent.instance()
 	var sex = randi()%2
@@ -58,13 +60,29 @@ func spawnStudent():
 		sceneStudentInstance.sex = "female"
 	sceneStudentInstance.set_name("student")
 	# set position
-	if spawnStudentLeft == true:
-		sceneStudentInstance.set_pos(get_node("SpawnAreas/SpawnAreaLeft").get_pos())
-	else:
-		sceneStudentInstance.set_pos(get_node("SpawnAreas/SpawnAreaRight").get_pos())
+	if atRandomSpawnPoint == true:
+		# spawn left or right
+		if randi()%2 == 1:
+			spawnStudentLeft = !spawnStudentLeft
+			
+		if spawnStudentLeft == true:
+			sceneStudentInstance.set_pos(get_node("SpawnAreas/SpawnAreaLeft").get_pos())
+		else:
+			sceneStudentInstance.set_pos(get_node("SpawnAreas/SpawnAreaRight").get_pos())
 		
 	get_node("../Students").add_child(sceneStudentInstance)
+	return sceneStudentInstance
 
+func spawnStudentsOnSeats(count):
+	var ts = get_tileset()
+	for cellIdx in get_used_cells():
+		if(ts.tile_get_name(get_cell(cellIdx.x, cellIdx.y)) == CHAIR_TILE_NAME):
+			if randi()%2 == 1:
+				var student = spawnStudent(true)
+				student.moveToCell(cellIdx)
+				student.setState(0) #SITTING
+				_seatList[cellIdx] = false
+	
 	
 ########## SPAWNING CAT ##########
 
@@ -72,14 +90,12 @@ func spawntimeCat(delta):
 	if !isCatSpawned:
 		timerCat += delta
 		if timerCat >= spawnTimeCat:
-			print("Spawning cat")
 			spawnCat()
 			isCatSpawned = true
 			timerCat = 0.0
 	else:
 		timerCatExists += delta
 		if timerCatExists >= catExistenceTime:
-			print("Hiding cat")
 			hideCat()
 			timerCatExists = 0.0
 			isCatSpawned = false

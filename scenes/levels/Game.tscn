@@ -15,7 +15,7 @@
 [ext_resource path="res://scripts/DisturbActions.gd" type="Script" id=13]
 [ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=14]
 [ext_resource path="res://scripts/PaperPlaneDebug.gd" type="Script" id=15]
-[ext_resource path="res://textures/panic.png" type="Texture" id=16]
+[ext_resource path="res://textures/ragemeter.png" type="Texture" id=16]
 [ext_resource path="res://scripts/Panic.gd" type="Script" id=17]
 [ext_resource path="res://scripts/SeatArea.gd" type="Script" id=18]
 
@@ -214,13 +214,23 @@ script/script = ExtResource( 15 )
 
 [node name="Panic" type="Sprite" parent="."]
 
-transform/pos = Vector2( 11.367, 41.3132 )
-transform/scale = Vector2( 0.2, 0.2 )
+transform/pos = Vector2( 178.621, 7.21532 )
+transform/scale = Vector2( 1.24347, 1.24347 )
 texture = ExtResource( 16 )
 centered = false
 region = true
-region_rect = Rect2( 0, 0, 145, 80 )
+region_rect = Rect2( 0, 0, 64, 35 )
 script/script = ExtResource( 17 )
+
+[node name="PanicPointer" type="Sprite" parent="Panic"]
+
+transform/pos = Vector2( 32, 32 )
+transform/rot = 90.0
+texture = ExtResource( 16 )
+offset = Vector2( 0, -14 )
+modulate = Color( 1, 0.726563, 0, 1 )
+region = true
+region_rect = Rect2( 2, 36, 12, 28 )
 
 [node name="FrontStageBorder" type="Node" parent="."]
 

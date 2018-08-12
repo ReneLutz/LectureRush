@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=8 format=1]
 
-[ext_resource path="res://textures/Student_body.png" type="Texture" id=1]
-[ext_resource path="res://scripts/Student.gd" type="Script" id=2]
-[ext_resource path="res://textures/Student_hair_female.png" type="Texture" id=3]
-[ext_resource path="res://textures/Student_hair_male.png" type="Texture" id=4]
+[ext_resource path="res://textures/Studentmale_RGB.png" type="Texture" id=1]
+[ext_resource path="res://textures/Studentfemale_RGB.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Student.gd" type="Script" id=3]
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -43,57 +42,41 @@ shader_param/shoeColor = Color( 0.112853, 0.382812, 0.0657959, 1 )
 [sub_resource type="SpriteFrames" id=3]
 
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "New Anim",
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=4]
-
-animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-extents = Vector2( 14.1236, 18.9832 )
+extents = Vector2( 11.8586, 20.2773 )
 
 [node name="AnimatedSprite" type="AnimatedSprite"]
 
 material/material = SubResource( 2 )
-transform/pos = Vector2( 0, -22.0003 )
+transform/pos = Vector2( 0, -22 )
 frames = SubResource( 3 )
 animation = "New Anim"
-script/script = ExtResource( 2 )
+script/script = ExtResource( 3 )
 walkSpeed = 50
 sex = "male"
-
-[node name="Hair" type="AnimatedSprite" parent="."]
-
-frames = SubResource( 4 )
-animation = "default"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 input/pickable = true
-shapes/0/shape = SubResource( 5 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-collision/layers = 131200
-collision/mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0
 

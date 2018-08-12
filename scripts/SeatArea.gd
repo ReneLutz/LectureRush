@@ -16,4 +16,4 @@ func _input_event(viewport, event, shape_idx):
 		on_click()
 		
 func on_click():
-	pass
+	print("Chalk!")

@@ -9,7 +9,7 @@ enum Walkable { NONE = 0, HRZ, VRT, BOTH }
 
 const WALKABLE_TILES = { "Floor": Walkable.BOTH, "Chair": Walkable.HRZ, "Stair": Walkable.BOTH }
 
-var state
+var state = State.SITTING setget setState, getState
 
 var _room
 var material
@@ -18,6 +18,8 @@ var disturbing
 var activeDisturbAction
 var pathToStudentsNode
 var disturbTimer = 0.0
+var walkTimer = 0
+export var walkAnimSpeed = 0.2
 var disturbChildNodes
 
 func picRandomColor():
@@ -94,26 +96,55 @@ func _ready():
 	
 	if currentTile == "Floor":
 		if get_pos().x <= screenSize.x/2:
-			state = State.WALK_R
+			setState(State.WALK_R)
 		else:
-			state = State.WALK_L
+			setState(State.WALK_L)
 	elif currentTile == "Stair":
 		if get_pos().y <= screenSize.y/2:
-			state = State.WALK_U
+			setState(State.WALK_U)
 		else:
-			state = State.WALK_D
+			setState(State.WALK_D)
 
 func isSeated():
 	return state == State.SITTING
+
+func setState(s):
+	state = s
+	if state == State.WALK_D:
+		if sex == "male":
+			set_animation("WalkingMaleBack")
+		else:
+			set_animation("WalkingFemaleBack")
+		set_frame(0)
+	else:
+		set_animation("front")
+		if sex == "male":
+			set_frame(0)
+		else:
+			set_frame(1)
+			
+	
+func getState():
+	return state
 
 func moveToCell(cellIdx):
 	set_pos(_room.map_to_world(cellIdx) + _room.get_cell_size()/2)
 	
 func _fixed_process(delta):
+	if state == State.WALK_D:
+		walkTimer += delta
+		if walkTimer > walkAnimSpeed:
+			walkTimer -= walkAnimSpeed
+			if get_frame() == 0:
+				set_frame(1)
+			else:
+				set_frame(0)
+	else:
+		walkTimer = 0
+	
 	var currentCellIdx = _room.coordToCellIdx(get_pos())
 	var currentTile = _room.getTileName(currentCellIdx)
 	var walkDir = Vector2()
-	
 	if state == State.WALK_L:
 		walkDir.x = -1
 	elif state == State.WALK_R:
@@ -130,19 +161,19 @@ func _fixed_process(delta):
 	var usedCellsRect = _room.get_used_rect()
 	
 	if p.x <= 0:
-		state = State.WALK_R
+		setState(State.WALK_R)
 		moveToCell(Vector2(1, currentCellIdx.y))
 		
 	elif p.x >= ss.x:
-		state = State.WALK_L
+		setState(State.WALK_L)
 		moveToCell(Vector2(usedCellsRect.end.x-1, currentCellIdx.y))
 		
 	elif p.y <= 0:
-		state = State.WALK_U
+		setState(State.WALK_U)
 		moveToCell(Vector2(currentCellIdx.x, 1))
 		
 	elif p.y >= ss.y:
-		state = State.WALK_D
+		setState(State.WALK_D)
 		moveToCell(Vector2(currentCellIdx.x, usedCellsRect.end.y-1))
 		
 	else:
@@ -151,15 +182,15 @@ func _fixed_process(delta):
 		if (state == State.WALK_D || state == State.WALK_U) &&  !(WALKABLE_TILES[newTile] & Walkable.VRT):
 			moveToCell(currentCellIdx)
 			if state == State.WALK_D:
-				state = State.WALK_U
+				setState(State.WALK_U)
 			else:
-				state = State.WALK_D
+				setState(State.WALK_D)
 		elif (state == State.WALK_L || state == State.WALK_R) && !(WALKABLE_TILES[newTile] & Walkable.HRZ):
 			moveToCell(currentCellIdx)
 			if state == State.WALK_L:
-				state = State.WALK_R
+				setState(State.WALK_R)
 			else:
-				state = State.WALK_L
+				setState(State.WALK_L)
 				
 	_updateActiveDisturbAction(delta)
 
@@ -177,16 +208,16 @@ func _onClick(btn):
 	
 	var nIdx = Vector2()
 	if state == State.WALK_L || state == State.WALK_R:
-		state = State.WALK_R + offset
+		setState( State.WALK_R + offset )
 		
 	else:
-		state = State.WALK_U + offset
+		setState(State.WALK_U + offset)
 		
 	moveToCell(currentCellIdx)
 	
 	if currentTile == "Chair":
 		moveToCell(currentCellIdx)
-		state = State.SITTING
+		setState(State.SITTING)
 		
 
 func setActiveDisturbAction(action):

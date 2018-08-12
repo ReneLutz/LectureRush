@@ -2,6 +2,7 @@ extends TileMap
 
 const CHAIR_TILE_NAME = "Chair"
 const INITIAL_STUDENTS_COUNT = 20
+const MAX_TIME = 120 # seconds
 
 var timerStudent = 20.0
 var spawnTimeStudent = 3.0
@@ -17,13 +18,25 @@ var catExistenceTime = 5.0
 var nodeStudents
 var initialSpawn = false
 
+var timerLabel
+var startMs
+
 func _ready():
+	timerLabel = get_node("../UI/Time")
+	startMs = OS.get_ticks_msec()
 	_resetSeatList()
 	randomize()
 	nodeStudents = get_node("../Students")
 	self.set_process(true)	
 
 func _process(delta):
+	var remainingTime = max(0, MAX_TIME - (OS.get_ticks_msec() - startMs) / 1000.0)
+	timerLabel.set_text("%d:%02d" % [floor(remainingTime / 60), int(remainingTime) % 60])
+	
+	if remainingTime <= 0:
+		# TODO: game over?
+		pass
+	
 	if !initialSpawn:
 		spawnStudentsOnSeats(INITIAL_STUDENTS_COUNT)
 		initialSpawn = true

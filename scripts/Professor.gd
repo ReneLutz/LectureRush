@@ -26,12 +26,20 @@ func _fixed_process(delta):
 	if dead:
 		get_node("BodyOnly/Particles2D").set_process(true)
 		get_node("BodyOnly/Particles2D").set_fixed_process(true)
+		if not get_node("rocketLaunch").is_playing():
+			get_node("rocketLaunch").play()
 		deadTimer+=delta
 		if deadTimer > 1:
+			if get_node("rocketLaunch").is_playing():
+				get_node("rocketLaunch").stop()
+			if not get_node("rocketExplode").is_playing():
+				get_node("rocketExplode").play()
 			get_node("HeadOnly/Sprite").hide()
 			get_node("HeadOnly/HeadExplosion").show()
 			get_node("HeadOnly/HeadExplosion").set_global_pos(get_node("HeadOnly/Sprite").get_global_pos())
 			get_node("HeadOnly/HeadExplosion").start()
+		if deadTimer > 5:
+			get_node("rocketExplode").stop()
 		return
 	
 	var acceleration = Vector2((Input.is_key_pressed(KEY_D) - Input.is_key_pressed(KEY_A)), 

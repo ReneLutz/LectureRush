@@ -1,12 +1,31 @@
 extends Node
 
+var uiTimeLabel
+var lectureTimer
+
+var professor
+var students
+
+var score = 0
+var uiScorelabel
+
 func _ready():
-	set_fixed_process(true)
+	set_process(true)
 	get_node("Professor").get_node("profBody").setPanicUI(get_node("Panic"))
+	uiTimeLabel = get_node("UI/Time")
+	lectureTimer = get_node("LectureTimer")
+	professor = get_node("Professor/profBody")
+	students = get_node("Students")
+	uiScorelabel = get_node("UI/Score")
 	
-func _fixed_process(delta):
-	var uiTimeLabel = get_node("UI/Time")
-	var lectureTimer = get_node("LectureTimer")
+func _process(delta):
+	var seatedStudents = 0
+	for s in students.get_children():
+		if s.isSeated():
+			seatedStudents += 1
+	
+	score += professor.mood * seatedStudents / 100 * delta
+	uiScorelabel.set_text(str(round(score)))
 	
 	var remainingTime = lectureTimer.get_time_left()
 	var minutes = int(remainingTime) / 60

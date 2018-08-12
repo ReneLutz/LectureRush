@@ -147,7 +147,7 @@ func _spawnActionPaperplane(student):
 	scenePlaneInstance.set_name("paper_plane")
 	# set position
 	scenePlaneInstance.set_pos(Vector2(student.get_pos().x + 20, student.get_pos().y))
-	add_child(scenePlaneInstance)
+	get_parent().add_child(scenePlaneInstance)
 	
 func _spawnActionSleep(student):
 	# Add Image / Animations to Student

@@ -23,22 +23,22 @@
 [ext_resource path="res://scripts/Panic.gd" type="Script" id=21]
 [ext_resource path="res://textures/rostrum.png" type="Texture" id=22]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 48, 48 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 384, 1 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 48, 48 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
 extents = Vector2( 384, 1 )
@@ -48,12 +48,12 @@ extents = Vector2( 384, 1 )
 custom_solver_bias = 0.0
 extents = Vector2( 31.8893, 32.2111 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
 extents = Vector2( 7.03526, 4.99719 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=7]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10.2069, 9.8031 )
@@ -228,7 +228,7 @@ editor/display_folded = true
 
 transform/pos = Vector2( 720, 400 )
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -237,7 +237,7 @@ collision/margin = 0.08
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrontStageBorder/EastBorder"]
 
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
@@ -245,7 +245,7 @@ _update_shape_index = 0
 
 transform/pos = Vector2( 384, 448 )
 input/pickable = false
-shapes/0/shape = SubResource( 7 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -254,7 +254,7 @@ collision/margin = 0.08
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrontStageBorder/SouthBorder"]
 
-shape = SubResource( 7 )
+shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
@@ -263,7 +263,7 @@ _update_shape_index = 0
 editor/display_folded = true
 transform/pos = Vector2( 48, 400 )
 input/pickable = false
-shapes/0/shape = SubResource( 8 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -272,14 +272,14 @@ collision/margin = 0.08
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrontStageBorder/WestBorder"]
 
-shape = SubResource( 8 )
+shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
 [node name="NorthBorder" type="KinematicBody2D" parent="FrontStageBorder"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 384, 352 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -289,7 +289,7 @@ collision/margin = 0.08
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrontStageBorder/NorthBorder"]
 
 transform/pos = Vector2( 384, 352 )
-shape = SubResource( 9 )
+shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0
 
@@ -317,7 +317,7 @@ _update_shape_index = 0
 [node name="Sponge" type="Area2D" parent="."]
 
 input/pickable = true
-shapes/0/shape = SubResource( 10 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -332,7 +332,7 @@ texture = ExtResource( 17 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sponge"]
 
-shape = SubResource( 10 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 
@@ -423,7 +423,7 @@ region_rect = Rect2( 0, 56, 36, 8 )
 
 transform/pos = Vector2( 553.749, 379.117 )
 input/pickable = false
-shapes/0/shape = SubResource( 11 )
+shapes/0/shape = SubResource( 7 )
 shapes/0/transform = Matrix32( 1.60576, 0, 0, 0.549475, 0.358459, -22.7521 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -446,8 +446,17 @@ texture = ExtResource( 22 )
 transform/pos = Vector2( 0.358459, -22.7521 )
 transform/scale = Vector2( 1.60576, 0.549475 )
 z/z = 50
-shape = SubResource( 11 )
+shape = SubResource( 7 )
 trigger = false
 _update_shape_index = 0
+
+[node name="LectureTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 120.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="LectureTimer" to="." method="_on_LectureTimer_timeout"]
 
 

@@ -19,7 +19,7 @@ func getPanic():
 	return panic
 
 func _process(delta):
-	panicPointer.set_rotd(90 - panic * 180 + (exp(panic)-1) * 2 * sin(2 * OS.get_ticks_msec()))
+	panicPointer.set_rotd(180 - panic * 180 + (exp(3*panic)-1) * 0.4 * sin((exp(3*panic)-1) * 0.4 * OS.get_ticks_msec()))
 
 func _ready():
 	set_process(true)

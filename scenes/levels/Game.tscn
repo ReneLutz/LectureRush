@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=1]
+[gd_scene load_steps=21 format=1]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://textures/bgTileset.tres" type="TileSet" id=2]
@@ -8,13 +8,14 @@
 [ext_resource path="res://textures/PeriodicTable.png" type="Texture" id=6]
 [ext_resource path="res://textures/Starry_night.png" type="Texture" id=7]
 [ext_resource path="res://textures/Easel.png" type="Texture" id=8]
-[ext_resource path="res://sounds/raw/track.ogg" type="AudioStream" id=9]
-[ext_resource path="res://scenes/objects/professor.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scripts/DisturbActions.gd" type="Script" id=11]
-[ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=12]
-[ext_resource path="res://scripts/PaperPlaneDebug.gd" type="Script" id=13]
-[ext_resource path="res://textures/panic.png" type="Texture" id=14]
-[ext_resource path="res://scripts/Panic.gd" type="Script" id=15]
+[ext_resource path="res://textures/Colour_palatte.png" type="Texture" id=9]
+[ext_resource path="res://sounds/raw/track.ogg" type="AudioStream" id=10]
+[ext_resource path="res://scenes/objects/professor.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/DisturbActions.gd" type="Script" id=12]
+[ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=13]
+[ext_resource path="res://scripts/PaperPlaneDebug.gd" type="Script" id=14]
+[ext_resource path="res://textures/panic.png" type="Texture" id=15]
+[ext_resource path="res://scripts/Panic.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -120,18 +121,25 @@ texture = ExtResource( 7 )
 [node name="Easle 1" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
-transform/pos = Vector2( 337.529, 25.9504 )
+transform/pos = Vector2( 330.344, 26.5491 )
 texture = ExtResource( 8 )
 
 [node name="Easle 2" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
-transform/pos = Vector2( 391.549, 25.1285 )
+transform/pos = Vector2( 391.549, 26.9247 )
 texture = ExtResource( 8 )
+
+[node name="Colour Palette" type="Sprite" parent="LectureRoom/Decoration"]
+
+visibility/visible = false
+transform/pos = Vector2( 390.73, 27.0571 )
+transform/scale = Vector2( 0.740126, 0.740126 )
+texture = ExtResource( 9 )
 
 [node name="StreamPlayer" type="StreamPlayer" parent="."]
 
-stream/stream = ExtResource( 9 )
+stream/stream = ExtResource( 10 )
 stream/play = false
 stream/loop = true
 stream/volume_db = 0.0
@@ -140,13 +148,13 @@ stream/paused = false
 stream/loop_restart_time = 0.0
 stream/buffering_ms = 500
 
-[node name="Professor" parent="." instance=ExtResource( 10 )]
+[node name="Professor" parent="." instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 131.208, 399.077 )
 
 [node name="Students" type="Node" parent="."]
 
-script/script = ExtResource( 11 )
+script/script = ExtResource( 12 )
 
 [node name="UI" type="Node" parent="."]
 
@@ -160,7 +168,7 @@ margin/left = 10.0
 margin/top = 10.0
 margin/right = 118.0
 margin/bottom = 36.0
-custom_fonts/font = ExtResource( 12 )
+custom_fonts/font = ExtResource( 13 )
 text = "Score: 0"
 percent_visible = 1.0
 lines_skipped = 0
@@ -176,7 +184,7 @@ margin/left = 669.0
 margin/top = 10.0
 margin/right = 760.0
 margin/bottom = 48.0
-custom_fonts/font = ExtResource( 12 )
+custom_fonts/font = ExtResource( 13 )
 text = "2:00"
 align = 2
 percent_visible = 1.0
@@ -192,17 +200,17 @@ autostart = true
 
 [node name="PaperPlaneDebug" type="Node" parent="PaperPlaneDebug"]
 
-script/script = ExtResource( 13 )
+script/script = ExtResource( 14 )
 
 [node name="Panic" type="Sprite" parent="."]
 
 transform/pos = Vector2( 176.177, 9.97229 )
 transform/scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 centered = false
 region = true
 region_rect = Rect2( 0, 0, 145, 80 )
-script/script = ExtResource( 15 )
+script/script = ExtResource( 16 )
 
 [node name="FrontStageBorder" type="Node" parent="."]
 

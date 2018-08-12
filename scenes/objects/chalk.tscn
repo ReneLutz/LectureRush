@@ -26,6 +26,8 @@ animations = [ {
 
 [node name="Chalk" type="KinematicBody2D"]
 
+z/z = 1000
+z/relative = false
 input/pickable = false
 collision/layers = 1
 collision/mask = 1
@@ -36,7 +38,7 @@ script/script = ExtResource( 1 )
 
 frames = SubResource( 1 )
 animation = "Chalk"
-frame = 1
+frame = 2
 playing = true
 
 

@@ -7,7 +7,7 @@ const WALKING = "Walking"
 # Current sentences the professor can say
 const SENTENCE_TRIVIAL = "You can do the rest at home. It's completely trivial!"
 const SENTENCE_EXAM = "Listen!!!\nThis will be relevant for your exam!"
-const SENTENCE_GET_OUT = "You are not paying attention! GET OUT!"
+const SENTENCES_GET_OUT = ["You are not paying attention! GET OUT!"]
 
 var speechBubbleInstance
 onready var trivialTimer = get_node("TrivialTimer")
@@ -31,6 +31,7 @@ var dead = false
 var deadTimer = 0
 
 func _ready():
+	randomize()
 	set_fixed_process(true)
 	get_node("BodyOnly/Particles2D").set_process(false)
 	get_node("BodyOnly/Particles2D").set_fixed_process(false)
@@ -117,7 +118,8 @@ func setPanicUI(p):
 	panicUI = p
 	
 func yankOutStudent():
-	_yell(SENTENCE_GET_OUT)
+	var i = randi() % SENTENCES_GET_OUT.size()
+	_yell(SENTENCES_GET_OUT[i])
 	
 func setMood(level):
 	mood = level

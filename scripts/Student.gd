@@ -312,32 +312,33 @@ func _getCurrentTilePos():
 	return get_pos() / _room.get_cell_size()
 	
 func _onClick(btn):
-	var currentCellIdx = _room.coordToCellIdx(get_pos())
-	var currentTile = _room.getTileName(currentCellIdx)
-	var ss = _room.get_used_rect().size * _room.get_cell_size()
-
-
-	if !get_parent().studentClicked:
-		get_parent().studentClicked = true
+	if !leaveRoom:
 		var currentCellIdx = _room.coordToCellIdx(get_pos())
 		var currentTile = _room.getTileName(currentCellIdx)
 		var ss = _room.get_used_rect().size * _room.get_cell_size()
-		
-		if currentTile == "Chair":
-			if btn == BUTTON_RIGHT:
-				if isSeated() && isDisturbActionActive():
-					leaveRoom()
+	
+	
+		if !get_parent().studentClicked:
+			get_parent().studentClicked = true
+			var currentCellIdx = _room.coordToCellIdx(get_pos())
+			var currentTile = _room.getTileName(currentCellIdx)
+			var ss = _room.get_used_rect().size * _room.get_cell_size()
+			
+			if currentTile == "Chair":
+				if btn == BUTTON_RIGHT:
+					if isSeated() && isDisturbActionActive():
+						leaveRoom()
+				else:
+					if isSeated() == false:
+						moveToCell(currentCellIdx)
+						setState(State.SITTING)
 			else:
-				if isSeated() == false:
-					moveToCell(currentCellIdx)
-					setState(State.SITTING)
-		else:
-			moveToCell(currentCellIdx)
-			# move to row 
-			if get_pos().x < ss.x / 2.0:
-				setState(State.WALK_R)
-			else:
-				setState(State.WALK_L)
+				moveToCell(currentCellIdx)
+				# move to row 
+				if get_pos().x < ss.x / 2.0:
+					setState(State.WALK_R)
+				else:
+					setState(State.WALK_L)
 
 func setActiveDisturbAction(action):
 	activeDisturbAction = action

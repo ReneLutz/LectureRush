@@ -16,7 +16,6 @@ func _on_SpeechbubbleDebug_timeout():
 		var textLabelNode = dialogBoxInstance.get_node("Polygon2D/RichTextLabel")
 
 		textLabelNode.setText("This is an extra long text message for testing purpose only: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.")
-		textLabelNode.set_scroll_follow(true)
 		
 		add_child(dialogBoxInstance)
 	elif(counter == 3):

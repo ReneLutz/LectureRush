@@ -16,7 +16,6 @@ var material
 
 var disturbing
 var activeDisturbAction
-var pathToStudentsNode
 var disturbTimer = 0.0
 var disturbChildNodes
 
@@ -186,6 +185,9 @@ func _onClick(btn):
 		state = State.SITTING
 		
 
+func setActiveDisturbAction(action):
+	activeDisturbAction = action
+	
 func _updateActiveDisturbAction(delta):
 	if activeDisturbAction != null:
 		disturbTimer += delta
@@ -197,12 +199,8 @@ func _updateActiveDisturbAction(delta):
 			# delete disturb action instance
 			activeDisturbAction = null
 
-func spawnDisturbAction():
-	# spawn random disturb action
-	var actions = pathToStudentsNode.get("actionTypes")
-	# TODO spawn random action
-	activeDisturbAction = pathToStudentsNode.generateDisturbAction(actions.DRINK_WATER, self)
 
 # checks if student is currently disturbing
 func isDisturbActionActive():
+	print(activeDisturbAction != null)
 	return activeDisturbAction != null

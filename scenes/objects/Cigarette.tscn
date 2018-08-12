@@ -32,14 +32,13 @@ animations = [ {
 
 [node name="Node2D" type="Node2D"]
 
-z/z = 1
-z/relative = false
+z/z = 10
 
 [node name="Cigarette" type="AnimatedSprite" parent="."]
 
 frames = SubResource( 1 )
 animation = "anim1"
-frame = 11
+frame = 6
 playing = true
 
 [node name="Smoke" type="AnimatedSprite" parent="."]

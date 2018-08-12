@@ -11,8 +11,8 @@ export var power = 150
 var velocity = Vector2()
 
 #Current mood level
-var mood = 100;
-var maxMood = 100;
+var mood = 100.0;
+var maxMood = 100.0;
 var panicUI = null
 var dead = false
 var deadTimer = 0
@@ -67,9 +67,11 @@ func setMood(level):
 		get_node("HeadOnly").show()
 		get_node("HeadOnly").set_fixed_process(true)
 	if panicUI != null:
+		print((maxMood-mood)/maxMood)
 		panicUI.panic = (maxMood-mood)/maxMood
 	print("Prof's mood set to %s." % str(level))
 	
 func changeMood(increase):
-	mood += increase
+	var newMood = mood + increase
+	setMood(newMood)
 	print("Prof's mood %s by %s (%s)." % ["increased" if increase >= 0 else "decreased", str(abs(increase)), str(mood)])

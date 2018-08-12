@@ -35,6 +35,7 @@ power = 150
 
 [node name="BodyOnly" type="Sprite" parent="profBody"]
 
+editor/display_folded = true
 visibility/visible = false
 texture = ExtResource( 3 )
 
@@ -66,6 +67,7 @@ color/color = Color( 0.757812, 0.00592041, 0.00592041, 1 )
 
 [node name="HeadOnly" type="KinematicBody2D" parent="profBody"]
 
+editor/display_folded = true
 visibility/visible = false
 input/pickable = false
 collision/layers = 1
@@ -117,5 +119,12 @@ stream/autoplay = false
 stream/paused = false
 stream/loop_restart_time = 0.0
 stream/buffering_ms = 500
+
+[node name="TrivialTimer" type="Timer" parent="profBody"]
+
+process_mode = 1
+wait_time = 45.0
+one_shot = false
+autostart = false
 
 

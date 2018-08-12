@@ -32,6 +32,7 @@ func picRandomColor():
 func _input_event(viewport, event, shape):
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		_onClick(event.button_index)
+		get_tree().set_input_as_handled()
 
 func _ready():
 	set_fixed_process(true)

@@ -10,6 +10,8 @@ var state
 var _room
 var material
 
+var disturbing
+
 func picRandomColor():
 	rand_seed(randi())
 	var r = randf()
@@ -163,8 +165,6 @@ func spawnDisturbAction():
 	pass
 
 func isDisturbActionActive():
-	# TODO check if student is currently disturbing
-	return false
+	# check if student is currently disturbing
+	return disturbing
 	
-func isSitting_test(): # Remove when isSitting() is implemented
-	return true

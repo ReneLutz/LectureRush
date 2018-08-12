@@ -8,3 +8,7 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	get_node("Professor").get_node("profBody").setPanicUI(get_node("Panic"))
+
+
+func _on_LectureTimer_timeout():
+	pass # replace with function body

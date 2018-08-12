@@ -42,7 +42,6 @@ func _ready():
 	speechBubbleInstance.set_pos(Vector2(96, -55))
 	
 	_disposeSpeechBubble()
-
 	
 func _fixed_process(delta):
 	if dead:
@@ -116,7 +115,10 @@ func _onTrivialCooldownReady():
 
 func setPanicUI(p):
 	panicUI = p
-
+	
+func yankOutStudent():
+	_yell(SENTENCE_GET_OUT)
+	
 func setMood(level):
 	mood = level
 	if mood == 0:

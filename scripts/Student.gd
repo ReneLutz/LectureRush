@@ -110,12 +110,14 @@ func isSeated():
 
 func setState(s):
 	state = s
+	set_z(1)
 	if state == State.WALK_D:
 		if sex == "male":
 			set_animation("WalkingMaleBack")
 		else:
 			set_animation("WalkingFemaleBack")
 		set_frame(0)
+		set_z(3)
 	elif state != State.SITTING:
 		if sex == "male":
 			set_animation("WalkingMaleFront")

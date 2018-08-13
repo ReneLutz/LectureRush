@@ -217,3 +217,6 @@ func _spawnActionSleep(student):
 		student.set_animation("SleepingFemale")
 		
 	student.setSleepAnimation(true)
+	
+func playDoorSound():
+	get_node("../ActionSounds").play("door")

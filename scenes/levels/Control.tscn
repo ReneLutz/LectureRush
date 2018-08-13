@@ -7,13 +7,13 @@
 [ext_resource path="res://textures/menu_button2.png" type="Texture" id=5]
 [ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=6]
 [ext_resource path="res://textures/moveProf.png" type="Texture" id=7]
-[ext_resource path="res://textures/evilStuds.png" type="Texture" id=8]
-[ext_resource path="res://textures/temperature.png" type="Texture" id=9]
-[ext_resource path="res://textures/watchPaperPlanes.png" type="Texture" id=10]
-[ext_resource path="res://textures/klickstud.png" type="Texture" id=11]
-[ext_resource path="res://textures/studchangedir.png" type="Texture" id=12]
-[ext_resource path="res://textures/clickStudseat.png" type="Texture" id=13]
-[ext_resource path="res://textures/studseat.png" type="Texture" id=14]
+[ext_resource path="res://textures/klickstud.png" type="Texture" id=8]
+[ext_resource path="res://textures/studchangedir.png" type="Texture" id=9]
+[ext_resource path="res://textures/clickStudseat.png" type="Texture" id=10]
+[ext_resource path="res://textures/studseat.png" type="Texture" id=11]
+[ext_resource path="res://textures/evilStuds.png" type="Texture" id=12]
+[ext_resource path="res://textures/temperature.png" type="Texture" id=13]
+[ext_resource path="res://textures/watchPaperPlanes.png" type="Texture" id=14]
 
 [node name="GuiAndGame" type="Node"]
 
@@ -234,7 +234,6 @@ flat = false
 
 [node name="TutorialControl2" type="Control" parent="."]
 
-editor/display_folded = true
 visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -265,10 +264,10 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 26.0
 margin/top = 24.0
-margin/right = 460.0
+margin/right = 728.0
 margin/bottom = 54.0
 custom_fonts/font = ExtResource( 6 )
-text = "You should banish distracted students"
+text = "If you click walking students, they will"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -279,12 +278,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 26.0
-margin/top = 65.0
-margin/right = 674.0
-margin/bottom = 95.0
+margin/left = 25.0
+margin/top = 62.0
+margin/right = 817.0
+margin/bottom = 92.0
 custom_fonts/font = ExtResource( 6 )
-text = "from the room by RIGHT-CLICKING them."
+text = "try to find a seat in the nearest row."
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -295,11 +294,24 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 162.0
-margin/top = 138.0
-margin/right = 495.0
-margin/bottom = 332.0
+margin/left = 106.0
+margin/top = 149.0
+margin/right = 506.0
+margin/bottom = 325.0
 texture = ExtResource( 8 )
+stretch_mode = 0
+
+[node name="TextureFrame1" type="TextureFrame" parent="TutorialControl2"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 411.0
+margin/top = 166.0
+margin/right = 811.0
+margin/bottom = 298.0
+texture = ExtResource( 9 )
 stretch_mode = 0
 
 [node name="Button" type="Button" parent="TutorialControl2"]
@@ -336,7 +348,6 @@ flat = false
 
 [node name="TutorialControl3" type="Control" parent="."]
 
-editor/display_folded = true
 visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -365,12 +376,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 26.0
-margin/top = 24.0
-margin/right = 460.0
-margin/bottom = 54.0
+margin/left = 16.0
+margin/top = 23.0
+margin/right = 808.0
+margin/bottom = 53.0
 custom_fonts/font = ExtResource( 6 )
-text = "If you don't banish distracted students"
+text = "Click again and the student will sit"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -386,39 +397,7 @@ margin/top = 62.0
 margin/right = 817.0
 margin/bottom = 92.0
 custom_fonts/font = ExtResource( 6 )
-text = "the professor gets angry and his"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Label4" type="Label" parent="TutorialControl3"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 25.0
-margin/top = 102.0
-margin/right = 817.0
-margin/bottom = 132.0
-custom_fonts/font = ExtResource( 6 )
-text = "pressure will rise. If you hit the"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Label2" type="Label" parent="TutorialControl3"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 23.0
-margin/top = 138.0
-margin/right = 833.0
-margin/bottom = 168.0
-custom_fonts/font = ExtResource( 6 )
-text = "maximum, it's GAME OVER!"
+text = "down."
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -429,11 +408,24 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 167.0
-margin/top = 222.0
-margin/right = 567.0
-margin/bottom = 316.0
-texture = ExtResource( 9 )
+margin/left = 186.0
+margin/top = 94.0
+margin/right = 586.0
+margin/bottom = 270.0
+texture = ExtResource( 10 )
+stretch_mode = 0
+
+[node name="TextureFrame1" type="TextureFrame" parent="TutorialControl3"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 386.0
+margin/top = 92.0
+margin/right = 786.0
+margin/bottom = 224.0
+texture = ExtResource( 11 )
 stretch_mode = 0
 
 [node name="Button" type="Button" parent="TutorialControl3"]
@@ -444,7 +436,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 26.0
 margin/top = 399.0
-margin/right = 125.0
+margin/right = 126.0
 margin/bottom = 419.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -499,12 +491,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 32.0
-margin/top = 26.0
-margin/right = 788.0
-margin/bottom = 56.0
+margin/left = 26.0
+margin/top = 24.0
+margin/right = 460.0
+margin/bottom = 54.0
 custom_fonts/font = ExtResource( 6 )
-text = "Btw., avoid paper planes. If they hit"
+text = "You should banish distracted students"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -517,74 +509,10 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 26.0
 margin/top = 65.0
-margin/right = 728.0
+margin/right = 674.0
 margin/bottom = 95.0
 custom_fonts/font = ExtResource( 6 )
-text = "the Prof... GAME OVER!"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Label2" type="Label" parent="TutorialControl4"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 26.0
-margin/top = 144.0
-margin/right = 728.0
-margin/bottom = 174.0
-custom_fonts/font = ExtResource( 6 )
-text = "The more students visit "
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Label3" type="Label" parent="TutorialControl4"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 26.0
-margin/top = 177.0
-margin/right = 728.0
-margin/bottom = 207.0
-custom_fonts/font = ExtResource( 6 )
-text = "your lecture the more"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Label4" type="Label" parent="TutorialControl4"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 26.0
-margin/top = 211.0
-margin/right = 728.0
-margin/bottom = 241.0
-custom_fonts/font = ExtResource( 6 )
-text = "POINTS you get, that's"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Label5" type="Label" parent="TutorialControl4"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 26.0
-margin/top = 247.0
-margin/right = 728.0
-margin/bottom = 277.0
-custom_fonts/font = ExtResource( 6 )
-text = "the objective."
+text = "from the room by RIGHT-CLICKING them."
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -595,11 +523,11 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 535.0
-margin/top = 63.0
-margin/right = 708.0
-margin/bottom = 435.0
-texture = ExtResource( 10 )
+margin/left = 162.0
+margin/top = 138.0
+margin/right = 495.0
+margin/bottom = 332.0
+texture = ExtResource( 12 )
 stretch_mode = 0
 
 [node name="Button" type="Button" parent="TutorialControl4"]
@@ -624,10 +552,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 297.0
-margin/top = 371.0
-margin/right = 513.0
-margin/bottom = 428.0
+margin/left = 532.0
+margin/top = 364.0
+margin/right = 748.0
+margin/bottom = 421.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -667,10 +595,10 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 26.0
 margin/top = 24.0
-margin/right = 728.0
+margin/right = 460.0
 margin/bottom = 54.0
 custom_fonts/font = ExtResource( 6 )
-text = "If you click walking students, they will"
+text = "If you don't banish distracted students"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -686,7 +614,39 @@ margin/top = 62.0
 margin/right = 817.0
 margin/bottom = 92.0
 custom_fonts/font = ExtResource( 6 )
-text = "try to find a seat in the nearest row."
+text = "the professor gets angry and his"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label4" type="Label" parent="TutorialControl5"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 25.0
+margin/top = 102.0
+margin/right = 817.0
+margin/bottom = 132.0
+custom_fonts/font = ExtResource( 6 )
+text = "pressure will rise. If you hit the"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label2" type="Label" parent="TutorialControl5"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 23.0
+margin/top = 138.0
+margin/right = 833.0
+margin/bottom = 168.0
+custom_fonts/font = ExtResource( 6 )
+text = "maximum, it's GAME OVER!"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -697,24 +657,11 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 106.0
-margin/top = 149.0
-margin/right = 506.0
-margin/bottom = 325.0
-texture = ExtResource( 11 )
-stretch_mode = 0
-
-[node name="TextureFrame1" type="TextureFrame" parent="TutorialControl5"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 411.0
-margin/top = 166.0
-margin/right = 811.0
-margin/bottom = 298.0
-texture = ExtResource( 12 )
+margin/left = 167.0
+margin/top = 222.0
+margin/right = 567.0
+margin/bottom = 316.0
+texture = ExtResource( 13 )
 stretch_mode = 0
 
 [node name="Button" type="Button" parent="TutorialControl5"]
@@ -751,7 +698,6 @@ flat = false
 
 [node name="TutorialControl6" type="Control" parent="."]
 
-editor/display_folded = true
 visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -780,28 +726,12 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 16.0
-margin/top = 23.0
-margin/right = 808.0
-margin/bottom = 53.0
+margin/left = 32.0
+margin/top = 26.0
+margin/right = 788.0
+margin/bottom = 56.0
 custom_fonts/font = ExtResource( 6 )
-text = "Click again and the student will sit"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Label2" type="Label" parent="TutorialControl6"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 189.0
-margin/top = 261.0
-margin/right = 551.0
-margin/bottom = 291.0
-custom_fonts/font = ExtResource( 6 )
-text = "GL,HF,like,subscribe"
+text = "Btw., avoid paper planes. If they hit"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -812,12 +742,124 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 25.0
-margin/top = 62.0
-margin/right = 817.0
-margin/bottom = 92.0
+margin/left = 26.0
+margin/top = 65.0
+margin/right = 728.0
+margin/bottom = 95.0
 custom_fonts/font = ExtResource( 6 )
-text = "down."
+text = "the Prof... GAME OVER!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label2" type="Label" parent="TutorialControl6"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 26.0
+margin/top = 120.0
+margin/right = 728.0
+margin/bottom = 150.0
+custom_fonts/font = ExtResource( 6 )
+text = "The more students visit "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label3" type="Label" parent="TutorialControl6"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 26.0
+margin/top = 153.0
+margin/right = 728.0
+margin/bottom = 183.0
+custom_fonts/font = ExtResource( 6 )
+text = "your lecture the more"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label4" type="Label" parent="TutorialControl6"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 26.0
+margin/top = 187.0
+margin/right = 728.0
+margin/bottom = 217.0
+custom_fonts/font = ExtResource( 6 )
+text = "POINTS you get, that's"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label5" type="Label" parent="TutorialControl6"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 22.0
+margin/top = 223.0
+margin/right = 724.0
+margin/bottom = 253.0
+custom_fonts/font = ExtResource( 6 )
+text = "the objective."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label6" type="Label" parent="TutorialControl6"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 26.0
+margin/top = 258.0
+margin/right = 782.0
+margin/bottom = 288.0
+custom_fonts/font = ExtResource( 6 )
+text = "Keep control of the room"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label7" type="Label" parent="TutorialControl6"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 26.0
+margin/top = 293.0
+margin/right = 728.0
+margin/bottom = 323.0
+custom_fonts/font = ExtResource( 6 )
+text = "for TWO MINUTES."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Label2 2" type="Label" parent="TutorialControl6"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 113.0
+margin/top = 338.0
+margin/right = 475.0
+margin/bottom = 368.0
+custom_fonts/font = ExtResource( 6 )
+text = "GL,HF,like,subscribe"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -828,23 +870,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 186.0
-margin/top = 94.0
-margin/right = 586.0
-margin/bottom = 270.0
-texture = ExtResource( 13 )
-stretch_mode = 0
-
-[node name="TextureFrame1" type="TextureFrame" parent="TutorialControl6"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 386.0
-margin/top = 92.0
-margin/right = 786.0
-margin/bottom = 224.0
+margin/left = 535.0
+margin/top = 63.0
+margin/right = 708.0
+margin/bottom = 435.0
 texture = ExtResource( 14 )
 stretch_mode = 0
 
@@ -854,10 +883,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 263.0
-margin/top = 329.0
-margin/right = 495.0
-margin/bottom = 415.0
+margin/left = 197.0
+margin/top = 385.0
+margin/right = 361.0
+margin/bottom = 429.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

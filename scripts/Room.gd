@@ -3,6 +3,8 @@ extends TileMap
 const CHAIR_TILE_NAME = "Chair"
 const INITIAL_STUDENTS_COUNT = 20
 
+export var initialSpawnProbability = 0.8
+
 var timerStudent = 20.0
 var spawnTimeStudent = 3.0
 var spawnStudentLeft = true
@@ -82,7 +84,7 @@ func spawnStudentsOnSeats(count):
 	var ts = get_tileset()
 	for cellIdx in get_used_cells():
 		if(ts.tile_get_name(get_cell(cellIdx.x, cellIdx.y)) == CHAIR_TILE_NAME):
-			if randi()%2 == 1:
+			if randf() < initialSpawnProbability:
 				var student = spawnStudent(true)
 				student.moveToCell(cellIdx)
 				student.setState(0) #SITTING

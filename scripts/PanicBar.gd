@@ -5,11 +5,8 @@ var panic = 0.0 setget setPanic, getPanic
 var fill
 
 func setPanic(var p):
-	panic = p
-	if panic < 0.0:
-		panic = 0.0
-	if panic > 1.0:
-		panic = 1.0
+	if panic < 1:
+		panic = clamp(p, 0.0, 1.0)
 
 func getPanic():
 	return panic

@@ -10,7 +10,8 @@ const SENTENCE_EXAM = "Listen!!!\nThis will be relevant for your exam!"
 const SENTENCES_GET_OUT = [
 	"You are not paying attention! GET OUT!",
 	"I will have none of that!",
-	"Don't even think about doing that in my lectures!"
+	"Don't even think about doing that in my lectures!",
+	"Are you serious?!"
 ]
 
 var speechBubbleInstance

@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=1]
+[gd_scene load_steps=101 format=1]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/TileSetScene2.tres" type="TileSet" id=2]
@@ -91,6 +91,7 @@
 [ext_resource path="res://textures/Stair_Row.png" type="Texture" id=89]
 [ext_resource path="res://textures/rostrum.png" type="Texture" id=90]
 [ext_resource path="res://scripts/GuiLayer.gd" type="Script" id=91]
+[ext_resource path="res://scenes/objects/ActionSounds.tscn" type="PackedScene" id=92]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -149,7 +150,6 @@ script/script = ExtResource( 1 )
 "lectureRoom",
 ]]
 
-editor/display_folded = true
 mode = 0
 tile_set = ExtResource( 2 )
 cell/size = Vector2( 37, 32 )
@@ -174,11 +174,9 @@ initialSpawnProbability = 0.8
 
 [node name="SpawnAreas" type="Node" parent="LectureRoom"]
 
-editor/display_folded = true
-
 [node name="SpawnAreaLeft" type="Area2D" parent="LectureRoom/SpawnAreas"]
 
-transform/pos = Vector2( 32.7351, 400 )
+transform/pos = Vector2( -25, 300 )
 transform/scale = Vector2( 0.5, 0.5 )
 input/pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -188,7 +186,7 @@ angular_damp = 1.0
 
 [node name="SpawnAreaRight" type="Area2D" parent="LectureRoom/SpawnAreas"]
 
-transform/pos = Vector2( 736, 400 )
+transform/pos = Vector2( 800, 300 )
 transform/scale = Vector2( 0.5, 0.5 )
 input/pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -716,6 +714,8 @@ align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="ActionSounds" parent="." instance=ExtResource( 92 )]
 
 [connection signal="timeout" from="LectureTimer" to="." method="_on_LectureTimer_timeout"]
 

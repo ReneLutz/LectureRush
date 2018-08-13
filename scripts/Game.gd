@@ -9,7 +9,7 @@ var students
 var score = 0
 var uiScorelabel
 
-var colorAnimationTimer
+var colorAnimationTimer = 0.0
 var colorAnimationMaxTime = 0.6
 var colorAnimationActive = false
 var colorGreen = false
@@ -50,6 +50,7 @@ func _on_LectureTimer_timeout():
 	pass # replace with function body
 	
 func setColorFeedbackGreen():
+	print("SET COLOR")
 	uiScorelabel.add_color_override("font_color", Color(0,1,0,1))
 	setColorFeedback(true)
 		
@@ -61,6 +62,6 @@ func setColorFeedback(active):
 	colorAnimationActive = active
 	if !active:
 		#set color to white
-		uiScorelabel.add_color_override("font_color", Color(0,0,0,1))
+		uiScorelabel.add_color_override("font_color", Color(1,1,1,1))
 		
 	

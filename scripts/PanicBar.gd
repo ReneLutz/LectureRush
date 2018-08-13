@@ -62,4 +62,5 @@ func _blinkBar(delta):
 				fill.hide()
 			else:
 				fill.show()
-		
+	else:
+		fill.show()

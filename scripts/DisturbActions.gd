@@ -4,7 +4,7 @@ var studentClicked = false;
 
 var occupiedSeats = {}
 
-enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP }
+enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP, PHONE }
 
 const ACTION_SPAWN_COOLDOWN = 2.0
 
@@ -16,6 +16,7 @@ const MOOD_VALUE_ACTION_TOILET = 5
 const MOOD_VALUE_ACTION_SMOKE = 5
 const MOOD_VALUE_ACTION_PAPERPLANE = 5
 const MOOD_VALUE_ACTION_SLEEP = 5
+const MOOD_VALUE_ACTION_PHONE = 5
 
 # If DURATION initialized with <= 0: Disturb action of student will remain until he leaves the room
 const DURATION_ACTION_DRINK_WATER = 15
@@ -25,6 +26,7 @@ const DURATION_ACTION_TOILET = 15
 const DURATION_ACTION_SMOKE = 15
 const DURATION_ACTION_PAPERPLANE = 4
 const DURATION_ACTION_SLEEP = 20
+const DURATION_ACTION_PHONE = 0
 
 var timerDisturbAction = 0.0
 
@@ -96,6 +98,11 @@ func _generateDisturbAction(actionType, student):
 	elif actionType == actionTypes.SLEEP:
 		_spawnActionSleep(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_SLEEP, DURATION_ACTION_SLEEP)
+		
+	elif actionType == actionTypes.PHONE:
+		_spawnActionPhone(student)
+		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_PHONE, DURATION_ACTION_PHONE)
+		
 	else:
 		_spawnActionPaperplane(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_PAPERPLANE, DURATION_ACTION_PAPERPLANE)
@@ -157,3 +164,10 @@ func _spawnActionSleep(student):
 	#TODO
 	
 	pass
+	
+func _spawnActionPhone(student):
+	# Add Image / Animations to Student
+	if student.sex == "male":
+		student.set_animation("WalkingMalePhone")
+	else:
+		student.set_animation("WalkingFemalePhone")

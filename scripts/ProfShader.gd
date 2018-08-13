@@ -60,7 +60,6 @@ func play(animName):
 		animStart = OS.get_ticks_msec()
 		frameCount = get_sprite_frames().get_frame_count(animName)
 		animSpeed = get_sprite_frames().get_animation_speed(animName)
-		print("playing %s (%d frames)" % [animName, frameCount])
 
 func set_frame(i):
 	.set_frame(i)

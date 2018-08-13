@@ -176,18 +176,21 @@ texture = ExtResource( 11 )
 
 [node name="Skeleton" type="Sprite" parent="LectureRoom/Decoration"]
 
+visibility/visible = false
 transform/pos = Vector2( 597.449, 31.4493 )
 transform/scale = Vector2( 1.14372, 1.14372 )
 texture = ExtResource( 12 )
 
 [node name="MM Plot" type="Sprite" parent="LectureRoom/Decoration"]
 
+visibility/visible = false
 transform/pos = Vector2( 536.026, 23.8023 )
 transform/scale = Vector2( 0.699153, 0.699153 )
 texture = ExtResource( 13 )
 
 [node name="Parrot" type="Sprite" parent="LectureRoom/Decoration"]
 
+visibility/visible = false
 transform/pos = Vector2( 219.913, 30.0036 )
 texture = ExtResource( 14 )
 

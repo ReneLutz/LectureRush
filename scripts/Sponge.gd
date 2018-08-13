@@ -4,6 +4,8 @@ extends Area2D
 # var a = 2
 # var b = "textvar"
 
+#var spongeAtProf = false
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
@@ -24,4 +26,5 @@ func on_click():
 	# set position
 	get_node("../Professor/profBody").add_child(sceneSpongeInstance)
 	sceneSpongeInstance.set_pos(Vector2(20, 5))
+#	spongeAtProf = true
 	

@@ -126,7 +126,7 @@ func _ready():
 			else {
 				if(col.r==0.0&&col.g==1.0&&col.b==0.0)
 				{
-					COLOR=shoeColor;
+					col=shoeColor;
 				}
 			}
 		}

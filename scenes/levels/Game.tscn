@@ -345,6 +345,7 @@ z/z = 2
 frames = SubResource( 1 )
 animation = "Init"
 script/script = ExtResource( 80 )
+blinkDuration = 0.4
 
 [node name="Fill" type="Sprite" parent="UI/PanicBar"]
 

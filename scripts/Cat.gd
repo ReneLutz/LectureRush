@@ -17,4 +17,4 @@ func on_click():
 		get_tree().get_current_scene().get_node("Game/Professor/profBody").changeMood(mood_bonus)
 		is_used = true
 		get_node("SamplePlayer").play("cat_meow")
-		
+		get_tree().get_current_scene().get_node("Game").setColorFeedbackGreen()

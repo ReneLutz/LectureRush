@@ -41,6 +41,8 @@ var sleepAnimTimer = 0.0
 var sleepAnimSpeed = 0.2
 var sleepFrame = 0
 
+var wasUpstairs = false
+
 # when walking through a row this stores the student
 # that's on the seat this student walked past
 var lastTrampledStudent = null
@@ -107,7 +109,7 @@ func pickShoeColor():
 	return colors[randi() % colors.size()]
 	
 func pickSkinColor():
-	var colors = [Color("#FFDFC4"),
+	var colors = [#Color("#FFDFC4"),
 			Color("#F0D5BE"),
 			Color("#EECEB3"),
 			Color("#E1B899"),
@@ -122,16 +124,16 @@ func pickSkinColor():
 			Color("#BA6C49"),
 			Color("#A57257"),
 			Color("#F0C8C9"),
-			Color("#DDA8A0"),
-			Color("#B97C6D"),
-			Color("#DB9065"),
+#			Color("#DDA8A0"),
+#			Color("#B97C6D"),
+			Color("#DB9065"),]
 			
-			Color("#AD6452"),
-			Color("#CB8442"),
-			Color("#BD723C"),
-			Color("#870400"),
-			Color("#710101"),
-			Color("#430000"),]
+#			Color("#AD6452"),
+#			Color("#CB8442"),]
+#			Color("#BD723C"),
+#			Color("#870400"),
+#			Color("#710101"),
+#			Color("#430000"),]
 	randomize()
 	return colors[randi() % colors.size()]
 
@@ -401,13 +403,17 @@ func _fixed_process(delta):
 		setState(State.WALK_L)
 		moveToCell(Vector2(usedCellsRect.end.x-1, currentCellIdx.y))
 		
-	elif p.y <= 0:
+	elif p.y <= 64:
 		setState(State.WALK_U)
-		moveToCell(Vector2(currentCellIdx.x, 1))
+		moveToCell(Vector2(currentCellIdx.x, currentCellIdx.y))
+		wasUpstairs = true
 		
-	elif p.y >= ss.y:
-		setState(State.WALK_D)
-		moveToCell(Vector2(currentCellIdx.x, usedCellsRect.end.y-1))
+	elif p.y >= ss.y - 32:
+		if wasUpstairs:
+			_deleteSelf()
+		else:
+			setState(State.WALK_D)
+			moveToCell(Vector2(currentCellIdx.x, usedCellsRect.end.y-1))
 		
 	else:
 		var newCellIdx = _room.coordToCellIdx(get_pos())
@@ -486,12 +492,13 @@ func _onClick(btn):
 						_takeSeat()
 						
 			else:
-				moveToCell(currentCellIdx)
-				# move to row 
-				if get_pos().x < ss.x / 2.0:
-					setState(State.WALK_R)
-				else:
-					setState(State.WALK_L)
+				if currentTile == "Stair":
+					moveToCell(currentCellIdx)
+					# move to row 
+					if get_pos().x < ss.x / 2.0:
+						setState(State.WALK_R)
+					else:
+						setState(State.WALK_L)
 
 func _takeSeat():
 	setState(State.SITTING)

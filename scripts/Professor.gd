@@ -45,7 +45,7 @@ func _ready():
 	speechBubbleInstance = speechBubbleScene.instance()
 	add_child(speechBubbleInstance)
 	
-	speechBubbleInstance.set_pos(Vector2(96, -55))
+	speechBubbleInstance.set_pos(Vector2(110, -30)) # 96, -55
 	
 	_disposeSpeechBubble()
 	
@@ -65,8 +65,9 @@ func _fixed_process(delta):
 			get_node("HeadOnly/HeadExplosion").show()
 			get_node("HeadOnly/HeadExplosion").set_global_pos(get_node("HeadOnly/Sprite").get_global_pos())
 			get_node("HeadOnly/HeadExplosion").start()
-		if deadTimer > 5:
+		if deadTimer > 5 and not get_tree().is_paused():
 			get_node("rocketExplode").stop()
+			get_tree().set_pause(true)
 		return
 	
 	var acceleration = Vector2((Input.is_key_pressed(KEY_D) - Input.is_key_pressed(KEY_A)), 

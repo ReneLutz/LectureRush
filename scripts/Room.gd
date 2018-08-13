@@ -110,8 +110,12 @@ func spawnCat():
 	sceneCatInstance = sceneCat.instance()
 	sceneCatInstance.set_name("cat")
 	# set position
-	sceneCatInstance.set_pos(get_node("Decoration/Plant").get_pos())
-	add_child(sceneCatInstance)
+	#sceneCatInstance.set_pos(get_node("Decoration/Plant2").get_pos())
+	#add_child(sceneCatInstance)
+	
+	sceneCatInstance.set_pos(Vector2(7, 20))
+	get_node("Decoration/Plant2").add_child(sceneCatInstance)
+	#print("SpawnKitty2")
 	
 func hideCat():
 	remove_child(sceneCatInstance)

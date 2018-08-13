@@ -26,6 +26,9 @@ animations = [ {
 
 [node name="Cat" type="Node2D"]
 
+transform/pos = Vector2( 0, 20 )
+z/z = 5
+
 [node name="Clickable" type="Area2D" parent="."]
 
 input/pickable = true
@@ -51,7 +54,7 @@ _update_shape_index = 0
 
 frames = SubResource( 2 )
 animation = "idle"
-frame = 1
+frame = 4
 playing = true
 
 

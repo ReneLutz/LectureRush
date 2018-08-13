@@ -100,6 +100,7 @@ flat = false
 
 [node name="TutorialControl1" type="Control" parent="."]
 
+editor/display_folded = true
 visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -283,7 +284,7 @@ margin/top = 65.0
 margin/right = 674.0
 margin/bottom = 95.0
 custom_fonts/font = ExtResource( 6 )
-text = "from the room by right-clicking them."
+text = "from the room by RIGHT-CLICKING them."
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

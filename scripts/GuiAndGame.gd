@@ -14,7 +14,6 @@ func closeTutorial():
 	get_node("TutorialControl4").hide()
 	get_node("TutorialControl5").hide()
 	get_node("TutorialControl6").hide()
-	get_node("TutorialControl7").hide()
 
 func showTutorial1():
 	get_node("TutorialControl1").show()
@@ -23,7 +22,6 @@ func showTutorial1():
 	get_node("TutorialControl4").hide()
 	get_node("TutorialControl5").hide()
 	get_node("TutorialControl6").hide()
-	get_node("TutorialControl7").hide()
 	
 func showTutorial2():
 	get_node("TutorialControl1").hide()
@@ -32,13 +30,14 @@ func showTutorial2():
 	get_node("TutorialControl4").hide()
 	get_node("TutorialControl5").hide()
 	get_node("TutorialControl6").hide()
-	get_node("TutorialControl7").hide()
 	
 func showTutorial3():
 	get_node("TutorialControl1").hide()
 	get_node("TutorialControl2").hide()
 	get_node("TutorialControl3").show()
 	get_node("TutorialControl4").hide()
+	get_node("TutorialControl5").hide()
+	get_node("TutorialControl6").hide()
 	
 func showTutorial4():
 	get_node("TutorialControl1").hide()
@@ -47,7 +46,6 @@ func showTutorial4():
 	get_node("TutorialControl4").show()
 	get_node("TutorialControl5").hide()
 	get_node("TutorialControl6").hide()
-	get_node("TutorialControl7").hide()
 	
 func showTutorial5():
 	get_node("TutorialControl1").hide()
@@ -56,7 +54,6 @@ func showTutorial5():
 	get_node("TutorialControl4").hide()
 	get_node("TutorialControl5").show()
 	get_node("TutorialControl6").hide()
-	get_node("TutorialControl7").hide()
 	
 func showTutorial6():
 	get_node("TutorialControl1").hide()
@@ -65,16 +62,6 @@ func showTutorial6():
 	get_node("TutorialControl4").hide()
 	get_node("TutorialControl5").hide()
 	get_node("TutorialControl6").show()
-	get_node("TutorialControl7").hide()
-	
-func showTutorial7():
-	get_node("TutorialControl1").hide()
-	get_node("TutorialControl2").hide()
-	get_node("TutorialControl3").hide()
-	get_node("TutorialControl4").hide()
-	get_node("TutorialControl5").hide()
-	get_node("TutorialControl6").hide()
-	get_node("TutorialControl7").show()
 	
 
 func _ready():
@@ -87,7 +74,6 @@ func _ready():
 	get_node("TutorialControl3/Button1").connect("button_up",self,"showTutorial4")
 	get_node("TutorialControl4/Button1").connect("button_up",self,"showTutorial5")
 	get_node("TutorialControl5/Button1").connect("button_up",self,"showTutorial6")
-	get_node("TutorialControl6/Button1").connect("button_up",self,"showTutorial7")
 	
 	get_node("TutorialControl1/Button").connect("button_up",self,"closeTutorial")
 	get_node("TutorialControl2/Button").connect("button_up",self,"closeTutorial")
@@ -95,7 +81,6 @@ func _ready():
 	get_node("TutorialControl4/Button").connect("button_up",self,"closeTutorial")
 	get_node("TutorialControl5/Button").connect("button_up",self,"closeTutorial")
 	get_node("TutorialControl6/Button").connect("button_up",self,"closeTutorial")
-	get_node("TutorialControl7/Button").connect("button_up",self,"closeTutorial")
 
 func endGame():
 	remove_child(currentGameInstance)

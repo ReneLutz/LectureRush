@@ -780,120 +780,6 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 26.0
-margin/top = 24.0
-margin/right = 728.0
-margin/bottom = 54.0
-custom_fonts/font = ExtResource( 3 )
-text = "If you click a walking student he will"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Label1" type="Label" parent="TutorialControl6"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 25.0
-margin/top = 62.0
-margin/right = 817.0
-margin/bottom = 92.0
-custom_fonts/font = ExtResource( 3 )
-text = "try to find a seat in the next row."
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="TextureFrame" type="TextureFrame" parent="TutorialControl6"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 106.0
-margin/top = 149.0
-margin/right = 506.0
-margin/bottom = 325.0
-texture = ExtResource( 8 )
-stretch_mode = 0
-
-[node name="TextureFrame1" type="TextureFrame" parent="TutorialControl6"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 411.0
-margin/top = 166.0
-margin/right = 811.0
-margin/bottom = 298.0
-texture = ExtResource( 9 )
-stretch_mode = 0
-
-[node name="Button" type="Button" parent="TutorialControl6"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 26.0
-margin/top = 399.0
-margin/right = 125.0
-margin/bottom = 419.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "back to Menu"
-flat = false
-
-[node name="Button1" type="Button" parent="TutorialControl6"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 532.0
-margin/top = 364.0
-margin/right = 748.0
-margin/bottom = 421.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "next Page"
-flat = false
-
-[node name="TutorialControl7" type="Control" parent="."]
-
-visibility/visible = false
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 774.0
-margin/bottom = 437.0
-
-[node name="ColorFrame1" type="ColorFrame" parent="TutorialControl7"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = -16.0
-margin/top = -3.0
-margin/right = 784.0
-margin/bottom = 454.0
-color = Color( 0, 0.57016, 0.613281, 1 )
-
-[node name="Label" type="Label" parent="TutorialControl7"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
 margin/left = 16.0
 margin/top = 23.0
 margin/right = 808.0
@@ -904,7 +790,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Label2" type="Label" parent="TutorialControl7"]
+[node name="Label2" type="Label" parent="TutorialControl6"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -920,7 +806,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Label1" type="Label" parent="TutorialControl7"]
+[node name="Label1" type="Label" parent="TutorialControl6"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -936,7 +822,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="TextureFrame" type="TextureFrame" parent="TutorialControl7"]
+[node name="TextureFrame" type="TextureFrame" parent="TutorialControl6"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -949,7 +835,7 @@ margin/bottom = 270.0
 texture = ExtResource( 10 )
 stretch_mode = 0
 
-[node name="TextureFrame1" type="TextureFrame" parent="TutorialControl7"]
+[node name="TextureFrame1" type="TextureFrame" parent="TutorialControl6"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -962,7 +848,7 @@ margin/bottom = 224.0
 texture = ExtResource( 11 )
 stretch_mode = 0
 
-[node name="Button" type="Button" parent="TutorialControl7"]
+[node name="Button" type="Button" parent="TutorialControl6"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true

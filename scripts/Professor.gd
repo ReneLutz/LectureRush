@@ -84,7 +84,15 @@ func _fixed_process(delta):
 	
 	# Move professor
 	var motion = Vector2(WALK_SPEED.x * acceleration.x, WALK_SPEED.y * acceleration.y) * delta
-	move(motion)
+	move_and_slide(motion)
+	
+func move_and_slide(motion):
+	motion = move(motion)
+	if is_colliding():
+		var n = get_collision_normal()
+		motion = n.slide(motion)
+		velocity = n.slide(velocity)
+		move(motion)
 	
 func _yell(sentence):
 	var textLabelNode = speechBubbleInstance.get_node("Polygon2D/RichTextLabel")

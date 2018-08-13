@@ -6,7 +6,8 @@ var occupiedSeats = {}
 
 enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP, PHONE }
 
-const ACTION_SPAWN_COOLDOWN = 2.0
+const ACTION_SPAWN_COOLDOWN = 3.0
+const ACTION_PAPERPLANE_COOLDOWN = 5.0
 
 # Values which decrease the mood of the professor
 const MOOD_VALUE_ACTION_DRINK_WATER = 7
@@ -19,16 +20,17 @@ const MOOD_VALUE_ACTION_SLEEP = 7
 const MOOD_VALUE_ACTION_PHONE = 7
 
 # If DURATION initialized with <= 0: Disturb action of student will remain until he leaves the room
-const DURATION_ACTION_DRINK_WATER = 30
-const DURATION_ACTION_DRINK_COFFEE = 30
-const DURATION_ACTION_HEADPHONES = 30
-const DURATION_ACTION_TOILET = 30
-const DURATION_ACTION_SMOKE = 30
+const DURATION_ACTION_DRINK_WATER = 40
+const DURATION_ACTION_DRINK_COFFEE = 40
+const DURATION_ACTION_HEADPHONES = 40
+const DURATION_ACTION_TOILET = 40
+const DURATION_ACTION_SMOKE = 40
 const DURATION_ACTION_PAPERPLANE = 6
-const DURATION_ACTION_SLEEP = 30
-const DURATION_ACTION_PHONE = 30
+const DURATION_ACTION_SLEEP = 40
+const DURATION_ACTION_PHONE = 40
 
 var timerDisturbAction = 0.0
+var timerPaperplane = 0.0
 
 class DisturbAction:
 	var actionType
@@ -63,6 +65,23 @@ func spawnDisturbActions(delta):
 				break
 			count += 1
 
+func spawnPaperplanes(delta):
+	timerPaperplane += delta
+	if timerPaperplane >= ACTION_PAPERPLANE_COOLDOWN:
+		timerPaperplane = 0.0
+		#choose random student who is sitting and has no current disturb action
+		var freeStudentChosen = false
+		var count = 0
+		var maxTries = 10
+		while !freeStudentChosen && count < maxTries:
+			var randStudent = randi() % get_child_count()
+			var student = get_children()[randStudent]
+			if student.isSeated() && !student.isDisturbActionActive():
+				freeStudentChosen = true
+				_generateDisturbAction(actionTypes.PAPERPLANE, student)
+				break
+			count += 1
+			
 # spawns a random disturb action on a student
 func _spawnRandomDisturbAction(student):
 	# spawn random disturb action
@@ -114,17 +133,15 @@ func _generateDisturbAction(actionType, student):
 	professor.changeMood(-action.disturbValue)
 	
 func _spawnActionDrinkWater(student):
-	print("WATER")
 	# Add Image / Animations to Student
 	var sceneWaterbottle = load("res://scenes/objects/waterbottle.tscn")
 	var sceneWaterbottleInstance = sceneWaterbottle.instance()
 	sceneWaterbottleInstance.set_name("waterbottle")
-	sceneWaterbottleInstance.set_pos(Vector2(10, -4))
+	sceneWaterbottleInstance.set_pos(Vector2(12, -4))
 		
 	student.get_node("DisturbSprites").add_child(sceneWaterbottleInstance)
 	
 func _spawnActionDrinkCoffee(student):
-	print("COFFEE")
 	# Add Image / Animations to Student
 	var scene = load("res://scenes/objects/coffee.tscn")
 	var sceneInstance = scene.instance()
@@ -138,7 +155,7 @@ func _spawnActionHeadphones(student):
 	var scene = load("res://scenes/objects/headphones.tscn")
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("headphones")
-	sceneInstance.set_pos(Vector2(1, -11))
+	sceneInstance.set_pos(Vector2(0, -11))
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
 	
@@ -157,7 +174,7 @@ func _spawnActionPaperplane(student):
 	var scenePlaneInstance = scenePlane.instance()
 	scenePlaneInstance.set_name("paper_plane_fold")
 	# set position
-	scenePlaneInstance.set_pos(Vector2(student.get_pos().x + 20, student.get_pos().y))
+	scenePlaneInstance.set_pos(Vector2(student.get_pos().x + 10, student.get_pos().y))
 	get_parent().add_child(scenePlaneInstance)
 	
 func _spawnActionPhone(student):

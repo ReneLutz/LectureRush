@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=1]
+[gd_scene load_steps=101 format=1]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/TileSetScene2.tres" type="TileSet" id=2]
@@ -91,6 +91,7 @@
 [ext_resource path="res://textures/Stair_Row.png" type="Texture" id=89]
 [ext_resource path="res://textures/rostrum.png" type="Texture" id=90]
 [ext_resource path="res://scripts/GuiLayer.gd" type="Script" id=91]
+[ext_resource path="res://scenes/objects/ActionSounds.tscn" type="PackedScene" id=92]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -713,6 +714,8 @@ align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="ActionSounds" parent="." instance=ExtResource( 92 )]
 
 [connection signal="timeout" from="LectureTimer" to="." method="_on_LectureTimer_timeout"]
 

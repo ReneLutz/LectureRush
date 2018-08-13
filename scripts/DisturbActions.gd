@@ -145,7 +145,7 @@ func _spawnActionSmoke(student):
 	var scene = load("res://scenes/objects/Cigarette.tscn")
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("cigarette")
-	sceneInstance.set_pos(Vector2(-8, 5))
+	sceneInstance.set_pos(Vector2(-3, 3))
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
 	
@@ -171,3 +171,5 @@ func _spawnActionPhone(student):
 		student.set_animation("WalkingMalePhone")
 	else:
 		student.set_animation("WalkingFemalePhone")
+		
+	student.setPhoneAnimation(true)

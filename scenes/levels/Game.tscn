@@ -33,7 +33,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 48, 48 )
+extents = Vector2( 48, 80.4129 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
@@ -43,12 +43,12 @@ extents = Vector2( 384, 1 )
 [sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
-extents = Vector2( 48, 48 )
+extents = Vector2( 48, 81.3154 )
 
 [sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
-extents = Vector2( 384, 1 )
+extents = Vector2( 33.1009, 87.4391 )
 
 [sub_resource type="RectangleShape2D" id=5]
 
@@ -306,10 +306,11 @@ _update_shape_index = 0
 
 [node name="NorthBorder" type="KinematicBody2D" parent="FrontStageBorder"]
 
-transform/pos = Vector2( 32.9027, 414.003 )
+transform/pos = Vector2( 383.035, 300.806 )
+transform/scale = Vector2( 9.76461, 0.198072 )
 input/pickable = false
 shapes/0/shape = SubResource( 4 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 384, 300 )
+shapes/0/transform = Matrix32( 1, 0, 0, 0.545591, 0, -41.0964 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -317,7 +318,8 @@ collision/margin = 0.08
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrontStageBorder/NorthBorder"]
 
-transform/pos = Vector2( 384, 300 )
+transform/pos = Vector2( 0, -41.0964 )
+transform/scale = Vector2( 1, 0.545591 )
 shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0

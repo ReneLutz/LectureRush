@@ -120,7 +120,6 @@ angular_damp = 1.0
 
 [node name="Decoration" type="Node" parent="LectureRoom"]
 
-editor/display_folded = true
 script/script = ExtResource( 4 )
 
 [node name="Plant" type="Sprite" parent="LectureRoom/Decoration"]
@@ -132,15 +131,13 @@ texture = ExtResource( 5 )
 [node name="Chemistry Rack" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
-transform/pos = Vector2( 510.455, 25.2618 )
-transform/scale = Vector2( 1.34969, 1.19766 )
+transform/pos = Vector2( 529.455, 25.2618 )
 texture = ExtResource( 6 )
 
 [node name="Periodic Table" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 594.363, 25.7784 )
-transform/scale = Vector2( 1.21642, 1.21642 )
 texture = ExtResource( 7 )
 
 [node name="Starry Night" type="Sprite" parent="LectureRoom/Decoration"]
@@ -172,22 +169,19 @@ texture = ExtResource( 10 )
 [node name="Ethanole" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
-transform/pos = Vector2( 445.972, 25.5067 )
-transform/scale = Vector2( 0.764368, 0.764368 )
+transform/pos = Vector2( 477.972, 25.5067 )
 texture = ExtResource( 11 )
 
 [node name="Skeleton" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
-transform/pos = Vector2( 597.449, 31.4493 )
-transform/scale = Vector2( 1.14372, 1.14372 )
+transform/pos = Vector2( 556.449, 31.4493 )
 texture = ExtResource( 12 )
 
 [node name="MM Plot" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
-transform/pos = Vector2( 536.026, 23.8023 )
-transform/scale = Vector2( 0.699153, 0.699153 )
+transform/pos = Vector2( 616.026, 29.8023 )
 texture = ExtResource( 13 )
 
 [node name="Parrot" type="Sprite" parent="LectureRoom/Decoration"]

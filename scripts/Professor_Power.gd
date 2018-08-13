@@ -4,9 +4,12 @@ extends Node2D
 # var a = 2
 # var b = "textvar"
 
-export var power = 20
+signal exploded
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	pass
+
+func explode():
+	emit_signal("exploded")

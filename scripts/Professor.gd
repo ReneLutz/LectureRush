@@ -67,7 +67,7 @@ func _fixed_process(delta):
 			get_node("HeadOnly/HeadExplosion").start()
 		if deadTimer > 5 and not get_tree().is_paused():
 			get_node("rocketExplode").stop()
-			get_tree().set_pause(true)
+			get_parent().explode()
 		return
 	
 	var acceleration = Vector2((Input.is_key_pressed(KEY_D) - Input.is_key_pressed(KEY_A)), 

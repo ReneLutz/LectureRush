@@ -25,7 +25,7 @@ const DURATION_ACTION_HEADPHONES = 15
 const DURATION_ACTION_TOILET = 15
 const DURATION_ACTION_SMOKE = 15
 const DURATION_ACTION_PAPERPLANE = 4
-const DURATION_ACTION_SLEEP = 20
+const DURATION_ACTION_SLEEP = 15
 const DURATION_ACTION_PHONE = 0
 
 var timerDisturbAction = 0.0
@@ -145,7 +145,7 @@ func _spawnActionSmoke(student):
 	var scene = load("res://scenes/objects/Cigarette.tscn")
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("cigarette")
-	sceneInstance.set_pos(Vector2(-8, 5))
+	sceneInstance.set_pos(Vector2(-3, 3))
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
 	
@@ -158,16 +158,20 @@ func _spawnActionPaperplane(student):
 	scenePlaneInstance.set_pos(Vector2(student.get_pos().x + 20, student.get_pos().y))
 	get_parent().add_child(scenePlaneInstance)
 	
-func _spawnActionSleep(student):
-	# Add Image / Animations to Student
-	
-	#TODO
-	
-	pass
-	
 func _spawnActionPhone(student):
 	# Add Image / Animations to Student
 	if student.sex == "male":
 		student.set_animation("WalkingMalePhone")
 	else:
 		student.set_animation("WalkingFemalePhone")
+		
+	student.setPhoneAnimation(true)
+	
+func _spawnActionSleep(student):
+	# Add Image / Animations to Student
+	if student.sex == "male":
+		student.set_animation("SleepingMale")
+	else:
+		student.set_animation("SleepingFemale")
+		
+	student.setSleepAnimation(true)

@@ -9,6 +9,11 @@ var students
 var score = 0
 var uiScorelabel
 
+var colorAnimationTimer = 0.0
+var colorAnimationMaxTime = 0.6
+var colorAnimationActive = false
+var colorGreen = false
+
 func _ready():
 	set_process(true)
 	get_node("Professor").get_node("profBody").setPanicUI(get_node("Panic"))
@@ -30,9 +35,34 @@ func _process(delta):
 	var remainingTime = lectureTimer.get_time_left()
 	var minutes = int(remainingTime) / 60
 	var seconds = int(remainingTime) % 60
+	print("minutes: %s" % minutes)
 	
-	uiTimeLabel.set_text(str(minutes) + ":" + str(seconds))
+	uiTimeLabel.set_text("%d:%02d" % [minutes, seconds])
 	
+	#change color
+	if colorAnimationActive:
+		colorAnimationTimer += delta
+		if colorAnimationTimer >= colorAnimationMaxTime:
+			colorAnimationTimer = 0.0
+			setColorFeedback(false)
+			
 func _on_LectureTimer_timeout():
 	get_tree().set_pause(true)
 	pass # replace with function body
+	
+func setColorFeedbackGreen():
+	print("SET COLOR")
+	uiScorelabel.add_color_override("font_color", Color(0,1,0,1))
+	setColorFeedback(true)
+		
+func setColorFeedbackRed():
+	uiScorelabel.add_color_override("font_color", Color(1,0,0,1))
+	setColorFeedback(true)
+	
+func setColorFeedback(active):
+	colorAnimationActive = active
+	if !active:
+		#set color to white
+		uiScorelabel.add_color_override("font_color", Color(1,1,1,1))
+		
+	

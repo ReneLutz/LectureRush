@@ -24,7 +24,7 @@ func setGameover(gameover):
 	
 func _ready():
 	set_process(true)
-	get_node("Professor").get_node("profBody").setPanicUI(get_node("Panic"))
+	get_node("Professor").get_node("profBody").setPanicUI(get_node("UI/PanicBar"))
 	uiTimeLabel = get_node("UI/Time")
 	lectureTimer = get_node("LectureTimer")
 	professor = get_node("Professor/profBody")

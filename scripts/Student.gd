@@ -396,7 +396,9 @@ func _fixed_process(delta):
 		
 	set_pos(get_pos() + walkDir * walkSpeed * delta)
 	
-	
+	if leaveRoom == true:
+		_leavingRoom(delta, currentTile)
+		
 	var p = get_pos()
 	var ss = _room.get_used_rect().size * _room.get_cell_size()
 	var usedCellsRect = _room.get_used_rect()
@@ -478,8 +480,6 @@ func _fixed_process(delta):
 				sleepFrame = 0
 			set_frame(sleepFrame)
 			
-	if leaveRoom == true:
-		_leavingRoom(delta, currentTile)
 
 # cell index of feet
 func _getCurrentTilePos():

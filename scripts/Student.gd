@@ -369,6 +369,7 @@ func _leavingRoom(delta, currentTile):
 	
 func _deleteSelf():
 	_resetDisturbAction(true)
+	get_parent().playDoorSound()
 	self.queue_free()
 
 func _fixed_process(delta):

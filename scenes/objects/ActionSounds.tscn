@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://sounds/wav/cigarette.wav" type="Sample" id=1]
 [ext_resource path="res://sounds/wav/coffee_slurp.wav" type="Sample" id=2]
-[ext_resource path="res://sounds/wav/glass_pouring.wav" type="Sample" id=3]
-[ext_resource path="res://sounds/wav/lofi1.wav" type="Sample" id=4]
-[ext_resource path="res://sounds/wav/lofi2.wav" type="Sample" id=5]
-[ext_resource path="res://sounds/wav/lofi3.wav" type="Sample" id=6]
-[ext_resource path="res://sounds/wav/phone1.wav" type="Sample" id=7]
-[ext_resource path="res://sounds/wav/phone2.wav" type="Sample" id=8]
+[ext_resource path="res://sounds/wav/door.wav" type="Sample" id=3]
+[ext_resource path="res://sounds/wav/glass_pouring.wav" type="Sample" id=4]
+[ext_resource path="res://sounds/wav/lofi1.wav" type="Sample" id=5]
+[ext_resource path="res://sounds/wav/lofi2.wav" type="Sample" id=6]
+[ext_resource path="res://sounds/wav/lofi3.wav" type="Sample" id=7]
+[ext_resource path="res://sounds/wav/phone1.wav" type="Sample" id=8]
+[ext_resource path="res://sounds/wav/phone2.wav" type="Sample" id=9]
 
 [sub_resource type="SampleLibrary" id=1]
 
@@ -23,41 +24,47 @@ samples/coffee_slurp = {
 "priority": 0,
 "sample": ExtResource( 2 )
 }
-samples/glass_pouring = {
+samples/door = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 3 )
 }
-samples/lofi1 = {
-"db": -5.0,
+samples/glass_pouring = {
+"db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 4 )
 }
-samples/lofi2 = {
+samples/lofi1 = {
 "db": -5.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 5 )
 }
-samples/lofi3 = {
+samples/lofi2 = {
 "db": -5.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 6 )
 }
+samples/lofi3 = {
+"db": -5.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 7 )
+}
 samples/phone1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 7 )
+"sample": ExtResource( 8 )
 }
 samples/phone2 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 8 )
+"sample": ExtResource( 9 )
 }
 
 [node name="ActionSounds" type="SamplePlayer"]

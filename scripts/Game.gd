@@ -17,12 +17,15 @@ var colorGreen = false
 signal gameRestarted
 signal gameEnded
 var gameover = false
+var timeout = false
 
 func isGameover():
 	return gameover
 	
 func setGameover(gameover):
 	if gameover:
+		if timeout:
+			get_node("GuiLayer/Gui/Label").set_text("Time's up")
 		get_node("GuiLayer/Gui/Score").set_text(str(ceil(score)))
 		get_node("GuiLayer/Gui").show()
 	self.gameover = gameover
@@ -71,7 +74,9 @@ func _process(delta):
 			setColorFeedback(false)
 			
 func _on_LectureTimer_timeout():
-	get_tree().set_pause(true)
+	if !gameover:
+		timeout = true
+		setGameover(true)
 	pass # replace with function body
 	
 func setColorFeedbackGreen():

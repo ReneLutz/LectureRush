@@ -9,7 +9,10 @@ enum State { SITTING = 0, WALK_L, WALK_U, WALK_R, WALK_D }
 
 enum Walkable { NONE = 0, HRZ, VRT, BOTH }
 
-const WALKABLE_TILES = { "Floor1": Walkable.BOTH, "Floor2": Walkable.BOTH, "Floor3": Walkable.BOTH, "Chair": Walkable.HRZ, "Stair": Walkable.BOTH }
+const WALKABLE_TILES = { "Floor1": Walkable.NONE, "Floor2": Walkable.NONE, "Floor3": Walkable.NONE, "Chair": Walkable.HRZ, "Stair": Walkable.BOTH }
+
+const ENTER_R_X = 740
+const ENTER_L_X = 40
 
 var gameScript
 	
@@ -17,6 +20,8 @@ var state = State.SITTING setget setState, getState
 
 var _room
 var material
+
+var entering = true
 
 var leaveRoom
 var leavingState = 0
@@ -261,10 +266,10 @@ func _ready():
 	var currentTile = _room.getTileName(currentCellIdx)
 	var screenSize = get_viewport().get_rect().size
 	
-	if get_pos().y <= screenSize.y/2:
-		setState(State.WALK_U)
+	if get_pos().x <= screenSize.x/2:
+		setState(State.WALK_R)
 	else:
-		setState(State.WALK_D)
+		setState(State.WALK_L)
 
 func isSeated():
 	return state == State.SITTING
@@ -391,11 +396,21 @@ func _fixed_process(delta):
 		
 	set_pos(get_pos() + walkDir * walkSpeed * delta)
 	
+	
 	var p = get_pos()
 	var ss = _room.get_used_rect().size * _room.get_cell_size()
 	var usedCellsRect = _room.get_used_rect()
 	
-	if p.x <= 0:
+	if entering:
+		if state == State.WALK_R && p.x >= ENTER_L_X || state == State.WALK_L && p.x <= ENTER_R_X:
+			entering = false
+			if p.y < get_viewport().get_rect().size.y / 2:
+				setState(State.WALK_U)
+			else:
+				setState(State.WALK_D)
+		return
+		
+	elif p.x <= 0:
 		setState(State.WALK_R)
 		moveToCell(Vector2(1, currentCellIdx.y))
 		

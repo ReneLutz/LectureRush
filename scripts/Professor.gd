@@ -67,6 +67,7 @@ func _fixed_process(delta):
 			get_node("HeadOnly/HeadExplosion").start()
 		if deadTimer > 5 and not get_tree().is_paused():
 			get_node("rocketExplode").stop()
+			get_node("HeadOnly/HeadExplosion").stop()
 			get_parent().explode()
 		return
 	
@@ -137,7 +138,7 @@ func yankOutStudent():
 	
 func setMood(level):
 	mood = level
-	if mood == 0:
+	if mood <= 0:
 		dead = true
 		get_node("AnimatedSprite").hide()
 		get_node("BodyOnly").show()

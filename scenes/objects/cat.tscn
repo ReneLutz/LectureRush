@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://scripts/Cat.gd" type="Script" id=1]
 [ext_resource path="res://textures/cat/Cat_animationt1.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://textures/cat/Cat_animationt6.png" type="Texture" id=7]
 [ext_resource path="res://textures/cat/Cat_animationt7.png" type="Texture" id=8]
 [ext_resource path="res://textures/cat/Cat_animationt8.png" type="Texture" id=9]
+[ext_resource path="res://sounds/wav/cat_meow.wav" type="Sample" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -23,6 +24,15 @@ animations = [ {
 "name": "idle",
 "speed": 2.0
 } ]
+
+[sub_resource type="SampleLibrary" id=3]
+
+samples/cat_meow = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 10 )
+}
 
 [node name="Cat" type="Node2D"]
 
@@ -54,7 +64,24 @@ _update_shape_index = 0
 
 frames = SubResource( 2 )
 animation = "idle"
-frame = 4
+frame = 1
 playing = true
+
+[node name="SamplePlayer" type="SamplePlayer" parent="Clickable"]
+
+config/polyphony = 1
+config/samples = SubResource( 3 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
 
 

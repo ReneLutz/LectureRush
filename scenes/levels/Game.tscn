@@ -54,7 +54,7 @@ extents = Vector2( 33.1009, 87.4391 )
 [sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
-extents = Vector2( 31.8893, 28.8596 )
+extents = Vector2( 31.8893, 29.1104 )
 
 [sub_resource type="RectangleShape2D" id=6]
 
@@ -337,7 +337,7 @@ transform/scale = Vector2( 9.03984, 4.5008 )
 z/z = 1000
 input/pickable = true
 shapes/0/shape = SubResource( 5 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -2.71456 )
+shapes/0/transform = Matrix32( 0.970219, 0, 0, 1.05866, 0.264472, -4.94075 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -347,8 +347,8 @@ script/script = ExtResource( 21 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeatArea"]
 
-visibility/visible = false
-transform/pos = Vector2( 0, -2.71456 )
+transform/pos = Vector2( 0.264472, -4.94075 )
+transform/scale = Vector2( 0.970219, 1.05866 )
 shape = SubResource( 5 )
 trigger = false
 _update_shape_index = 0

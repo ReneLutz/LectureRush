@@ -46,7 +46,11 @@ func coordToCellIdx(coord):
 	
 # idx: cell index
 func getTileName(idx):
-	return get_tileset().tile_get_name(self.get_cell(idx.x, idx.y))
+	var ur = get_used_rect()
+	if idx.x >= ur.pos.x && idx.x < ur.end.x && idx.y >= ur.pos.y && idx.y < ur.end.y:
+		return get_tileset().tile_get_name(self.get_cell(idx.x, idx.y))
+	else:
+		return "None"
 
 ########## SPAWNING STUDENTS ##########
 

@@ -150,7 +150,6 @@ script/script = ExtResource( 1 )
 "lectureRoom",
 ]]
 
-editor/display_folded = true
 mode = 0
 tile_set = ExtResource( 2 )
 cell/size = Vector2( 37, 32 )
@@ -175,11 +174,9 @@ initialSpawnProbability = 0.8
 
 [node name="SpawnAreas" type="Node" parent="LectureRoom"]
 
-editor/display_folded = true
-
 [node name="SpawnAreaLeft" type="Area2D" parent="LectureRoom/SpawnAreas"]
 
-transform/pos = Vector2( 32.7351, 400 )
+transform/pos = Vector2( -25, 300 )
 transform/scale = Vector2( 0.5, 0.5 )
 input/pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -189,7 +186,7 @@ angular_damp = 1.0
 
 [node name="SpawnAreaRight" type="Area2D" parent="LectureRoom/SpawnAreas"]
 
-transform/pos = Vector2( 736, 400 )
+transform/pos = Vector2( 800, 300 )
 transform/scale = Vector2( 0.5, 0.5 )
 input/pickable = true
 gravity_vec = Vector2( 0, 1 )

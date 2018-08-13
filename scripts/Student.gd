@@ -478,6 +478,12 @@ func _resetDisturbAction(resetMood):
 		# special for disturb actions with animations:
 		phoneAnimActive = false
 		sleepAnimActive = false
+		# reset frame
+		set_animation("front")
+		if sex == "male":
+			set_frame(0)
+		else:
+			set_frame(1)
 
 # checks if student is currently disturbing
 func isDisturbActionActive():

@@ -138,6 +138,9 @@ func yankOutStudent():
 	_yell(SENTENCES_GET_OUT[i])
 	
 func setMood(level):
+	var gameScript = get_node("../../../Game")
+	if gameScript.isGameover():
+		return
 	mood = level
 	if mood <= 0:
 		dead = true
@@ -146,7 +149,7 @@ func setMood(level):
 		get_node("HeadOnly").show()
 		get_node("HeadOnly").set_fixed_process(true)
 		# stop counting score
-		var gameScript = get_node("../../../Game")
+		
 		gameScript.setGameover(true)
 	if panicUI != null:
 		panicUI.panic = (maxMood-mood)/maxMood

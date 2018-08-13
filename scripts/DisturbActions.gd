@@ -153,9 +153,9 @@ func _spawnActionSmoke(student):
 	
 func _spawnActionPaperplane(student):
 	# spawn paperplane at students pos
-	var scenePlane = load("res://scenes/objects/paper_plane.tscn")
+	var scenePlane = load("res://scenes/objects/paper_plane_fold.tscn")
 	var scenePlaneInstance = scenePlane.instance()
-	scenePlaneInstance.set_name("paper_plane")
+	scenePlaneInstance.set_name("paper_plane_fold")
 	# set position
 	scenePlaneInstance.set_pos(Vector2(student.get_pos().x + 20, student.get_pos().y))
 	get_parent().add_child(scenePlaneInstance)

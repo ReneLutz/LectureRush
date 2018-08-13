@@ -22,7 +22,6 @@ height = 16.7721
 
 z/z = 51
 script/script = ExtResource( 1 )
-power = 20
 
 [node name="profBody" type="KinematicBody2D" parent="."]
 

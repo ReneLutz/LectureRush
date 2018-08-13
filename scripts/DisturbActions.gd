@@ -122,6 +122,7 @@ func _spawnActionDrinkWater(student):
 	sceneWaterbottleInstance.set_pos(Vector2(10, -4))
 		
 	student.get_node("DisturbSprites").add_child(sceneWaterbottleInstance)
+	get_node("../ActionSounds").play("glass_pouring")
 	
 func _spawnActionDrinkCoffee(student):
 	print("COFFEE")

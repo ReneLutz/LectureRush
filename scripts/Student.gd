@@ -411,6 +411,24 @@ func _fixed_process(delta):
 	if leaveRoom == true:
 		_leavingRoom(delta, currentTile)
 		
+	if phoneAnimActive:
+		phoneAnimTimer += delta
+		if phoneAnimTimer >= phoneAnimSpeed:
+			phoneAnimTimer = 0.0
+			phoneFrame += 1
+			if phoneFrame > 8:
+				phoneFrame = 0
+			set_frame(phoneFrame)
+			
+	elif sleepAnimActive:
+		sleepAnimTimer += delta
+		if sleepAnimTimer >= sleepAnimSpeed:
+			sleepAnimTimer = 0.0
+			sleepFrame += 1
+			if sleepFrame > 8:
+				sleepFrame = 0
+			set_frame(sleepFrame)
+			
 	var p = get_pos()
 	var ss = _room.get_used_rect().size * _room.get_cell_size()
 	var usedCellsRect = _room.get_used_rect()
@@ -474,24 +492,7 @@ func _fixed_process(delta):
 			lastTrampledStudent = trampled
 			
 	_updateActiveDisturbAction(delta)
-	
-	if phoneAnimActive:
-		phoneAnimTimer += delta
-		if phoneAnimTimer >= phoneAnimSpeed:
-			phoneAnimTimer = 0.0
-			phoneFrame += 1
-			if phoneFrame > 8:
-				phoneFrame = 0
-			set_frame(phoneFrame)
-			
-	elif sleepAnimActive:
-		sleepAnimTimer += delta
-		if sleepAnimTimer >= sleepAnimSpeed:
-			sleepAnimTimer = 0.0
-			sleepFrame += 1
-			if sleepFrame > 8:
-				sleepFrame = 0
-			set_frame(sleepFrame)
+
 			
 
 # cell index of feet

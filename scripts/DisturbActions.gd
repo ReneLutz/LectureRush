@@ -6,8 +6,8 @@ var occupiedSeats = {}
 
 enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP, PHONE, DRINK_WINE }
 
-const ACTION_SPAWN_COOLDOWN = 4.0
-const ACTION_PAPERPLANE_COOLDOWN = 5.0
+const ACTION_SPAWN_COOLDOWN = 4.5
+const ACTION_PAPERPLANE_COOLDOWN = 6.0
 
 # Values which decrease the mood of the professor
 const MOOD_VALUE_ACTION_DRINK_WATER = 4

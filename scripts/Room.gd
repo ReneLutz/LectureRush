@@ -3,7 +3,7 @@ extends TileMap
 const CHAIR_TILE_NAME = "Chair"
 const INITIAL_STUDENTS_COUNT = 20
 
-export var initialSpawnProbability = 0.8
+export var initialSpawnProbability = 0.9
 
 var timerStudent = 20.0
 var spawnTimeStudent = 3.0

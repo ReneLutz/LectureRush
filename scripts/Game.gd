@@ -14,13 +14,24 @@ var colorAnimationMaxTime = 0.6
 var colorAnimationActive = false
 var colorGreen = false
 
+signal gameRestarted
+signal gameEnded
 var gameover = false
 
 func isGameover():
 	return gameover
 	
 func setGameover(gameover):
+	if gameover:
+		get_node("GuiLayer/Gui/Score").set_text(str(ceil(score)))
+		get_node("GuiLayer/Gui").show()
 	self.gameover = gameover
+	
+func endGame():
+	emit_signal("gameEnded")
+	
+func restartGame():
+	emit_signal("gameRestarted")
 	
 func _ready():
 	set_process(true)

@@ -6,27 +6,27 @@ var occupiedSeats = {}
 
 enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP, PHONE }
 
-const ACTION_SPAWN_COOLDOWN = 1.5
+const ACTION_SPAWN_COOLDOWN = 2.0
 
 # Values which decrease the mood of the professor
-const MOOD_VALUE_ACTION_DRINK_WATER = 5
-const MOOD_VALUE_ACTION_DRINK_COFFEE = 5
-const MOOD_VALUE_ACTION_HEADPHONES = 5
-const MOOD_VALUE_ACTION_TOILET = 5
-const MOOD_VALUE_ACTION_SMOKE = 5
-const MOOD_VALUE_ACTION_PAPERPLANE = 5
-const MOOD_VALUE_ACTION_SLEEP = 5
-const MOOD_VALUE_ACTION_PHONE = 5
+const MOOD_VALUE_ACTION_DRINK_WATER = 7
+const MOOD_VALUE_ACTION_DRINK_COFFEE = 7
+const MOOD_VALUE_ACTION_HEADPHONES = 7
+const MOOD_VALUE_ACTION_TOILET = 7
+const MOOD_VALUE_ACTION_SMOKE = 7
+const MOOD_VALUE_ACTION_PAPERPLANE = 7
+const MOOD_VALUE_ACTION_SLEEP = 7
+const MOOD_VALUE_ACTION_PHONE = 7
 
 # If DURATION initialized with <= 0: Disturb action of student will remain until he leaves the room
-const DURATION_ACTION_DRINK_WATER = 15
-const DURATION_ACTION_DRINK_COFFEE = 15
-const DURATION_ACTION_HEADPHONES = 15
-const DURATION_ACTION_TOILET = 15
-const DURATION_ACTION_SMOKE = 15
-const DURATION_ACTION_PAPERPLANE = 4
-const DURATION_ACTION_SLEEP = 15
-const DURATION_ACTION_PHONE = 0
+const DURATION_ACTION_DRINK_WATER = 30
+const DURATION_ACTION_DRINK_COFFEE = 30
+const DURATION_ACTION_HEADPHONES = 30
+const DURATION_ACTION_TOILET = 30
+const DURATION_ACTION_SMOKE = 30
+const DURATION_ACTION_PAPERPLANE = 6
+const DURATION_ACTION_SLEEP = 30
+const DURATION_ACTION_PHONE = 30
 
 var timerDisturbAction = 0.0
 
@@ -66,7 +66,7 @@ func spawnDisturbActions(delta):
 # spawns a random disturb action on a student
 func _spawnRandomDisturbAction(student):
 	# spawn random disturb action
-	var randAction = randi() % actionTypes.size() + 2 # +2 to get more paperplanes
+	var randAction = randi() % actionTypes.size()
 	_generateDisturbAction(randAction, student)
 		
 	
@@ -114,15 +114,17 @@ func _generateDisturbAction(actionType, student):
 	professor.changeMood(-action.disturbValue)
 	
 func _spawnActionDrinkWater(student):
+	print("WATER")
 	# Add Image / Animations to Student
 	var sceneWaterbottle = load("res://scenes/objects/waterbottle.tscn")
 	var sceneWaterbottleInstance = sceneWaterbottle.instance()
 	sceneWaterbottleInstance.set_name("waterbottle")
-	sceneWaterbottleInstance.set_pos(Vector2(10, -7))
+	sceneWaterbottleInstance.set_pos(Vector2(10, -4))
 		
 	student.get_node("DisturbSprites").add_child(sceneWaterbottleInstance)
 	
 func _spawnActionDrinkCoffee(student):
+	print("COFFEE")
 	# Add Image / Animations to Student
 	var scene = load("res://scenes/objects/coffee.tscn")
 	var sceneInstance = scene.instance()
@@ -151,9 +153,9 @@ func _spawnActionSmoke(student):
 	
 func _spawnActionPaperplane(student):
 	# spawn paperplane at students pos
-	var scenePlane = load("res://scenes/objects/paper_plane.tscn")
+	var scenePlane = load("res://scenes/objects/paper_plane_fold.tscn")
 	var scenePlaneInstance = scenePlane.instance()
-	scenePlaneInstance.set_name("paper_plane")
+	scenePlaneInstance.set_name("paper_plane_fold")
 	# set position
 	scenePlaneInstance.set_pos(Vector2(student.get_pos().x + 20, student.get_pos().y))
 	get_parent().add_child(scenePlaneInstance)

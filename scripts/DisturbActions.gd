@@ -10,15 +10,15 @@ const ACTION_SPAWN_COOLDOWN = 3.0
 const ACTION_PAPERPLANE_COOLDOWN = 5.0
 
 # Values which decrease the mood of the professor
-const MOOD_VALUE_ACTION_DRINK_WATER = 7
-const MOOD_VALUE_ACTION_DRINK_COFFEE = 7
-const MOOD_VALUE_ACTION_HEADPHONES = 7
-const MOOD_VALUE_ACTION_TOILET = 7
-const MOOD_VALUE_ACTION_SMOKE = 7
-const MOOD_VALUE_ACTION_PAPERPLANE = 7
-const MOOD_VALUE_ACTION_SLEEP = 7
-const MOOD_VALUE_ACTION_PHONE = 7
-const MOOD_VALUE_ACTION_DRINK_WINE = 7
+const MOOD_VALUE_ACTION_DRINK_WATER = 4
+const MOOD_VALUE_ACTION_DRINK_COFFEE = 4
+const MOOD_VALUE_ACTION_HEADPHONES = 4
+const MOOD_VALUE_ACTION_TOILET = 4
+const MOOD_VALUE_ACTION_SMOKE = 4
+const MOOD_VALUE_ACTION_PAPERPLANE = 0
+const MOOD_VALUE_ACTION_SLEEP = 4
+const MOOD_VALUE_ACTION_PHONE = 4
+const MOOD_VALUE_ACTION_DRINK_WINE = 4
 
 # If DURATION initialized with <= 0: Disturb action of student will remain until he leaves the room
 const DURATION_ACTION_DRINK_WATER = 40
@@ -135,8 +135,8 @@ func _generateDisturbAction(actionType, student):
 	# give action to student
 	student.setActiveDisturbAction(action)
 	# change mood of professor
-	var professor = get_node("../Professor/profBody")
-	professor.changeMood(-action.disturbValue)
+	#var professor = get_node("../Professor/profBody")
+	#professor.changeMood(-action.disturbValue)
 	
 func _spawnActionDrinkWater(student):
 	# Add Image / Animations to Student

@@ -45,7 +45,7 @@ func _ready():
 	speechBubbleInstance = speechBubbleScene.instance()
 	add_child(speechBubbleInstance)
 	
-	speechBubbleInstance.set_pos(Vector2(96, -55))
+	speechBubbleInstance.set_pos(Vector2(110, -30)) # 96, -55
 	
 	_disposeSpeechBubble()
 	

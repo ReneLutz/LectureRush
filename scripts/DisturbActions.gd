@@ -6,7 +6,7 @@ var occupiedSeats = {}
 
 enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP, PHONE }
 
-const ACTION_SPAWN_COOLDOWN = 2.0
+const ACTION_SPAWN_COOLDOWN = 1.5
 
 # Values which decrease the mood of the professor
 const MOOD_VALUE_ACTION_DRINK_WATER = 5
@@ -66,7 +66,7 @@ func spawnDisturbActions(delta):
 # spawns a random disturb action on a student
 func _spawnRandomDisturbAction(student):
 	# spawn random disturb action
-	var randAction = randi() % actionTypes.size() + 3 # +3 to get more paperplanes
+	var randAction = randi() % actionTypes.size() + 2 # +2 to get more paperplanes
 	_generateDisturbAction(randAction, student)
 		
 	

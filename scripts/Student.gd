@@ -373,6 +373,8 @@ func _deleteSelf():
 	self.queue_free()
 
 func _fixed_process(delta):
+	_updateActiveDisturbAction(delta)
+	
 	if get_parent().studentClicked:
 		get_parent().studentClicked = false
 	
@@ -491,7 +493,24 @@ func _fixed_process(delta):
 				
 			lastTrampledStudent = trampled
 			
-	_updateActiveDisturbAction(delta)
+
+	if phoneAnimActive:
+		phoneAnimTimer += delta
+		if phoneAnimTimer >= phoneAnimSpeed:
+			phoneAnimTimer = 0.0
+			phoneFrame += 1
+			if phoneFrame > 8:
+				phoneFrame = 0
+			set_frame(phoneFrame)
+			
+	elif sleepAnimActive:
+		sleepAnimTimer += delta
+		if sleepAnimTimer >= sleepAnimSpeed:
+			sleepAnimTimer = 0.0
+			sleepFrame += 1
+			if sleepFrame > 8:
+				sleepFrame = 0
+			set_frame(sleepFrame)
 
 			
 
@@ -545,6 +564,9 @@ func _updateActiveDisturbAction(delta):
 			if disturbTimer >= activeDisturbAction.disturbTime:
 				disturbTimer = 0.0
 				_resetDisturbAction(true)
+			else:
+				var professor = get_node("../../Professor/profBody")
+				professor.changeMood(-(activeDisturbAction.disturbValue*0.2*delta))
 
 func _resetDisturbAction(resetMood):
 	if activeDisturbAction != null:

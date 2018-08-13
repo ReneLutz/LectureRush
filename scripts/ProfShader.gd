@@ -127,6 +127,9 @@ func _ready():
 	get_material().set_shader_param("trouwsersColor",panties)
 	get_material().set_shader_param("shoeColor",shoes)
 	get_material().set_shader_param("hairColor",hairC)
+	
+	get_node("../HeadOnly/Sprite").setColors(shirt, panties, shoes, hairC)
+	get_node("../BodyOnly").setColors(shirt, panties, shoes, hairC)
 
 func _process(delta):
 	var frame = int((OS.get_ticks_msec() - animStart) / 1000 / animSpeed) % frameCount

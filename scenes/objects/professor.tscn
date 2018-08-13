@@ -1,15 +1,16 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://scripts/Professor_Power.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Professor.gd" type="Script" id=2]
 [ext_resource path="res://textures/Professor_RGB_headless.png" type="Texture" id=3]
-[ext_resource path="res://scripts/HeadPart.gd" type="Script" id=4]
-[ext_resource path="res://textures/Professor_RGB_head.png" type="Texture" id=5]
-[ext_resource path="res://scripts/HeadExplosion.tscn" type="PackedScene" id=6]
-[ext_resource path="res://animations/Professor.tres" type="SpriteFrames" id=7]
-[ext_resource path="res://scripts/ProfShader.gd" type="Script" id=8]
-[ext_resource path="res://sounds/raw/rocketlaunch.ogg" type="AudioStream" id=9]
-[ext_resource path="res://sounds/raw/rocketexplode.ogg" type="AudioStream" id=10]
+[ext_resource path="res://scripts/ShadedSprite.gd" type="Script" id=4]
+[ext_resource path="res://scripts/HeadPart.gd" type="Script" id=5]
+[ext_resource path="res://textures/Professor_RGB_head.png" type="Texture" id=6]
+[ext_resource path="res://scripts/HeadExplosion.tscn" type="PackedScene" id=7]
+[ext_resource path="res://animations/Professor.tres" type="SpriteFrames" id=8]
+[ext_resource path="res://scripts/ProfShader.gd" type="Script" id=9]
+[ext_resource path="res://sounds/raw/rocketlaunch.ogg" type="AudioStream" id=10]
+[ext_resource path="res://sounds/raw/rocketexplode.ogg" type="AudioStream" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -39,6 +40,7 @@ power = 150
 
 visibility/visible = false
 texture = ExtResource( 3 )
+script/script = ExtResource( 4 )
 
 [node name="Particles2D" type="Particles2D" parent="profBody/BodyOnly"]
 
@@ -73,16 +75,17 @@ input/pickable = false
 collision/layers = 1
 collision/mask = 1
 collision/margin = 0.08
-script/script = ExtResource( 4 )
+script/script = ExtResource( 5 )
 degrees = 180.0
 mass = 1.0
 
 [node name="Sprite" type="Sprite" parent="profBody/HeadOnly"]
 
 transform/pos = Vector2( 0.214638, -7.72699 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
+script/script = ExtResource( 4 )
 
-[node name="HeadExplosion" parent="profBody/HeadOnly" instance=ExtResource( 6 )]
+[node name="HeadExplosion" parent="profBody/HeadOnly" instance=ExtResource( 7 )]
 
 visibility/visible = false
 
@@ -90,9 +93,9 @@ visibility/visible = false
 
 z/z = 51
 z/relative = false
-frames = ExtResource( 7 )
+frames = ExtResource( 8 )
 animation = "Walking"
-script/script = ExtResource( 8 )
+script/script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="profBody"]
 
@@ -103,7 +106,7 @@ _update_shape_index = 0
 
 [node name="rocketLaunch" type="StreamPlayer" parent="profBody"]
 
-stream/stream = ExtResource( 9 )
+stream/stream = ExtResource( 10 )
 stream/play = false
 stream/loop = false
 stream/volume_db = 11.0
@@ -114,7 +117,7 @@ stream/buffering_ms = 500
 
 [node name="rocketExplode" type="StreamPlayer" parent="profBody"]
 
-stream/stream = ExtResource( 10 )
+stream/stream = ExtResource( 11 )
 stream/play = false
 stream/loop = false
 stream/volume_db = 11.0

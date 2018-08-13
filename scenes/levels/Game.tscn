@@ -20,15 +20,15 @@
 [ext_resource path="res://scripts/DisturbActions.gd" type="Script" id=18]
 [ext_resource path="res://scenes/objects/uiBar.tscn" type="PackedScene" id=19]
 [ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=20]
-[ext_resource path="res://scripts/SeatArea.gd" type="Script" id=21]
-[ext_resource path="res://scripts/Sponge.gd" type="Script" id=22]
-[ext_resource path="res://textures/sponge/sponge1.png" type="Texture" id=23]
-[ext_resource path="res://textures/bottomseets.png" type="Texture" id=24]
-[ext_resource path="res://textures/inbetween.png" type="Texture" id=25]
-[ext_resource path="res://textures/seatsback2.png" type="Texture" id=26]
-[ext_resource path="res://textures/Stair_Row.png" type="Texture" id=27]
-[ext_resource path="res://textures/ragemeter.png" type="Texture" id=28]
-[ext_resource path="res://scripts/Panic.gd" type="Script" id=29]
+[ext_resource path="res://textures/ragemeter.png" type="Texture" id=21]
+[ext_resource path="res://scripts/Panic.gd" type="Script" id=22]
+[ext_resource path="res://scripts/SeatArea.gd" type="Script" id=23]
+[ext_resource path="res://scripts/Sponge.gd" type="Script" id=24]
+[ext_resource path="res://textures/sponge/sponge1.png" type="Texture" id=25]
+[ext_resource path="res://textures/bottomseets.png" type="Texture" id=26]
+[ext_resource path="res://textures/inbetween.png" type="Texture" id=27]
+[ext_resource path="res://textures/seatsback2.png" type="Texture" id=28]
+[ext_resource path="res://textures/Stair_Row.png" type="Texture" id=29]
 [ext_resource path="res://textures/rostrum.png" type="Texture" id=30]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -54,7 +54,7 @@ extents = Vector2( 33.1009, 87.4391 )
 [sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
-extents = Vector2( 31.8893, 28.8596 )
+extents = Vector2( 31.8893, 29.1104 )
 
 [sub_resource type="RectangleShape2D" id=6]
 
@@ -121,6 +121,7 @@ angular_damp = 1.0
 
 [node name="Decoration" type="Node" parent="LectureRoom"]
 
+editor/display_folded = true
 script/script = ExtResource( 4 )
 
 [node name="Plant" type="Sprite" parent="LectureRoom/Decoration"]
@@ -217,11 +218,15 @@ z/relative = false
 
 script/script = ExtResource( 18 )
 
-[node name="UI" type="Node" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+
+layer = 2
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
 
 [node name="Bar" parent="UI" instance=ExtResource( 19 )]
 
-visibility/opacity = 0.6
 transform/pos = Vector2( 383.656, 410.962 )
 transform/scale = Vector2( 24.1528, 1.3183 )
 
@@ -257,7 +262,28 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="Panic" type="Sprite" parent="UI"]
+
+transform/pos = Vector2( 356.676, 390.755 )
+texture = ExtResource( 21 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 64, 41 )
+script/script = ExtResource( 22 )
+
+[node name="PanicPointer" type="Sprite" parent="UI/Panic"]
+
+transform/pos = Vector2( 32, 34 )
+transform/rot = 180.0
+texture = ExtResource( 21 )
+offset = Vector2( 8, 0 )
+modulate = Color( 1, 0.726563, 0, 1 )
+region = true
+region_rect = Rect2( 0, 56, 36, 8 )
+
 [node name="FrontStageBorder" type="Node" parent="."]
+
+editor/display_folded = true
 
 [node name="EastBorder" type="KinematicBody2D" parent="FrontStageBorder"]
 
@@ -332,29 +358,31 @@ _update_shape_index = 0
 
 [node name="SeatArea" type="Area2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 385.151, 205.779 )
 transform/scale = Vector2( 9.03984, 4.5008 )
 z/z = 1000
 input/pickable = true
 shapes/0/shape = SubResource( 5 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -2.71456 )
+shapes/0/transform = Matrix32( 0.970219, 0, 0, 1.05866, 0.264472, -4.94075 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 21 )
+script/script = ExtResource( 23 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeatArea"]
 
-visibility/visible = false
-transform/pos = Vector2( 0, -2.71456 )
+transform/pos = Vector2( 0.264472, -4.94075 )
+transform/scale = Vector2( 0.970219, 1.05866 )
 shape = SubResource( 5 )
 trigger = false
 _update_shape_index = 0
 
 [node name="Sponge" type="Area2D" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 562, 341 )
 z/z = 50
 input/pickable = true
@@ -365,14 +393,14 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 22 )
+script/script = ExtResource( 24 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="Sponge"]
 
-texture = ExtResource( 23 )
+texture = ExtResource( 25 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sponge"]
 
@@ -385,95 +413,76 @@ _update_shape_index = 0
 transform/pos = Vector2( 388, 313 )
 z/z = 40
 z/relative = false
-texture = ExtResource( 24 )
+texture = ExtResource( 26 )
 
 [node name="BetweenChairs0" type="Sprite" parent="."]
 
 transform/pos = Vector2( 387.995, 286.955 )
 z/z = 35
 z/relative = false
-texture = ExtResource( 25 )
+texture = ExtResource( 27 )
 
 [node name="BetweenChairs1" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388.036, 255.154 )
 z/z = 30
 z/relative = false
-texture = ExtResource( 25 )
+texture = ExtResource( 27 )
 
 [node name="BetweenChairs2" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388.036, 223.25 )
 z/z = 25
 z/relative = false
-texture = ExtResource( 25 )
+texture = ExtResource( 27 )
 
 [node name="BetweenChairs3" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388.036, 191.176 )
 z/z = 20
 z/relative = false
-texture = ExtResource( 25 )
+texture = ExtResource( 27 )
 
 [node name="BetweenChairs4" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388, 159 )
 z/z = 15
 z/relative = false
-texture = ExtResource( 25 )
+texture = ExtResource( 27 )
 
 [node name="BetweenChairs5" type="Sprite" parent="."]
 
 transform/pos = Vector2( 387.985, 127.005 )
 z/z = 10
 z/relative = false
-texture = ExtResource( 25 )
+texture = ExtResource( 27 )
 
 [node name="BetweenChairs6" type="Sprite" parent="."]
 
 transform/pos = Vector2( 387.968, 95.0121 )
 z/z = 5
 z/relative = false
-texture = ExtResource( 25 )
+texture = ExtResource( 27 )
 
 [node name="BetweenChairsTop" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388, 154.035 )
 z/relative = false
-texture = ExtResource( 26 )
+texture = ExtResource( 28 )
 
 [node name="StarsLeft" type="Sprite" parent="."]
 
 visibility/visible = false
 transform/pos = Vector2( 55.0474, 191.988 )
 z/relative = false
-texture = ExtResource( 27 )
+texture = ExtResource( 29 )
 
 [node name="StarsRight" type="Sprite" parent="."]
 
 visibility/visible = false
 transform/pos = Vector2( 721.114, 191.957 )
 z/relative = false
-texture = ExtResource( 27 )
-
-[node name="Panic" type="Sprite" parent="."]
-
-transform/pos = Vector2( 356.676, 390.755 )
-texture = ExtResource( 28 )
-centered = false
-region = true
-region_rect = Rect2( 0, 0, 64, 41 )
-script/script = ExtResource( 29 )
-
-[node name="PanicPointer" type="Sprite" parent="Panic"]
-
-transform/pos = Vector2( 32, 34 )
-transform/rot = 180.0
-texture = ExtResource( 28 )
-offset = Vector2( 8, 0 )
-modulate = Color( 1, 0.726563, 0, 1 )
-region = true
-region_rect = Rect2( 0, 56, 36, 8 )
+texture = ExtResource( 29 )
 
 [node name="Rostrum" type="StaticBody2D" parent="."]
 

@@ -14,7 +14,7 @@ func _input_event(viewport, event, shape_idx):
 
 func on_click():
 	if not is_used:
-		get_tree().get_current_scene().get_node("Professor/profBody").changeMood(mood_bonus)
+		get_tree().get_current_scene().get_node("Game/Professor/profBody").changeMood(mood_bonus)
 		is_used = true
 		get_node("SamplePlayer").play("cat_meow")
 		

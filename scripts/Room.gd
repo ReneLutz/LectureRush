@@ -120,7 +120,7 @@ func spawnCat():
 	#print("SpawnKitty2")
 	
 func hideCat():
-	remove_child(sceneCatInstance)
+	get_node("Decoration/Plant2").remove_child(sceneCatInstance)
 	
 # Vector2 -> bool
 # only contains indices of chairs

@@ -136,7 +136,7 @@ autostart = false
 [node name="SpeechbubbleDispose" type="Timer" parent="profBody"]
 
 process_mode = 1
-wait_time = 4.0
+wait_time = 2.5
 one_shot = false
 autostart = false
 

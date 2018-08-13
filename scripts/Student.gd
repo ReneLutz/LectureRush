@@ -9,7 +9,7 @@ enum State { SITTING = 0, WALK_L, WALK_U, WALK_R, WALK_D }
 
 enum Walkable { NONE = 0, HRZ, VRT, BOTH }
 
-const WALKABLE_TILES = { "Floor": Walkable.BOTH, "Chair": Walkable.HRZ, "Stair": Walkable.BOTH }
+const WALKABLE_TILES = { "Floor1": Walkable.BOTH, "Floor2": Walkable.BOTH, "Floor3": Walkable.BOTH, "Chair": Walkable.HRZ, "Stair": Walkable.BOTH }
 
 var state = State.SITTING setget setState, getState
 
@@ -283,13 +283,13 @@ func _leavingRoom(delta, currentTile):
 			setState(State.WALK_L)
 		else:
 			setState(State.WALK_R)
-		if currentTile == "Stair":
+		if currentTile == "Stairs":
 			if get_pos().x < 40 || get_pos().x > ss.x - 40:
 				setState(State.WALK_U)
 				leavingState = 4
 			
 	elif leavingState == 4:
-		if currentTile == "Floor":
+		if currentTile.beginsWith("Floor"):
 			_deleteSelf()
 			leavingState = 5
 			leaveRoom = false

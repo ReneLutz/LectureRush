@@ -9,7 +9,7 @@ enum State { SITTING = 0, WALK_L, WALK_U, WALK_R, WALK_D }
 
 enum Walkable { NONE = 0, HRZ, VRT, BOTH }
 
-const WALKABLE_TILES = { "Floor": Walkable.BOTH, "Chair": Walkable.HRZ, "Stair": Walkable.BOTH }
+const WALKABLE_TILES = { "Floor1": Walkable.BOTH, "Floor2": Walkable.BOTH, "Floor3": Walkable.BOTH, "Chair": Walkable.HRZ, "Stair": Walkable.BOTH }
 
 var state = State.SITTING setget setState, getState
 
@@ -29,6 +29,10 @@ var walkTimer = 0
 export var walkAnimSpeed = 0.2
 var disturbChildNodes
 
+var phoneAnimActive = false
+var phoneAnimTimer = 0.0
+var phoneAnimSpeed = 0.2
+var phoneFrame = 0
 # when walking through a row this stores the student
 # that's on the seat this student walked past
 var lastTrampledStudent = null
@@ -273,13 +277,13 @@ func _leavingRoom(delta, currentTile):
 			setState(State.WALK_L)
 		else:
 			setState(State.WALK_R)
-		if currentTile == "Stair":
+		if currentTile == "Stairs":
 			if get_pos().x < 40 || get_pos().x > ss.x - 40:
 				setState(State.WALK_U)
 				leavingState = 4
 			
 	elif leavingState == 4:
-		if currentTile == "Floor":
+		if currentTile.beginsWith("Floor"):
 			_deleteSelf()
 			leavingState = 5
 			leaveRoom = false
@@ -374,6 +378,15 @@ func _fixed_process(delta):
 			
 	_updateActiveDisturbAction(delta)
 	
+	if phoneAnimActive:
+		phoneAnimTimer += delta
+		if phoneAnimTimer >= phoneAnimSpeed:
+			phoneAnimTimer = 0.0
+			phoneFrame += 1
+			if phoneFrame > 8:
+				phoneFrame = 0
+			set_frame(phoneFrame)
+			
 	if leaveRoom == true:
 		_leavingRoom(delta, currentTile)
 
@@ -433,7 +446,12 @@ func _resetDisturbAction(resetMood):
 			professor.changeMood(activeDisturbAction.disturbValue)
 		# delete disturb action instance
 		activeDisturbAction = null
+		# special for phone action:
+		phoneAnimActive = false
 
 # checks if student is currently disturbing
 func isDisturbActionActive():
 	return activeDisturbAction != null
+
+func setPhoneAnimation(animate):
+	phoneAnimActive = animate

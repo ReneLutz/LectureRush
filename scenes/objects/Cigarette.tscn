@@ -38,7 +38,7 @@ z/z = 10
 
 frames = SubResource( 1 )
 animation = "anim1"
-frame = 6
+frame = 10
 playing = true
 
 [node name="Smoke" type="AnimatedSprite" parent="."]
@@ -46,7 +46,6 @@ playing = true
 transform/pos = Vector2( -7.53559, -2.35411 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 2
 playing = true
 
 

@@ -49,12 +49,11 @@ func pickHairColor():
 			Color("#2C222B"),
 			Color("#71635A"),
 			Color("#B7A69E"),
-			Color("#D6C4C2"),
-			Color("#CABFB1"),
-			Color("#DCD0BA"),
-			Color("#FFF5E1"),
-			Color("#E6CEA8"),
-			Color("#E5C8A8"),
+			Color("#6940c1"), #changed
+			Color("#6a1f16"), #changed
+			Color("#d7b144"), #changed
+			Color("#e099c6"), #changed
+			Color("#E6CEA8"), 
 			Color("#DEBC99"),
 			Color("#B89778"),
 			Color("#A56B46"),
@@ -63,11 +62,10 @@ func pickHairColor():
 			Color("#8D4A43"),
 			Color("#533D32"),
 			Color("#3B3024"),
-			Color("#4E433F"),
 			Color("#554838"),
 			Color("#504444"),
 			Color("#6A4E42"),
-			Color("#A7856A"),
+			Color("#A7856A"), 
 			Color("#977961")]
 	randomize()
 	return colors[randi() % colors.size()]

@@ -423,7 +423,7 @@ func _fixed_process(delta):
 		moveToCell(Vector2(currentCellIdx.x, currentCellIdx.y))
 		wasUpstairs = true
 		
-	elif p.y >= ss.y - 32:
+	elif p.y >= 300:
 		if wasUpstairs:
 			_deleteSelf()
 		else:

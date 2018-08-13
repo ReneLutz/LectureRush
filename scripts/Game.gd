@@ -14,6 +14,7 @@ var colorAnimationMaxTime = 0.6
 var colorAnimationActive = false
 var colorGreen = false
 
+signal gameRestarted
 signal gameEnded
 var gameover = false
 
@@ -21,14 +22,19 @@ func isGameover():
 	return gameover
 	
 func setGameover(gameover):
+	if gameover:
+		get_node("GuiLayer/Gui/Score").set_text(str(ceil(score)))
+		get_node("GuiLayer/Gui").show()
 	self.gameover = gameover
 	
-func onProfExplosion():
+func endGame():
 	emit_signal("gameEnded")
+	
+func restartGame():
+	emit_signal("gameRestarted")
 	
 func _ready():
 	set_process(true)
-	get_node("Professor").connect("exploded",self,"onProfExplosion")
 	get_node("Professor").get_node("profBody").setPanicUI(get_node("UI/PanicBar"))
 	uiTimeLabel = get_node("UI/Time")
 	lectureTimer = get_node("LectureTimer")

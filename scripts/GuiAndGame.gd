@@ -16,9 +16,18 @@ func endGame():
 	remove_child(currentGameInstance)
 	currentGameInstance = null
 	get_node("Control").show()
+	
+func restartGame():
+	remove_child(currentGameInstance)
+	currentGameInstance = null
+	currentGameInstance = Game.instance()
+	currentGameInstance.connect("gameEnded", self, "endGame")
+	currentGameInstance.connect("gameRestarted", self, "restartGame")
+	add_child(currentGameInstance)
 
 func playPressed():
 	currentGameInstance = Game.instance()
 	currentGameInstance.connect("gameEnded", self, "endGame")
+	currentGameInstance.connect("gameRestarted", self, "restartGame")
 	get_node("Control").hide()
 	add_child(currentGameInstance)

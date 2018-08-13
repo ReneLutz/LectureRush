@@ -6,7 +6,7 @@ var occupiedSeats = {}
 
 enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP, PHONE }
 
-const ACTION_SPAWN_COOLDOWN = 1.5
+const ACTION_SPAWN_COOLDOWN = 2.0
 
 # Values which decrease the mood of the professor
 const MOOD_VALUE_ACTION_DRINK_WATER = 5
@@ -66,7 +66,7 @@ func spawnDisturbActions(delta):
 # spawns a random disturb action on a student
 func _spawnRandomDisturbAction(student):
 	# spawn random disturb action
-	var randAction = randi() % actionTypes.size() + 2 # +2 to get more paperplanes
+	var randAction = randi() % actionTypes.size()
 	_generateDisturbAction(randAction, student)
 		
 	
@@ -114,15 +114,17 @@ func _generateDisturbAction(actionType, student):
 	professor.changeMood(-action.disturbValue)
 	
 func _spawnActionDrinkWater(student):
+	print("WATER")
 	# Add Image / Animations to Student
 	var sceneWaterbottle = load("res://scenes/objects/waterbottle.tscn")
 	var sceneWaterbottleInstance = sceneWaterbottle.instance()
 	sceneWaterbottleInstance.set_name("waterbottle")
-	sceneWaterbottleInstance.set_pos(Vector2(10, -7))
+	sceneWaterbottleInstance.set_pos(Vector2(10, -4))
 		
 	student.get_node("DisturbSprites").add_child(sceneWaterbottleInstance)
 	
 func _spawnActionDrinkCoffee(student):
+	print("COFFEE")
 	# Add Image / Animations to Student
 	var scene = load("res://scenes/objects/coffee.tscn")
 	var sceneInstance = scene.instance()

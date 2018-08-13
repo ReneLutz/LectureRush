@@ -1,11 +1,10 @@
 [gd_scene load_steps=2 format=1]
 
-[ext_resource path="res://textures/waterbottle.png" type="Texture" id=1]
+[ext_resource path="res://textures/beer.png" type="Texture" id=1]
 
 [node name="Node2D" type="Node2D"]
 
-transform/scale = Vector2( 1.5, 1.5 )
-z/z = 1
+z/z = 10
 
 [node name="Sprite" type="Sprite" parent="."]
 

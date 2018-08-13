@@ -106,6 +106,36 @@ func pickShoeColor():
 	randomize()
 	return colors[randi() % colors.size()]
 	
+func pickSkinColor():
+	var colors = [Color("#FFDFC4"),
+			Color("#F0D5BE"),
+			Color("#EECEB3"),
+			Color("#E1B899"),
+			Color("#E5C298"),
+			Color("#FFDCB2"),
+			Color("#E5B887"),
+			Color("#E5A073"),
+			Color("#E79E6D"),
+			Color("#DB9065"),
+			Color("#CE967C"),
+			Color("#C67856"),
+			Color("#BA6C49"),
+			Color("#A57257"),
+			Color("#F0C8C9"),
+			Color("#DDA8A0"),
+			Color("#B97C6D"),
+			Color("#DB9065"),
+			
+			Color("#AD6452"),
+			Color("#CB8442"),
+			Color("#BD723C"),
+			Color("#870400"),
+			Color("#710101"),
+			Color("#430000"),]
+	randomize()
+	return colors[randi() % colors.size()]
+
+	
 func pickPantsColor():
 	var colors = [Color("#313a91"),
 			Color("#cbe8f7"),
@@ -161,8 +191,14 @@ func _ready():
 	uniform color trouwsersColor;
 	uniform color shoeColor;
 	uniform color hairColor;
+	uniform color skinColor;
 	
 	float SHADE_FACTOR = 2;
+	
+	bool allmost(float v1, float v2, float e)
+	{
+		return abs(v1-v2)<e;
+	}
 	
 	color col = tex(TEXTURE,UV);
 	if(col.r==1.0&&col.g==1.0&&col.b==0.0)
@@ -185,6 +221,14 @@ func _ready():
 				{
 					col=shoeColor;
 				}
+				else {
+					if(allmost(col.r,238.0/255.0,0.1) &&
+						allmost(col.g,195.0/255.0, 0.1) &&
+						allmost(col.b,154/255.0, 0.1) )
+					{
+						col=skinColor;
+					}
+				}
 			}
 		}
 	}
@@ -206,6 +250,8 @@ func _ready():
 	get_material().set_shader_param("trouwsersColor",panties)
 	get_material().set_shader_param("shoeColor",shoes)
 	get_material().set_shader_param("hairColor",hairC)
+	get_material().set_shader_param("skinColor",pickSkinColor())
+	
 	
 	_room = get_tree().get_nodes_in_group("lectureRoom")[0]
 	

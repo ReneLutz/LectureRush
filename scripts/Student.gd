@@ -49,10 +49,12 @@ func pickHairColor():
 			Color("#2C222B"),
 			Color("#71635A"),
 			Color("#B7A69E"),
-			Color("#6940c1"), #changed
 			Color("#6a1f16"), #changed
 			Color("#d7b144"), #changed
-			Color("#e099c6"), #changed
+			Color("#e099c6"), #changed light pink
+			Color("#6e1769"), #changed
+			Color("#b01313"), #changed
+			Color("#2d2db9"), #changed
 			Color("#E6CEA8"), 
 			Color("#DEBC99"),
 			Color("#B89778"),
@@ -67,6 +69,38 @@ func pickHairColor():
 			Color("#6A4E42"),
 			Color("#A7856A"), 
 			Color("#977961")]
+	randomize()
+	return colors[randi() % colors.size()]
+	
+func pickShoeColor(): 
+	var colors = [Color("#313a91"),
+			Color("#151515"),
+			Color("#4f2b24"),
+			Color("#795f1b"),
+			Color("#524f40"),
+			Color("#1b1e29"),
+			Color("#dddddd")]
+	randomize()
+	return colors[randi() % colors.size()]
+	
+func pickPantsColor():
+	var colors = [Color("#313a91"),
+			Color("#cbe8f7"),
+			Color("#a46422"),
+			Color("#343434"),
+			Color("#9e5b47"),
+			Color("#151515"),
+			Color("#214e3f"),
+			Color("#44aacc"),
+			Color("#342a97"),
+			Color("#262144"),
+			Color("#362747"),
+			Color("#091d48"),
+			Color("#4c3435"),
+			Color("#5f4351"),
+			Color("#0d2030"),
+			Color("#0d2030"),
+			Color("#bfb588"),]
 	randomize()
 	return colors[randi() % colors.size()]
 
@@ -93,8 +127,8 @@ func _ready():
 		set_frame(0)
 	var hairC = pickHairColor();
 	var shirt = picRandomColor();
-	var shoes = picRandomColor();
-	var panties = picRandomColor();
+	var shoes = pickShoeColor();
+	var panties = pickPantsColor();
 	
 	var fragmentShader = """
 	uniform texture shadeTex;

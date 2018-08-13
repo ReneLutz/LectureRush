@@ -1,17 +1,19 @@
-[gd_scene load_steps=13 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://scripts/GuiAndGame.gd" type="Script" id=1]
 [ext_resource path="res://textures/background_menu.png" type="Texture" id=2]
 [ext_resource path="res://textures/logo.png" type="Texture" id=3]
-[ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=4]
-[ext_resource path="res://textures/moveProf.png" type="Texture" id=5]
-[ext_resource path="res://textures/evilStuds.png" type="Texture" id=6]
-[ext_resource path="res://textures/temperature.png" type="Texture" id=7]
-[ext_resource path="res://textures/watchPaperPlanes.png" type="Texture" id=8]
-[ext_resource path="res://textures/klickstud.png" type="Texture" id=9]
-[ext_resource path="res://textures/studchangedir.png" type="Texture" id=10]
-[ext_resource path="res://textures/clickStudseat.png" type="Texture" id=11]
-[ext_resource path="res://textures/studseat.png" type="Texture" id=12]
+[ext_resource path="res://textures/menu_button1.png" type="Texture" id=4]
+[ext_resource path="res://textures/menu_button2.png" type="Texture" id=5]
+[ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=6]
+[ext_resource path="res://textures/moveProf.png" type="Texture" id=7]
+[ext_resource path="res://textures/evilStuds.png" type="Texture" id=8]
+[ext_resource path="res://textures/temperature.png" type="Texture" id=9]
+[ext_resource path="res://textures/watchPaperPlanes.png" type="Texture" id=10]
+[ext_resource path="res://textures/klickstud.png" type="Texture" id=11]
+[ext_resource path="res://textures/studchangedir.png" type="Texture" id=12]
+[ext_resource path="res://textures/clickStudseat.png" type="Texture" id=13]
+[ext_resource path="res://textures/studseat.png" type="Texture" id=14]
 
 [node name="GuiAndGame" type="Node"]
 
@@ -67,12 +69,12 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 319.0
 margin/top = 244.0
-margin/right = 465.0
-margin/bottom = 296.0
+margin/right = 467.0
+margin/bottom = 300.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Play"
+icon = ExtResource( 4 )
 flat = false
 
 [node name="Node" type="Node" parent="Control/Button"]
@@ -85,12 +87,12 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 319.0
 margin/top = 322.0
-margin/right = 465.0
-margin/bottom = 374.0
+margin/right = 467.0
+margin/bottom = 378.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "Tutorial"
+icon = ExtResource( 5 )
 flat = false
 
 [node name="Node" type="Node" parent="Control/ButtonTutorial"]
@@ -129,7 +131,7 @@ margin/left = 26.0
 margin/top = 24.0
 margin/right = 460.0
 margin/bottom = 54.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "Greetings gamer!"
 percent_visible = 1.0
 lines_skipped = 0
@@ -145,7 +147,7 @@ margin/left = 26.0
 margin/top = 65.0
 margin/right = 460.0
 margin/bottom = 95.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "In this game you play the professor."
 percent_visible = 1.0
 lines_skipped = 0
@@ -161,7 +163,7 @@ margin/left = 26.0
 margin/top = 110.0
 margin/right = 674.0
 margin/bottom = 140.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "Control him with w,a,s,d like this:"
 percent_visible = 1.0
 lines_skipped = 0
@@ -177,7 +179,7 @@ margin/left = 33.0
 margin/top = 163.0
 margin/right = 366.0
 margin/bottom = 274.0
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 stretch_mode = 0
 
 [node name="Label3" type="Label" parent="TutorialControl1"]
@@ -190,7 +192,7 @@ margin/left = 26.0
 margin/top = 292.0
 margin/right = 674.0
 margin/bottom = 322.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "(y-direction is similar)"
 percent_visible = 1.0
 lines_skipped = 0
@@ -262,7 +264,7 @@ margin/left = 26.0
 margin/top = 24.0
 margin/right = 460.0
 margin/bottom = 54.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "You should banish distracted students"
 percent_visible = 1.0
 lines_skipped = 0
@@ -278,7 +280,7 @@ margin/left = 26.0
 margin/top = 65.0
 margin/right = 674.0
 margin/bottom = 95.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "from the room by right-clicking them."
 percent_visible = 1.0
 lines_skipped = 0
@@ -294,7 +296,7 @@ margin/left = 162.0
 margin/top = 138.0
 margin/right = 495.0
 margin/bottom = 332.0
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 stretch_mode = 0
 
 [node name="Button" type="Button" parent="TutorialControl2"]
@@ -363,7 +365,7 @@ margin/left = 26.0
 margin/top = 24.0
 margin/right = 460.0
 margin/bottom = 54.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "If you don't banish distracted students"
 percent_visible = 1.0
 lines_skipped = 0
@@ -379,7 +381,7 @@ margin/left = 25.0
 margin/top = 102.0
 margin/right = 817.0
 margin/bottom = 132.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "and the preasure in his body"
 percent_visible = 1.0
 lines_skipped = 0
@@ -395,7 +397,7 @@ margin/left = 25.0
 margin/top = 62.0
 margin/right = 817.0
 margin/bottom = 92.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "the professor gets angry"
 percent_visible = 1.0
 lines_skipped = 0
@@ -411,7 +413,7 @@ margin/left = 23.0
 margin/top = 138.0
 margin/right = 833.0
 margin/bottom = 168.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "increases. If you hit the maximum (see "
 percent_visible = 1.0
 lines_skipped = 0
@@ -427,7 +429,7 @@ margin/left = 30.0
 margin/top = 175.0
 margin/right = 840.0
 margin/bottom = 205.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "below) its GAME OVER!"
 percent_visible = 1.0
 lines_skipped = 0
@@ -443,7 +445,7 @@ margin/left = 167.0
 margin/top = 222.0
 margin/right = 567.0
 margin/bottom = 316.0
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 stretch_mode = 0
 
 [node name="Button" type="Button" parent="TutorialControl3"]
@@ -512,7 +514,7 @@ margin/left = 32.0
 margin/top = 26.0
 margin/right = 788.0
 margin/bottom = 56.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "Btw., avoid paper planes if they hit"
 percent_visible = 1.0
 lines_skipped = 0
@@ -528,7 +530,7 @@ margin/left = 26.0
 margin/top = 65.0
 margin/right = 728.0
 margin/bottom = 95.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "the Prof... GAME OVER!"
 percent_visible = 1.0
 lines_skipped = 0
@@ -544,7 +546,7 @@ margin/left = 26.0
 margin/top = 144.0
 margin/right = 728.0
 margin/bottom = 174.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "The more students visit "
 percent_visible = 1.0
 lines_skipped = 0
@@ -560,7 +562,7 @@ margin/left = 26.0
 margin/top = 177.0
 margin/right = 728.0
 margin/bottom = 207.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "your lecture the more"
 percent_visible = 1.0
 lines_skipped = 0
@@ -576,7 +578,7 @@ margin/left = 26.0
 margin/top = 211.0
 margin/right = 728.0
 margin/bottom = 241.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "POINTS you get, that's"
 percent_visible = 1.0
 lines_skipped = 0
@@ -592,7 +594,7 @@ margin/left = 26.0
 margin/top = 247.0
 margin/right = 728.0
 margin/bottom = 277.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "the objective."
 percent_visible = 1.0
 lines_skipped = 0
@@ -608,7 +610,7 @@ margin/left = 535.0
 margin/top = 63.0
 margin/right = 708.0
 margin/bottom = 435.0
-texture = ExtResource( 8 )
+texture = ExtResource( 10 )
 stretch_mode = 0
 
 [node name="Button" type="Button" parent="TutorialControl4"]
@@ -677,7 +679,7 @@ margin/left = 26.0
 margin/top = 24.0
 margin/right = 728.0
 margin/bottom = 54.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "If you click a walking student he will"
 percent_visible = 1.0
 lines_skipped = 0
@@ -693,7 +695,7 @@ margin/left = 25.0
 margin/top = 62.0
 margin/right = 817.0
 margin/bottom = 92.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "try to find a seat in the next row."
 percent_visible = 1.0
 lines_skipped = 0
@@ -709,7 +711,7 @@ margin/left = 106.0
 margin/top = 149.0
 margin/right = 506.0
 margin/bottom = 325.0
-texture = ExtResource( 9 )
+texture = ExtResource( 11 )
 stretch_mode = 0
 
 [node name="TextureFrame1" type="TextureFrame" parent="TutorialControl5"]
@@ -722,7 +724,7 @@ margin/left = 411.0
 margin/top = 166.0
 margin/right = 811.0
 margin/bottom = 298.0
-texture = ExtResource( 10 )
+texture = ExtResource( 12 )
 stretch_mode = 0
 
 [node name="Button" type="Button" parent="TutorialControl5"]
@@ -791,7 +793,7 @@ margin/left = 16.0
 margin/top = 23.0
 margin/right = 808.0
 margin/bottom = 53.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "Click again and the student will sit"
 percent_visible = 1.0
 lines_skipped = 0
@@ -807,7 +809,7 @@ margin/left = 189.0
 margin/top = 261.0
 margin/right = 551.0
 margin/bottom = 291.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "GL,HF,like,subscribe"
 percent_visible = 1.0
 lines_skipped = 0
@@ -823,7 +825,7 @@ margin/left = 25.0
 margin/top = 62.0
 margin/right = 817.0
 margin/bottom = 92.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
 text = "down."
 percent_visible = 1.0
 lines_skipped = 0
@@ -839,7 +841,7 @@ margin/left = 186.0
 margin/top = 94.0
 margin/right = 586.0
 margin/bottom = 270.0
-texture = ExtResource( 11 )
+texture = ExtResource( 13 )
 stretch_mode = 0
 
 [node name="TextureFrame1" type="TextureFrame" parent="TutorialControl6"]
@@ -852,7 +854,7 @@ margin/left = 386.0
 margin/top = 92.0
 margin/right = 786.0
 margin/bottom = 224.0
-texture = ExtResource( 12 )
+texture = ExtResource( 14 )
 stretch_mode = 0
 
 [node name="Button" type="Button" parent="TutorialControl6"]

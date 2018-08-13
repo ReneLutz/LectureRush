@@ -173,6 +173,7 @@ func _spawnActionHeadphones(student):
 	var scene = load("res://scenes/objects/headphones.tscn")
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("headphones")
+	get_node("../ActionSounds").play("lofi%s" % (randi() % 3 + 1))
 	sceneInstance.set_pos(Vector2(0, -11))
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
@@ -183,8 +184,7 @@ func _spawnActionSmoke(student):
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("cigarette")
 	sceneInstance.set_pos(Vector2(-3, 3))
-	get_node("../ActionSounds").play("cigarette_lighter")
-	#get_node("../ActionSounds").play("cigarette_smoke")
+	get_node("../ActionSounds").play("cigarette")
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
 	
@@ -203,7 +203,7 @@ func _spawnActionPhone(student):
 		student.set_animation("WalkingMalePhone")
 	else:
 		student.set_animation("WalkingFemalePhone")
-		
+	get_node("../ActionSounds").play("phone%s" % (randi() % 2 + 1))
 	student.setPhoneAnimation(true)
 	
 func _spawnActionSleep(student):

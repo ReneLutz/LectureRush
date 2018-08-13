@@ -352,9 +352,20 @@ func _leavingRoom(delta, currentTile):
 			
 	elif leavingState == 4:
 		if currentTile.begins_with("Floor"):
-			_deleteSelf()
+			# _deleteSelf()
 			leavingState = 5
+			if get_pos().x < ss.x / 2.0:
+				setState(State.WALK_L)
+			else:
+				setState(State.WALK_R)
+			# leaveRoom = false
+			
+	elif leavingState == 5:
+		if get_pos().x < -30 or get_pos().x > ss.x:
+			_deleteSelf()
 			leaveRoom = false
+			leavingState = 6
+		
 	
 func _deleteSelf():
 	_resetDisturbAction(true)
@@ -412,11 +423,11 @@ func _fixed_process(delta):
 				setState(State.WALK_D)
 		return
 		
-	elif p.x <= 0:
+	elif p.x <= 0 and !leaveRoom:
 		setState(State.WALK_R)
 		moveToCell(Vector2(1, currentCellIdx.y))
 		
-	elif p.x >= ss.x:
+	elif p.x >= ss.x and !leaveRoom:
 		setState(State.WALK_L)
 		moveToCell(Vector2(usedCellsRect.end.x-1, currentCellIdx.y))
 		
@@ -425,14 +436,15 @@ func _fixed_process(delta):
 		moveToCell(Vector2(currentCellIdx.x, currentCellIdx.y))
 		wasUpstairs = true
 		
-	elif p.y >= 300:
+	elif p.y >= 300 and !leaveRoom:
 		if wasUpstairs:
-			_deleteSelf()
+			leaveRoom = true
+			leavingState = 3
 		else:
 			setState(State.WALK_D)
 			moveToCell(Vector2(currentCellIdx.x, usedCellsRect.end.y-1))
 		
-	else:
+	elif not leaveRoom:
 		var newCellIdx = _room.coordToCellIdx(get_pos())
 		var newTile = _room.getTileName(newCellIdx)
 		if (state == State.WALK_D || state == State.WALK_U) &&  !(WALKABLE_TILES[newTile] & Walkable.VRT):

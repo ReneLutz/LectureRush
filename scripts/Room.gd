@@ -38,6 +38,7 @@ func _process(delta):
 	spawnStudents(delta)
 	spawntimeCat(delta)
 	nodeStudents.spawnDisturbActions(delta)
+	nodeStudents.spawnPaperplanes(delta)
 
 # coord: Vector2
 func coordToCellIdx(coord):

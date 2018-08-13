@@ -7,7 +7,11 @@ const WALKING = "Walking"
 # Current sentences the professor can say
 const SENTENCE_TRIVIAL = "You can do the rest at home. It's completely trivial!"
 const SENTENCE_EXAM = "Listen!!!\nThis will be relevant for your exam!"
-const SENTENCES_GET_OUT = ["You are not paying attention! GET OUT!"]
+const SENTENCES_GET_OUT = [
+	"You are not paying attention! GET OUT!",
+	"I will have none of that!",
+	"Don't even think about doing that in my lectures!"
+]
 
 var speechBubbleInstance
 onready var trivialTimer = get_node("TrivialTimer")

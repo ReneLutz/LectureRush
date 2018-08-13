@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=1]
+[gd_scene load_steps=101 format=1]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/TileSetScene2.tres" type="TileSet" id=2]
@@ -83,16 +83,17 @@
 [ext_resource path="res://textures/Thermometer_Intro/Thermometer_Intro19.png" type="Texture" id=81]
 [ext_resource path="res://scripts/PanicBar.gd" type="Script" id=82]
 [ext_resource path="res://textures/1px.png" type="Texture" id=83]
-[ext_resource path="res://scripts/SeatArea.gd" type="Script" id=84]
-[ext_resource path="res://scripts/Sponge.gd" type="Script" id=85]
-[ext_resource path="res://textures/sponge/sponge1.png" type="Texture" id=86]
-[ext_resource path="res://textures/bottomseets.png" type="Texture" id=87]
-[ext_resource path="res://textures/inbetween.png" type="Texture" id=88]
-[ext_resource path="res://textures/seatsback2.png" type="Texture" id=89]
-[ext_resource path="res://textures/Stair_Row.png" type="Texture" id=90]
-[ext_resource path="res://textures/rostrum.png" type="Texture" id=91]
+[ext_resource path="res://textures/thermometer_thingy.png" type="Texture" id=84]
+[ext_resource path="res://scripts/SeatArea.gd" type="Script" id=85]
+[ext_resource path="res://scripts/Sponge.gd" type="Script" id=86]
+[ext_resource path="res://textures/sponge/sponge1.png" type="Texture" id=87]
+[ext_resource path="res://textures/bottomseets.png" type="Texture" id=88]
+[ext_resource path="res://textures/inbetween.png" type="Texture" id=89]
+[ext_resource path="res://textures/seatsback2.png" type="Texture" id=90]
+[ext_resource path="res://textures/Stair_Row.png" type="Texture" id=91]
+[ext_resource path="res://textures/rostrum.png" type="Texture" id=92]
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 59 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 62 ) ],
@@ -106,37 +107,37 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 48, 80.4129 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 384, 1 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=4]
 
 custom_solver_bias = 0.0
 extents = Vector2( 48, 81.3154 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
 extents = Vector2( 33.1009, 87.4391 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=6]
 
 custom_solver_bias = 0.0
 extents = Vector2( 31.8893, 29.1104 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=7]
 
 custom_solver_bias = 0.0
 extents = Vector2( 7.03526, 4.99719 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=8]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10.2069, 9.8031 )
@@ -359,20 +360,26 @@ region_rect = Rect2( 0, 56, 36, 8 )
 
 [node name="PanicBar" type="AnimatedSprite" parent="UI"]
 
-transform/pos = Vector2( 384.374, 411.58 )
+transform/pos = Vector2( 383, 412 )
 z/z = 2
-frames = SubResource( 8 )
+frames = SubResource( 1 )
 animation = "Init"
 script/script = ExtResource( 82 )
 
 [node name="Fill" type="Sprite" parent="UI/PanicBar"]
 
-transform/pos = Vector2( -59.4551, -7.6669 )
-transform/scale = Vector2( 4.80085, 14.9888 )
+transform/pos = Vector2( -55, -8 )
+transform/scale = Vector2( 1, 15 )
 z/z = -1
 texture = ExtResource( 83 )
 centered = false
 modulate = Color( 1, 0, 0, 1 )
+
+[node name="Thingy" type="Sprite" parent="UI/PanicBar"]
+
+transform/pos = Vector2( 87, 0 )
+z/z = 3
+texture = ExtResource( 84 )
 
 [node name="FrontStageBorder" type="Node" parent="."]
 
@@ -380,7 +387,7 @@ modulate = Color( 1, 0, 0, 1 )
 
 transform/pos = Vector2( 720, 400 )
 input/pickable = false
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -389,7 +396,7 @@ collision/margin = 0.08
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrontStageBorder/EastBorder"]
 
-shape = SubResource( 9 )
+shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
@@ -397,7 +404,7 @@ _update_shape_index = 0
 
 transform/pos = Vector2( 384, 380 )
 input/pickable = false
-shapes/0/shape = SubResource( 10 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -406,7 +413,7 @@ collision/margin = 0.08
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrontStageBorder/SouthBorder"]
 
-shape = SubResource( 10 )
+shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 0
 
@@ -414,7 +421,7 @@ _update_shape_index = 0
 
 transform/pos = Vector2( 48, 400 )
 input/pickable = false
-shapes/0/shape = SubResource( 11 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -423,7 +430,7 @@ collision/margin = 0.08
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrontStageBorder/WestBorder"]
 
-shape = SubResource( 11 )
+shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0
 
@@ -432,7 +439,7 @@ _update_shape_index = 0
 transform/pos = Vector2( 383.035, 300.806 )
 transform/scale = Vector2( 9.76461, 0.198072 )
 input/pickable = false
-shapes/0/shape = SubResource( 12 )
+shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 0.545591, 0, -41.0964 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -443,7 +450,7 @@ collision/margin = 0.08
 
 transform/pos = Vector2( 0, -41.0964 )
 transform/scale = Vector2( 1, 0.545591 )
-shape = SubResource( 12 )
+shape = SubResource( 5 )
 trigger = false
 _update_shape_index = 0
 
@@ -454,20 +461,20 @@ transform/pos = Vector2( 385.151, 205.779 )
 transform/scale = Vector2( 9.03984, 4.5008 )
 z/z = 1000
 input/pickable = true
-shapes/0/shape = SubResource( 13 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 0.970219, 0, 0, 1.05866, 0.264472, -4.94075 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 84 )
+script/script = ExtResource( 85 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeatArea"]
 
 transform/pos = Vector2( 0.264472, -4.94075 )
 transform/scale = Vector2( 0.970219, 1.05866 )
-shape = SubResource( 13 )
+shape = SubResource( 6 )
 trigger = false
 _update_shape_index = 0
 
@@ -477,25 +484,25 @@ editor/display_folded = true
 transform/pos = Vector2( 562, 341 )
 z/z = 50
 input/pickable = true
-shapes/0/shape = SubResource( 14 )
+shapes/0/shape = SubResource( 7 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 85 )
+script/script = ExtResource( 86 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="Sponge"]
 
-texture = ExtResource( 86 )
+texture = ExtResource( 87 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sponge"]
 
-shape = SubResource( 14 )
+shape = SubResource( 7 )
 trigger = false
 _update_shape_index = 0
 
@@ -504,82 +511,82 @@ _update_shape_index = 0
 transform/pos = Vector2( 388, 313 )
 z/z = 40
 z/relative = false
-texture = ExtResource( 87 )
+texture = ExtResource( 88 )
 
 [node name="BetweenChairs0" type="Sprite" parent="."]
 
 transform/pos = Vector2( 387.995, 286.955 )
 z/z = 35
 z/relative = false
-texture = ExtResource( 88 )
+texture = ExtResource( 89 )
 
 [node name="BetweenChairs1" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388.036, 255.154 )
 z/z = 30
 z/relative = false
-texture = ExtResource( 88 )
+texture = ExtResource( 89 )
 
 [node name="BetweenChairs2" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388.036, 223.25 )
 z/z = 25
 z/relative = false
-texture = ExtResource( 88 )
+texture = ExtResource( 89 )
 
 [node name="BetweenChairs3" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388.036, 191.176 )
 z/z = 20
 z/relative = false
-texture = ExtResource( 88 )
+texture = ExtResource( 89 )
 
 [node name="BetweenChairs4" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388, 159 )
 z/z = 15
 z/relative = false
-texture = ExtResource( 88 )
+texture = ExtResource( 89 )
 
 [node name="BetweenChairs5" type="Sprite" parent="."]
 
 transform/pos = Vector2( 387.985, 127.005 )
 z/z = 10
 z/relative = false
-texture = ExtResource( 88 )
+texture = ExtResource( 89 )
 
 [node name="BetweenChairs6" type="Sprite" parent="."]
 
 transform/pos = Vector2( 387.968, 95.0121 )
 z/z = 5
 z/relative = false
-texture = ExtResource( 88 )
+texture = ExtResource( 89 )
 
 [node name="BetweenChairsTop" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388, 154.035 )
 z/relative = false
-texture = ExtResource( 89 )
+texture = ExtResource( 90 )
 
 [node name="StarsLeft" type="Sprite" parent="."]
 
 visibility/visible = false
 transform/pos = Vector2( 55.0474, 191.988 )
 z/relative = false
-texture = ExtResource( 90 )
+texture = ExtResource( 91 )
 
 [node name="StarsRight" type="Sprite" parent="."]
 
 visibility/visible = false
 transform/pos = Vector2( 721.114, 191.957 )
 z/relative = false
-texture = ExtResource( 90 )
+texture = ExtResource( 91 )
 
 [node name="Rostrum" type="StaticBody2D" parent="."]
 
 transform/pos = Vector2( 553.749, 347.117 )
 input/pickable = false
-shapes/0/shape = SubResource( 15 )
+shapes/0/shape = SubResource( 8 )
 shapes/0/transform = Matrix32( 1.60576, 0, 0, 0.549475, 0.358459, -22.7521 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -595,14 +602,14 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="Rostrum"]
 
 z/z = 46
-texture = ExtResource( 91 )
+texture = ExtResource( 92 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rostrum"]
 
 transform/pos = Vector2( 0.358459, -22.7521 )
 transform/scale = Vector2( 1.60576, 0.549475 )
 z/z = 50
-shape = SubResource( 15 )
+shape = SubResource( 8 )
 trigger = false
 _update_shape_index = 0
 

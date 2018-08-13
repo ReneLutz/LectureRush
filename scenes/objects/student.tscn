@@ -154,6 +154,16 @@ animations = [ {
 "loop": true,
 "name": "WalkingFemalePhone",
 "speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "WalkingFemalePhoneShade",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "WalkingMalePhoneShade",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]

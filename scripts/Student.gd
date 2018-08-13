@@ -29,6 +29,11 @@ var walkTimer = 0
 export var walkAnimSpeed = 0.2
 var disturbChildNodes
 
+var phoneAnimActive = false
+var phoneAnimTimer = 0.0
+var phoneAnimSpeed = 0.2
+var phoneFrame = 0
+
 func picRandomColor():
 	rand_seed(randi())
 	var r = randf()
@@ -283,7 +288,6 @@ func _fixed_process(delta):
 	set_z(int(min(46,(_getCurrentTilePos().y-2)*5 +1)))
 	if state == State.WALK_D:
 		set_z(get_z()+2)
-		
 	
 	if state != State.SITTING:
 		walkTimer += delta
@@ -348,6 +352,15 @@ func _fixed_process(delta):
 				
 	_updateActiveDisturbAction(delta)
 	
+	if phoneAnimActive:
+		phoneAnimTimer += delta
+		if phoneAnimTimer >= phoneAnimSpeed:
+			phoneAnimTimer = 0.0
+			phoneFrame += 1
+			if phoneFrame > 8:
+				phoneFrame = 0
+			set_frame(phoneFrame)
+			
 	if leaveRoom == true:
 		_leavingRoom(delta, currentTile)
 
@@ -407,7 +420,12 @@ func _resetDisturbAction(resetMood):
 			professor.changeMood(activeDisturbAction.disturbValue)
 		# delete disturb action instance
 		activeDisturbAction = null
+		# special for phone action:
+		phoneAnimActive = false
 
 # checks if student is currently disturbing
 func isDisturbActionActive():
 	return activeDisturbAction != null
+
+func setPhoneAnimation(animate):
+	phoneAnimActive = animate

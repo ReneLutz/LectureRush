@@ -30,8 +30,9 @@ func _process(delta):
 	var remainingTime = lectureTimer.get_time_left()
 	var minutes = int(remainingTime) / 60
 	var seconds = int(remainingTime) % 60
+	print("minutes: %s" % minutes)
 	
-	uiTimeLabel.set_text(str(minutes) + ":" + str(seconds))
+	uiTimeLabel.set_text("%d:%02d" % [minutes, seconds])
 	
 func _on_LectureTimer_timeout():
 	get_tree().set_pause(true)

@@ -445,8 +445,7 @@ texture = ExtResource( 25 )
 
 [node name="Panic" type="Sprite" parent="."]
 
-transform/pos = Vector2( 345.596, 381.891 )
-transform/scale = Vector2( 1.24347, 1.24347 )
+transform/pos = Vector2( 374.918, 386.778 )
 texture = ExtResource( 26 )
 centered = false
 region = true

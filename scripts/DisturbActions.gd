@@ -4,7 +4,7 @@ var studentClicked = false;
 
 var occupiedSeats = {}
 
-enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP, PHONE }
+enum actionTypes { DRINK_WATER = 0, DRINK_COFFEE, HEADPHONES, TOILET, SMOKE, PAPERPLANE, SLEEP, PHONE, DRINK_WINE }
 
 const ACTION_SPAWN_COOLDOWN = 3.0
 const ACTION_PAPERPLANE_COOLDOWN = 5.0
@@ -18,6 +18,7 @@ const MOOD_VALUE_ACTION_SMOKE = 7
 const MOOD_VALUE_ACTION_PAPERPLANE = 7
 const MOOD_VALUE_ACTION_SLEEP = 7
 const MOOD_VALUE_ACTION_PHONE = 7
+const MOOD_VALUE_ACTION_DRINK_WINE = 7
 
 # If DURATION initialized with <= 0: Disturb action of student will remain until he leaves the room
 const DURATION_ACTION_DRINK_WATER = 40
@@ -28,6 +29,7 @@ const DURATION_ACTION_SMOKE = 40
 const DURATION_ACTION_PAPERPLANE = 6
 const DURATION_ACTION_SLEEP = 40
 const DURATION_ACTION_PHONE = 40
+const DURATION_ACTION_DRINK_WINE = 40
 
 var timerDisturbAction = 0.0
 var timerPaperplane = 0.0
@@ -122,6 +124,10 @@ func _generateDisturbAction(actionType, student):
 		_spawnActionPhone(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_PHONE, DURATION_ACTION_PHONE)
 		
+	elif actionType == actionTypes.DRINK_WINE:
+		_spawnActionDrinkWine(student)
+		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_DRINK_WINE, DURATION_ACTION_DRINK_WINE)
+		
 	else:
 		_spawnActionPaperplane(student)
 		action = DisturbAction.new(actionType, MOOD_VALUE_ACTION_PAPERPLANE, DURATION_ACTION_PAPERPLANE)
@@ -149,6 +155,15 @@ func _spawnActionDrinkCoffee(student):
 	sceneInstance.set_pos(Vector2(14, -6))
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
+
+func _spawnActionDrinkWine(student):
+	# Add Image / Animations to Student
+	var scene = load("res://scenes/objects/wine.tscn")
+	var sceneInstance = scene.instance()
+	sceneInstance.set_name("wine")
+	sceneInstance.set_pos(Vector2(11, -4))
+		
+	student.get_node("DisturbSprites").add_child(sceneInstance)	
 	
 func _spawnActionHeadphones(student):
 	# Add Image / Animations to Student

@@ -38,7 +38,7 @@ script/script = ExtResource( 1 )
 
 frames = SubResource( 1 )
 animation = "Chalk"
-frame = 2
+frame = 3
 playing = true
 
 

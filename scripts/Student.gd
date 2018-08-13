@@ -33,6 +33,10 @@ var phoneAnimActive = false
 var phoneAnimTimer = 0.0
 var phoneAnimSpeed = 0.2
 var phoneFrame = 0
+# when walking through a row this stores the student
+# that's on the seat this student walked past
+var lastTrampledStudent = null
+const TRAMPLE_Y_OFFSET = 3
 
 func picRandomColor():
 	rand_seed(randi())
@@ -44,10 +48,16 @@ func picRandomColor():
 func isOccupied(idx):
 	if not get_parent().occupiedSeats.has(idx):
 		return false
-	return get_parent().occupiedSeats[idx]
+	return get_parent().occupiedSeats[idx] != null
 	
-func occupieSeat(idx, val):
+func occupySeat(idx, val):
 	get_parent().occupiedSeats[idx] = val
+	
+func getStudentOnSeat(idx):
+	if get_parent().occupiedSeats.has(idx):
+		return get_parent().occupiedSeats[idx]
+	else:
+		return null
 	
 func pickHairColor():
 	var colors = [Color("#090806"),
@@ -211,9 +221,10 @@ func setState(s):
 	if s!=state:
 		if s == State.SITTING:
 			set_pos(get_pos()+Vector2(0,5))
-			occupieSeat(_room.coordToCellIdx(get_pos()),true)
+			occupySeat(_room.coordToCellIdx(get_pos()),self)
+			lastTrampledStudent = null
 		else:
-			occupieSeat(_room.coordToCellIdx(get_pos()),false)
+			occupySeat(_room.coordToCellIdx(get_pos()),null)
 	state = s
 	if state == State.WALK_D:
 		if sex == "male":
@@ -242,7 +253,6 @@ func moveToCell(cellIdx):
 	set_pos(_room.map_to_world(cellIdx) + _room.get_cell_size()/2 -Vector2(0,10))
 
 func leaveRoom():
-	print("leave room")
 	leavingState = 1
 	walkSpeed = walkSpeedLeaving
 	# show speechbubble of prof
@@ -285,11 +295,15 @@ func _deleteSelf():
 func _fixed_process(delta):
 	if get_parent().studentClicked:
 		get_parent().studentClicked = false
-	set_z(int(min(46,(_getCurrentTilePos().y-2)*5 +1)))
-	if state == State.WALK_D:
-		set_z(get_z()+2)
+	
+	set_z(int(min(46,(_getCurrentTilePos().y-2)*5 + 2)))
 	
 	if state != State.SITTING:
+		if state == State.WALK_D:
+			set_z(get_z() + 2)
+		else:
+			set_z(get_z() + 1)
+			
 		walkTimer += delta
 		if walkTimer > walkAnimSpeed:
 			walkTimer -= walkAnimSpeed
@@ -350,6 +364,18 @@ func _fixed_process(delta):
 			else:
 				setState(State.WALK_L)
 				
+		if(state == State.WALK_L || state == State.WALK_R):
+			var trampled = null
+			if newTile == "Chair":
+				trampled = getStudentOnSeat(newCellIdx)
+				if trampled != null && trampled != lastTrampledStudent:
+					trampled.set_pos(trampled.get_pos() - Vector2(0, TRAMPLE_Y_OFFSET))
+				
+			if lastTrampledStudent != null && trampled != lastTrampledStudent:
+				lastTrampledStudent.set_pos(lastTrampledStudent.get_pos() + Vector2(0, TRAMPLE_Y_OFFSET))
+				
+			lastTrampledStudent = trampled
+			
 	_updateActiveDisturbAction(delta)
 	
 	if phoneAnimActive:
@@ -382,10 +408,10 @@ func _onClick(btn):
 			
 			if currentTile == "Chair":
 				if btn == BUTTON_RIGHT:
-					if isSeated() && isDisturbActionActive():
+					if isSeated():
 						leaveRoom()
 				else:
-					if isSeated() == false and not isOccupied(currentCellIdx):
+					if !isSeated() && !isOccupied(currentCellIdx):
 						moveToCell(currentCellIdx)
 						setState(State.SITTING)
 			else:

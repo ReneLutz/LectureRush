@@ -154,6 +154,7 @@ func _spawnActionDrinkCoffee(student):
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("coffee")
 	sceneInstance.set_pos(Vector2(14, -6))
+	get_node("../ActionSounds").play("coffee_slurp")
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
 
@@ -163,6 +164,7 @@ func _spawnActionDrinkWine(student):
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("wine")
 	sceneInstance.set_pos(Vector2(11, -4))
+	get_node("../ActionSounds").play("glass_pouring")
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)	
 	
@@ -181,6 +183,8 @@ func _spawnActionSmoke(student):
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("cigarette")
 	sceneInstance.set_pos(Vector2(-3, 3))
+	get_node("../ActionSounds").play("cigarette_lighter")
+	#get_node("../ActionSounds").play("cigarette_smoke")
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)
 	

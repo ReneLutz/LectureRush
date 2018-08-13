@@ -1,14 +1,35 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=6 format=1]
 
-[ext_resource path="res://sounds/wav/glass_pouring.wav" type="Sample" id=1]
+[ext_resource path="res://sounds/wav/cigarette_lighter.wav" type="Sample" id=1]
+[ext_resource path="res://sounds/wav/cigarette_smoke.wav" type="Sample" id=2]
+[ext_resource path="res://sounds/wav/coffee_slurp.wav" type="Sample" id=3]
+[ext_resource path="res://sounds/wav/glass_pouring.wav" type="Sample" id=4]
 
 [sub_resource type="SampleLibrary" id=1]
 
-samples/glass_pouring = {
+samples/cigarette_lighter = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 1 )
+}
+samples/cigarette_smoke = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 2 )
+}
+samples/coffee_slurp = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 3 )
+}
+samples/glass_pouring = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
 }
 
 [node name="ActionSounds" type="SamplePlayer"]

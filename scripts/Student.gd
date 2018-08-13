@@ -109,7 +109,7 @@ func pickShoeColor():
 	return colors[randi() % colors.size()]
 	
 func pickSkinColor():
-	var colors = [Color("#FFDFC4"),
+	var colors = [#Color("#FFDFC4"),
 			Color("#F0D5BE"),
 			Color("#EECEB3"),
 			Color("#E1B899"),
@@ -124,16 +124,16 @@ func pickSkinColor():
 			Color("#BA6C49"),
 			Color("#A57257"),
 			Color("#F0C8C9"),
-			Color("#DDA8A0"),
-			Color("#B97C6D"),
-			Color("#DB9065"),
+#			Color("#DDA8A0"),
+#			Color("#B97C6D"),
+			Color("#DB9065"),]
 			
-			Color("#AD6452"),
-			Color("#CB8442"),
-			Color("#BD723C"),
-			Color("#870400"),
-			Color("#710101"),
-			Color("#430000"),]
+#			Color("#AD6452"),
+#			Color("#CB8442"),]
+#			Color("#BD723C"),
+#			Color("#870400"),
+#			Color("#710101"),
+#			Color("#430000"),]
 	randomize()
 	return colors[randi() % colors.size()]
 

@@ -41,6 +41,8 @@ var sleepAnimTimer = 0.0
 var sleepAnimSpeed = 0.2
 var sleepFrame = 0
 
+var wasUpstairs = false
+
 # when walking through a row this stores the student
 # that's on the seat this student walked past
 var lastTrampledStudent = null
@@ -355,13 +357,17 @@ func _fixed_process(delta):
 		setState(State.WALK_L)
 		moveToCell(Vector2(usedCellsRect.end.x-1, currentCellIdx.y))
 		
-	elif p.y <= 0:
+	elif p.y <= 64:
 		setState(State.WALK_U)
-		moveToCell(Vector2(currentCellIdx.x, 1))
+		moveToCell(Vector2(currentCellIdx.x, currentCellIdx.y))
+		wasUpstairs = true
 		
-	elif p.y >= ss.y:
-		setState(State.WALK_D)
-		moveToCell(Vector2(currentCellIdx.x, usedCellsRect.end.y-1))
+	elif p.y >= ss.y - 32:
+		if wasUpstairs:
+			_deleteSelf()
+		else:
+			setState(State.WALK_D)
+			moveToCell(Vector2(currentCellIdx.x, usedCellsRect.end.y-1))
 		
 	else:
 		var newCellIdx = _room.coordToCellIdx(get_pos())

@@ -446,12 +446,13 @@ func _onClick(btn):
 						_takeSeat()
 						
 			else:
-				moveToCell(currentCellIdx)
-				# move to row 
-				if get_pos().x < ss.x / 2.0:
-					setState(State.WALK_R)
-				else:
-					setState(State.WALK_L)
+				if currentTile == "Stair":
+					moveToCell(currentCellIdx)
+					# move to row 
+					if get_pos().x < ss.x / 2.0:
+						setState(State.WALK_R)
+					else:
+						setState(State.WALK_L)
 
 func _takeSeat():
 	setState(State.SITTING)

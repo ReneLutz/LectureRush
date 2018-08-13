@@ -4,7 +4,7 @@ export var speed = 150
 
 func _ready():
 	set_fixed_process(true)
-	get_node("SamplePlayer").play("fly%s" % (randi() % 2 + 1))
+	get_node("SamplePlayer").play("fly1")
 	
 func _fixed_process(delta):
 	move(Vector2(0, int(speed * delta)))

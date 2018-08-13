@@ -13,9 +13,11 @@ var isSponge = false
 func _ready():
 	set_process(true)
 	set_fixed_process(false)
+	get_node("SamplePlayer").play("chalk")
 	if get_node("../Professor/profBody").has_node("sponge"):
 		get_node("../Professor/profBody/sponge").queue_free()
 		get_node("AnimatedSprite").play("Sponge")
+		get_node("SamplePlayer").play("sponge")
 		
 func init(start_pos, target_pos):
 	start = start_pos + OFFSET

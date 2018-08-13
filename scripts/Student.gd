@@ -33,6 +33,12 @@ var phoneAnimActive = false
 var phoneAnimTimer = 0.0
 var phoneAnimSpeed = 0.2
 var phoneFrame = 0
+
+var sleepAnimActive = false
+var sleepAnimTimer = 0.0
+var sleepAnimSpeed = 0.2
+var sleepFrame = 0
+
 # when walking through a row this stores the student
 # that's on the seat this student walked past
 var lastTrampledStudent = null
@@ -387,6 +393,15 @@ func _fixed_process(delta):
 				phoneFrame = 0
 			set_frame(phoneFrame)
 			
+	elif sleepAnimActive:
+		sleepAnimTimer += delta
+		if sleepAnimTimer >= sleepAnimSpeed:
+			sleepAnimTimer = 0.0
+			sleepFrame += 1
+			if sleepFrame > 8:
+				sleepFrame = 0
+			set_frame(sleepFrame)
+			
 	if leaveRoom == true:
 		_leavingRoom(delta, currentTile)
 
@@ -446,8 +461,9 @@ func _resetDisturbAction(resetMood):
 			professor.changeMood(activeDisturbAction.disturbValue)
 		# delete disturb action instance
 		activeDisturbAction = null
-		# special for phone action:
+		# special for disturb actions with animations:
 		phoneAnimActive = false
+		sleepAnimActive = false
 
 # checks if student is currently disturbing
 func isDisturbActionActive():
@@ -455,3 +471,7 @@ func isDisturbActionActive():
 
 func setPhoneAnimation(animate):
 	phoneAnimActive = animate
+	
+
+func setSleepAnimation(animate):
+	sleepAnimActive = animate

@@ -3,7 +3,7 @@ extends AnimatedSprite
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	pass
+	get_node("SamplePlayer").play("paperplane_folding")
 	
 func spawnPlane():
 	var scenePlane = load("res://scenes/objects/paper_plane.tscn")

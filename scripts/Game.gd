@@ -14,6 +14,14 @@ var colorAnimationMaxTime = 0.6
 var colorAnimationActive = false
 var colorGreen = false
 
+var gameover = false
+
+func isGameover():
+	return gameover
+	
+func setGameover(gameover):
+	self.gameover = gameover
+	
 func _ready():
 	set_process(true)
 	get_node("Professor").get_node("profBody").setPanicUI(get_node("Panic"))
@@ -24,21 +32,26 @@ func _ready():
 	uiScorelabel = get_node("UI/Score")
 	
 func _process(delta):
-	var seatedStudents = 0
-	for s in students.get_children():
-		if s.isSeated():
-			seatedStudents += 1
-	
-	score += professor.mood * seatedStudents / 100 * delta
-	uiScorelabel.set_text(str(round(score)))
-	
-	var remainingTime = lectureTimer.get_time_left()
-	var minutes = int(remainingTime) / 60
-	var seconds = int(remainingTime) % 60
-	print("minutes: %s" % minutes)
-	
-	uiTimeLabel.set_text("%d:%02d" % [minutes, seconds])
-	
+	if !gameover:
+		# count score
+		var seatedStudents = 0
+		for s in students.get_children():
+			if s.isSeated():
+				seatedStudents += 1
+		
+		score += professor.mood * seatedStudents / 100 * delta
+		uiScorelabel.set_text(str(round(score)))
+		
+		# calculate remaining time
+		var remainingTime = lectureTimer.get_time_left()
+		var minutes = int(remainingTime) / 60
+		var seconds = int(remainingTime) % 60
+		
+		if remainingTime <= 0:
+			gameover = true
+			
+		uiTimeLabel.set_text("%d:%02d" % [minutes, seconds])
+		
 	#change color
 	if colorAnimationActive:
 		colorAnimationTimer += delta

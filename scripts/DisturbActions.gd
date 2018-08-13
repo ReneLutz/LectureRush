@@ -66,7 +66,7 @@ func spawnDisturbActions(delta):
 # spawns a random disturb action on a student
 func _spawnRandomDisturbAction(student):
 	# spawn random disturb action
-	var randAction = randi() % actionTypes.size()
+	var randAction = randi() % actionTypes.size() + 3 # +3 to get more paperplanes
 	_generateDisturbAction(randAction, student)
 		
 	

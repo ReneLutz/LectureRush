@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const WALK_SPEED = Vector2(80, 40)
+const WALK_SPEED = Vector2(120, 60)
 const STANDING = "Standing"
 const WALKING = "Walking"
 
@@ -142,6 +142,9 @@ func setMood(level):
 		get_node("BodyOnly").show()
 		get_node("HeadOnly").show()
 		get_node("HeadOnly").set_fixed_process(true)
+		# stop counting score
+		var gameScript = get_node("../../../Game")
+		gameScript.setGameover(true)
 	if panicUI != null:
 		panicUI.panic = (maxMood-mood)/maxMood
 	

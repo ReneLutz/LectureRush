@@ -1,34 +1,35 @@
-[gd_scene load_steps=37 format=1]
+[gd_scene load_steps=38 format=1]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/TileSetScene2.tres" type="TileSet" id=2]
 [ext_resource path="res://scripts/Room.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Decoration.gd" type="Script" id=4]
 [ext_resource path="res://textures/plant.png" type="Texture" id=5]
-[ext_resource path="res://textures/chemistry_rack.png" type="Texture" id=6]
-[ext_resource path="res://textures/PeriodicTable.png" type="Texture" id=7]
-[ext_resource path="res://textures/Starry_night.png" type="Texture" id=8]
-[ext_resource path="res://textures/Easel.png" type="Texture" id=9]
-[ext_resource path="res://textures/Colour_palatte.png" type="Texture" id=10]
-[ext_resource path="res://textures/Ethanole.png" type="Texture" id=11]
-[ext_resource path="res://textures/skeleton.png" type="Texture" id=12]
-[ext_resource path="res://textures/Michaelis_Menten_Plot.png" type="Texture" id=13]
-[ext_resource path="res://textures/parrot.png" type="Texture" id=14]
-[ext_resource path="res://sounds/raw/track.ogg" type="AudioStream" id=15]
-[ext_resource path="res://scenes/objects/professor.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scripts/DisturbActions.gd" type="Script" id=17]
-[ext_resource path="res://scenes/objects/uiBar.tscn" type="PackedScene" id=18]
-[ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=19]
-[ext_resource path="res://scripts/SeatArea.gd" type="Script" id=20]
-[ext_resource path="res://scripts/Sponge.gd" type="Script" id=21]
-[ext_resource path="res://textures/sponge/sponge1.png" type="Texture" id=22]
-[ext_resource path="res://textures/bottomseets.png" type="Texture" id=23]
-[ext_resource path="res://textures/inbetween.png" type="Texture" id=24]
-[ext_resource path="res://textures/seatsback2.png" type="Texture" id=25]
-[ext_resource path="res://textures/Stair_Row.png" type="Texture" id=26]
-[ext_resource path="res://textures/ragemeter.png" type="Texture" id=27]
-[ext_resource path="res://scripts/Panic.gd" type="Script" id=28]
-[ext_resource path="res://textures/rostrum.png" type="Texture" id=29]
+[ext_resource path="res://textures/plant2.png" type="Texture" id=6]
+[ext_resource path="res://textures/chemistry_rack.png" type="Texture" id=7]
+[ext_resource path="res://textures/PeriodicTable.png" type="Texture" id=8]
+[ext_resource path="res://textures/Starry_night.png" type="Texture" id=9]
+[ext_resource path="res://textures/Easel.png" type="Texture" id=10]
+[ext_resource path="res://textures/Colour_palatte.png" type="Texture" id=11]
+[ext_resource path="res://textures/Ethanole.png" type="Texture" id=12]
+[ext_resource path="res://textures/skeleton.png" type="Texture" id=13]
+[ext_resource path="res://textures/Michaelis_Menten_Plot.png" type="Texture" id=14]
+[ext_resource path="res://textures/parrot.png" type="Texture" id=15]
+[ext_resource path="res://sounds/raw/track.ogg" type="AudioStream" id=16]
+[ext_resource path="res://scenes/objects/professor.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scripts/DisturbActions.gd" type="Script" id=18]
+[ext_resource path="res://scenes/objects/uiBar.tscn" type="PackedScene" id=19]
+[ext_resource path="res://textures/ui/ui_font_30.fnt" type="BitmapFont" id=20]
+[ext_resource path="res://scripts/SeatArea.gd" type="Script" id=21]
+[ext_resource path="res://scripts/Sponge.gd" type="Script" id=22]
+[ext_resource path="res://textures/sponge/sponge1.png" type="Texture" id=23]
+[ext_resource path="res://textures/bottomseets.png" type="Texture" id=24]
+[ext_resource path="res://textures/inbetween.png" type="Texture" id=25]
+[ext_resource path="res://textures/seatsback2.png" type="Texture" id=26]
+[ext_resource path="res://textures/Stair_Row.png" type="Texture" id=27]
+[ext_resource path="res://textures/ragemeter.png" type="Texture" id=28]
+[ext_resource path="res://scripts/Panic.gd" type="Script" id=29]
+[ext_resource path="res://textures/rostrum.png" type="Texture" id=30]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -120,80 +121,84 @@ angular_damp = 1.0
 
 [node name="Decoration" type="Node" parent="LectureRoom"]
 
-editor/display_folded = true
 script/script = ExtResource( 4 )
 
 [node name="Plant" type="Sprite" parent="LectureRoom/Decoration"]
 
-transform/pos = Vector2( 112, 373.001 )
+transform/pos = Vector2( 125, 364.001 )
 z/z = 50
 texture = ExtResource( 5 )
+
+[node name="Plant2" type="Sprite" parent="LectureRoom/Decoration"]
+
+transform/pos = Vector2( 115.345, 349.075 )
+texture = ExtResource( 6 )
 
 [node name="Chemistry Rack" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 529.455, 25.2618 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Periodic Table" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 594.363, 25.7784 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="Starry Night" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 595.998, 26.8523 )
 transform/scale = Vector2( 1.32562, 1.32562 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="Easle 1" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 472.344, 28.5491 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
 [node name="Easle 2" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 519.549, 28.9247 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
 [node name="Colour Palette" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 518.73, 30.0571 )
 transform/scale = Vector2( 0.740126, 0.740126 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 
 [node name="Ethanole" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 477.972, 25.5067 )
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 
 [node name="Skeleton" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 556.449, 31.4493 )
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 
 [node name="MM Plot" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 616.026, 29.8023 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 
 [node name="Parrot" type="Sprite" parent="LectureRoom/Decoration"]
 
 visibility/visible = false
 transform/pos = Vector2( 219.913, 30.0036 )
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 
 [node name="StreamPlayer" type="StreamPlayer" parent="."]
 
-stream/stream = ExtResource( 15 )
+stream/stream = ExtResource( 16 )
 stream/play = false
 stream/loop = true
 stream/volume_db = 0.0
@@ -202,7 +207,7 @@ stream/paused = false
 stream/loop_restart_time = 0.0
 stream/buffering_ms = 500
 
-[node name="Professor" parent="." instance=ExtResource( 16 )]
+[node name="Professor" parent="." instance=ExtResource( 17 )]
 
 transform/pos = Vector2( 384, 360 )
 z/z = 50
@@ -210,11 +215,11 @@ z/relative = false
 
 [node name="Students" type="Node" parent="."]
 
-script/script = ExtResource( 17 )
+script/script = ExtResource( 18 )
 
 [node name="UI" type="Node" parent="."]
 
-[node name="Bar" parent="UI" instance=ExtResource( 18 )]
+[node name="Bar" parent="UI" instance=ExtResource( 19 )]
 
 visibility/opacity = 0.6
 transform/pos = Vector2( 383.656, 410.962 )
@@ -230,7 +235,7 @@ margin/left = 10.0
 margin/top = 400.0
 margin/right = 154.0
 margin/bottom = 426.0
-custom_fonts/font = ExtResource( 19 )
+custom_fonts/font = ExtResource( 20 )
 text = "Score: 0"
 percent_visible = 1.0
 lines_skipped = 0
@@ -246,7 +251,7 @@ margin/left = 669.0
 margin/top = 400.0
 margin/right = 760.0
 margin/bottom = 438.0
-custom_fonts/font = ExtResource( 19 )
+custom_fonts/font = ExtResource( 20 )
 align = 2
 percent_visible = 1.0
 lines_skipped = 0
@@ -338,7 +343,7 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 20 )
+script/script = ExtResource( 21 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeatArea"]
 
@@ -360,14 +365,14 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 21 )
+script/script = ExtResource( 22 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="Sponge"]
 
-texture = ExtResource( 22 )
+texture = ExtResource( 23 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sponge"]
 
@@ -380,91 +385,91 @@ _update_shape_index = 0
 transform/pos = Vector2( 388, 313 )
 z/z = 40
 z/relative = false
-texture = ExtResource( 23 )
+texture = ExtResource( 24 )
 
 [node name="BetweenChairs0" type="Sprite" parent="."]
 
 transform/pos = Vector2( 387.995, 286.955 )
 z/z = 35
 z/relative = false
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 
 [node name="BetweenChairs1" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388.036, 255.154 )
 z/z = 30
 z/relative = false
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 
 [node name="BetweenChairs2" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388.036, 223.25 )
 z/z = 25
 z/relative = false
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 
 [node name="BetweenChairs3" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388.036, 191.176 )
 z/z = 20
 z/relative = false
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 
 [node name="BetweenChairs4" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388, 159 )
 z/z = 15
 z/relative = false
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 
 [node name="BetweenChairs5" type="Sprite" parent="."]
 
 transform/pos = Vector2( 387.985, 127.005 )
 z/z = 10
 z/relative = false
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 
 [node name="BetweenChairs6" type="Sprite" parent="."]
 
 transform/pos = Vector2( 387.968, 95.0121 )
 z/z = 5
 z/relative = false
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 
 [node name="BetweenChairsTop" type="Sprite" parent="."]
 
 transform/pos = Vector2( 388, 154.035 )
 z/relative = false
-texture = ExtResource( 25 )
+texture = ExtResource( 26 )
 
 [node name="StarsLeft" type="Sprite" parent="."]
 
 visibility/visible = false
 transform/pos = Vector2( 55.0474, 191.988 )
 z/relative = false
-texture = ExtResource( 26 )
+texture = ExtResource( 27 )
 
 [node name="StarsRight" type="Sprite" parent="."]
 
 visibility/visible = false
 transform/pos = Vector2( 721.114, 191.957 )
 z/relative = false
-texture = ExtResource( 26 )
+texture = ExtResource( 27 )
 
 [node name="Panic" type="Sprite" parent="."]
 
 transform/pos = Vector2( 356.676, 390.755 )
-texture = ExtResource( 27 )
+texture = ExtResource( 28 )
 centered = false
 region = true
 region_rect = Rect2( 0, 0, 64, 41 )
-script/script = ExtResource( 28 )
+script/script = ExtResource( 29 )
 
 [node name="PanicPointer" type="Sprite" parent="Panic"]
 
 transform/pos = Vector2( 32, 34 )
 transform/rot = 180.0
-texture = ExtResource( 27 )
+texture = ExtResource( 28 )
 offset = Vector2( 8, 0 )
 modulate = Color( 1, 0.726563, 0, 1 )
 region = true
@@ -490,7 +495,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="Rostrum"]
 
 z/z = 46
-texture = ExtResource( 29 )
+texture = ExtResource( 30 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rostrum"]
 

@@ -163,7 +163,7 @@ func _spawnActionDrinkWine(student):
 	var scene = load("res://scenes/objects/wine.tscn")
 	var sceneInstance = scene.instance()
 	sceneInstance.set_name("wine")
-	sceneInstance.set_pos(Vector2(11, -4))
+	sceneInstance.set_pos(Vector2(11, -2))
 	get_node("../ActionSounds").play("glass_pouring")
 		
 	student.get_node("DisturbSprites").add_child(sceneInstance)	
